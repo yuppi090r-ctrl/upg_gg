@@ -272,6 +272,21 @@
             .tldr{padding:1.75rem}
             .footer-inner{grid-template-columns:1fr;gap:2rem}
         }
+        @media(max-width:640px){
+            .overview-metrics{grid-template-columns:1fr !important}
+            .overview-metric{border-right:0 !important;border-bottom:1px solid var(--border)}
+            .overview-metric:last-child{border-bottom:0}
+            footer{padding:3rem 1rem 1.5rem}
+            .footer-links a{min-height:44px;display:inline-flex;align-items:center}
+            .back-link{min-height:44px;padding:.65rem 1rem}
+            .promo-pill{min-height:44px;padding:.65rem 1rem}
+            .rev-row{flex-wrap:wrap;gap:.4rem}
+            .rev-row .rev-label{flex:1 1 100%;min-width:auto}
+            .rev-row .rev-bar{flex:1 1 calc(100% - 70px)}
+            .rev-row .rev-pct{flex:0 0 60px}
+            .mech-box .v{font-size:1.75rem}
+            .channel-card .ch-icon{width:40px;height:40px;font-size:.85rem;border-radius:10px}
+        }
     </style>
 </head>
 <body>
@@ -387,23 +402,23 @@
 
         <div class="grid-3 reveal">
             <div class="glass-card">
-                <h4>Главное юрлицо</h4>
+                <h4>Innospace LTD (Кипр)</h4>
                 <ul>
-                    <li><strong>Innospace LTD</strong> (Кипр)</li>
-                    <li>HE 466465, зарег. 17.10.2024</li>
-                    <li>Лимассол, Voukourestiou 25</li>
-                    <li>Директор: Georgios Pittalis</li>
-                    <li>Принимает платежи, владеет ботами Steam</li>
+                    <li>HE 466465 &middot; зарег. <strong>17.10.2024</strong></li>
+                    <li>Voukourestiou 25, Neptune House, Лимассол</li>
+                    <li>Директор: <strong>Georgios Pittalis</strong> (номинал)</li>
+                    <li>Секретарь: Panlegal Secretarial Services (nominee-фабрика)</li>
+                    <li>Shareholders и UBO &mdash; <strong>скрыты</strong></li>
                 </ul>
             </div>
             <div class="glass-card">
-                <h4>На сайте указано</h4>
+                <h4>Связь с RustMagic</h4>
                 <ul>
-                    <li><strong>LLC &laquo;Transtrade&raquo;</strong> (Бишкек, Кыргызстан)</li>
-                    <li><strong>ITSFAIL OU</strong> (Таллин, Эстония)</li>
-                    <li>Trustpilot регистрация: Украина</li>
-                    <li>Email: support@upgrader.com</li>
-                    <li>Связь с RustMagic (тот же владелец)</li>
+                    <li><strong>Qualitas Services LLC</strong> (Belize, 200159823)</li>
+                    <li>Оператор RustMagic с 2023 года</li>
+                    <li><strong>Те же люди запустили Upgrader</strong></li>
+                    <li>Belize для Rust, Кипр для CS2 &mdash; осознанный сплит</li>
+                    <li>Публичное лицо: <strong>EinHaDe / Serkan</strong> (vLoot.io)</li>
                 </ul>
             </div>
             <div class="glass-card">
@@ -419,8 +434,13 @@
         </div>
 
         <div class="callout callout-warn reveal" style="margin-top:2rem">
-            <h4>Почему это риск</h4>
-            <p>Юрисдикции выбраны под минимизацию налогов и KYC-требований, не под защиту игрока. При любом крупном ASA/FCA/UKGC-запросе или EU-бане лутбоксов &mdash; платформа теряет возможность работать в европейских странах. Восстанавливать репутацию через Кюрасао-лицензию уже сложно: Trustpilot 2.9/5 тянет вниз.</p>
+            <h4>Timing Innospace &mdash; классический SPV-паттерн</h4>
+            <p>Юрлицо зарегистрировано <strong>17.10.2024</strong>, сайт запущен <strong>31.01.2025</strong> &mdash; 3 месяца между регой и релизом. Это не старый холдинг, а <strong>проектная SPV</strong>. Voukourestiou 25 = массовый адрес, через Panlegal прошли сотни gambling-фирм (RUNITE, FLIP GAMES, EUROVEGAS). UBO защищён двойным слоем: номинальный директор + скрытые shareholders. <strong>При регуляторной атаке структура растворяется за неделю, UBO остаётся чистым</strong>, появляется новая шелл &mdash; прецеденты в CS-гэмблинге сотни.</p>
+        </div>
+
+        <div class="callout callout-blue reveal">
+            <h4>Осознанный split юрисдикций</h4>
+            <p><strong>Belize</strong> (Qualitas) для RustMagic &mdash; риск-tolerant юрисдикция без лицензионных требований, Rust-комьюнити мелкое и не жалуется регуляторам.<br><strong>Кипр</strong> (Innospace) для Upgrader.pro &mdash; EU-зона, лучше для платёжек (Stripe, G2A), открывает доступ к европейским клиентам, Trustpilot смотрится легитимнее. <strong>Они учли урок RustMagic</strong> с его Trust score 44/100 на Scamadviser.</p>
         </div>
     </div>
 </div>
