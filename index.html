@@ -185,20 +185,65 @@
         /* === LOGO GLOW === */
         nav .logo{text-shadow:0 0 30px rgba(139,92,246,.2)}
 
+        /* === MOBILE MENU === */
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.75rem 2rem;border-radius:12px;transition:all .25s;text-align:center}
+        .mobile-nav a:hover,.mobile-nav a.active{color:var(--text);background:rgba(139,92,246,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
         /* === RESPONSIVE === */
         @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:768px){
             .grid-2,.grid-3,.funnel-container{grid-template-columns:1fr}
+            .grid-4{grid-template-columns:repeat(2,1fr)}
             nav .nav-links{display:none}
-            .slide{padding:4rem 1.25rem;min-height:auto}
-            .hero{min-height:100vh}
+            .menu-toggle{display:block}
+            .slide{padding:3.5rem 1rem;min-height:auto}
+            .hero{min-height:100vh;padding:4rem 1.25rem}
+            .hero .subtitle{font-size:1rem}
+            .hero-stats{gap:1.25rem}
+            .hero-stat .value{font-size:1.6rem}
+            .section-title{font-size:1.75rem}
+            .section-desc{font-size:.92rem}
+            .comp-header{flex-wrap:wrap;padding:1.25rem}
+            .comp-badge{margin-left:0;margin-top:.25rem}
             .comp-metrics{grid-template-columns:repeat(3,1fr)}
-            .comp-metric{border-bottom:1px solid var(--border)}
-            .hero-stats{gap:1.5rem}
+            .comp-metric{padding:.85rem .75rem;border-bottom:1px solid var(--border)}
+            .comp-metric .val{font-size:.95rem}
+            .tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
+            .tabs::-webkit-scrollbar{display:none}
+            .tab-btn{flex-shrink:0;padding:.5rem 1rem;font-size:.78rem}
+            .detail-card{padding:1.25rem}
+            .detail-card h4{font-size:.85rem}
+            .detail-card li{font-size:.8rem}
+            .glass-card{padding:1.5rem;border-radius:16px}
+            .table-container{border-radius:14px}
+            .table-container{overflow-x:auto;-webkit-overflow-scrolling:touch}
+            table{min-width:600px}
+            .funnel-body p{font-size:.78rem}
+            .funnel-body h4{font-size:.85rem}
+            .insight-card{padding:1.5rem}
+            .insight-card .num{font-size:3rem}
+            .insight-card h4{font-size:.9rem}
+            .insight-card p{font-size:.8rem}
+            .q-card{padding:1.5rem}
+            .callout{padding:1.25rem}
+            .hero-glow{width:500px;height:500px}
         }
         @media(max-width:480px){
-            .hero h1{font-size:2.5rem}
+            .hero h1{font-size:2.2rem}
+            .hero-stats{gap:1rem}
+            .hero-stat .value{font-size:1.4rem}
+            .hero-stat .label{font-size:.65rem}
             .comp-metrics{grid-template-columns:repeat(2,1fr)}
+            .grid-4{grid-template-columns:1fr}
+            .section-num{font-size:.6rem}
+            .slide{padding:3rem .85rem}
         }
     </style>
 </head>
@@ -220,8 +265,20 @@
             <a href="#insights">Инсайты</a>
             <a href="#questions">Вопросы</a>
         </div>
+        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
     </div>
 </nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="#market">Рынок</a>
+    <a href="#upgrader">Upgrader</a>
+    <a href="#skinswap">SkinSwap</a>
+    <a href="#funnels">Воронки</a>
+    <a href="#compare">Сравнение</a>
+    <a href="#landscape">Ландшафт</a>
+    <a href="#risks">Риски</a>
+    <a href="#insights">Инсайты</a>
+    <a href="#questions">Вопросы</a>
+</div>
 
 <!-- ==================== HERO ==================== -->
 <div class="slide hero" id="hero">
@@ -982,12 +1039,25 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 // Smooth scroll for nav links
-document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+document.querySelectorAll('nav a[href^="#"], .mobile-nav a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(a.getAttribute('href'));
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Close mobile nav
+        document.getElementById('mobileNav').classList.remove('open');
+        document.getElementById('menuToggle').classList.remove('open');
+        document.body.style.overflow = '';
     });
+});
+
+// Mobile menu toggle
+document.getElementById('menuToggle').addEventListener('click', () => {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('menuToggle');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
 });
 </script>
 </body>
