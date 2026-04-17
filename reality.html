@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPG_GG — Реальная картина с форумов</title>
+    <meta name="description" content="Что пишут юзеры Reddit, Trustpilot, Pikabu, DTF и Steam Community о нише CS2 скинов: скамы, Valve-шоки, архетипы зависимости и тренды 2026.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#07060e;--surface:#0f0d1a;--surface2:#16132a;--surface3:#1e1a35;
+            --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
+            --text:#f4f2ff;--text2:#9d97c0;--text3:#6b6490;
+            --accent:#8b5cf6;--accent2:#c4b5fd;
+            --green:#10b981;--red:#ef4444;--orange:#f59e0b;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;--yellow:#fbbf24;
+            --gradient:linear-gradient(135deg,#8b5cf6,#ec4899,#6366f1);
+            --gradient-red:linear-gradient(135deg,#ef4444,#f59e0b);
+            --gradient-green:linear-gradient(135deg,#10b981,#06b6d4);
+            --glass:rgba(139,92,246,.04);
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s;background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);text-shadow:0 0 30px rgba(139,92,246,.2)}
+        nav .logo a{color:inherit;text-decoration:none}
+        nav .logo span{color:var(--accent2)}
+        nav .nav-links{display:flex;gap:.25rem;flex-wrap:wrap}
+        nav .nav-links a{color:var(--text3);text-decoration:none;font-size:.74rem;font-weight:500;padding:.45rem .7rem;border-radius:8px;transition:all .25s;letter-spacing:.02em}
+        nav .nav-links a:hover{color:var(--text2)}
+        nav .nav-links a.active{color:#fff;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.2)}
+        .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gradient);z-index:1001;transition:width .15s;box-shadow:0 0 20px rgba(139,92,246,.5)}
+
+        .slide{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden}
+        .slide-content{max-width:1100px;width:100%;position:relative;z-index:2}
+
+        .hero{text-align:center;align-items:center;padding-top:0}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border:1px solid rgba(239,68,68,.3);border-radius:100px;font-size:.8rem;color:#fca5a5;margin-bottom:2.5rem;background:rgba(239,68,68,.08);backdrop-filter:blur(10px)}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse-dot 2s infinite;box-shadow:0 0 12px var(--red)}
+        @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+        .hero h1{font-size:clamp(2.5rem,6.5vw,5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-.04em}
+        .hero h1 .red{background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero .subtitle{font-size:1.2rem;color:var(--text2);max-width:720px;margin:0 auto 3rem;font-weight:300;line-height:1.6}
+        .hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .value{font-size:2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-stat .label{font-size:.7rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+        .hero-glow{position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(239,68,68,.08) 0%,rgba(245,158,11,.04) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+
+        .section-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;text-shadow:0 0 30px rgba(139,92,246,.4)}
+        .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);max-width:120px;opacity:.5}
+        .section-title{font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
+        .section-desc{font-size:1rem;color:var(--text2);max-width:650px;margin-bottom:3rem;font-weight:300;line-height:1.7}
+
+        /* === SCAM CARDS === */
+        .scam-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2rem}
+        .scam-card{background:linear-gradient(170deg,rgba(239,68,68,.05),var(--surface2));border:1px solid rgba(239,68,68,.2);border-radius:18px;padding:1.75rem;position:relative;overflow:hidden;transition:all .3s}
+        .scam-card:hover{border-color:rgba(239,68,68,.4);transform:translateY(-4px)}
+        .scam-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);box-shadow:0 0 20px rgba(239,68,68,.4)}
+        .scam-card .scam-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap}
+        .scam-card .platform{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:rgba(239,68,68,.1);padding:.3rem .7rem;border-radius:6px;border:1px solid rgba(239,68,68,.2)}
+        .scam-card .when{font-size:.72rem;color:var(--text3);font-weight:500}
+        .scam-card .sum{font-size:1.8rem;font-weight:900;line-height:1;margin:.5rem 0 1rem;background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.02em}
+        .scam-card .quote{font-size:.88rem;color:var(--text);line-height:1.6;font-style:italic;border-left:3px solid var(--red);padding:.5rem 0 .5rem 1rem;margin-bottom:.75rem}
+        .scam-card .detail{font-size:.8rem;color:var(--text2);line-height:1.6}
+
+        /* === TRUSTPILOT BAR === */
+        .trust-bars{margin:2rem 0}
+        .trust-row{display:flex;align-items:center;gap:1rem;margin-bottom:.9rem}
+        .trust-platform{font-size:.82rem;font-weight:600;min-width:160px;color:var(--text)}
+        .trust-bar{flex:1;height:28px;background:var(--surface2);border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center}
+        .trust-fill{height:100%;display:flex;align-items:center;padding:0 .85rem;font-size:.72rem;font-weight:700;color:#fff;border-radius:8px;transition:width .8s cubic-bezier(.16,1,.3,1);white-space:nowrap}
+        .trust-score{font-size:.85rem;font-weight:700;min-width:80px;text-align:right;color:var(--text2)}
+        .trust-issue{font-size:.78rem;color:var(--text3);margin-left:.5rem;font-style:italic}
+
+        /* === TIMELINE === */
+        .timeline{position:relative;padding-left:2.5rem;margin-top:2rem}
+        .timeline::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--red),var(--orange),transparent)}
+        .timeline-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
+        .timeline-item::before{content:'';position:absolute;left:-1.8rem;top:.4rem;width:14px;height:14px;border-radius:50%;border:3px solid var(--accent);background:var(--bg);box-shadow:0 0 20px rgba(139,92,246,.3)}
+        .timeline-item.danger::before{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,.5)}
+        .timeline-item.warn::before{border-color:var(--orange);box-shadow:0 0 20px rgba(245,158,11,.3)}
+        .timeline-item .date{font-size:.72rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.35rem}
+        .timeline-item.danger .date{color:#fca5a5}
+        .timeline-item.warn .date{color:#fcd34d}
+        .timeline-item h4{font-size:1rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.01em}
+        .timeline-item p{font-size:.85rem;color:var(--text2);line-height:1.65}
+        .timeline-item .impact{display:inline-block;margin-top:.6rem;padding:.3rem .7rem;background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2);border-radius:6px;font-size:.75rem;font-weight:600;letter-spacing:.02em}
+
+        /* === ARCHETYPE CARDS === */
+        .archetype-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+        .arch-card{background:linear-gradient(160deg,var(--surface2),rgba(139,92,246,.03));border:1px solid var(--border);border-radius:18px;padding:1.75rem;transition:all .3s;position:relative;overflow:hidden}
+        .arch-card:hover{border-color:rgba(139,92,246,.3);transform:translateY(-3px)}
+        .arch-card .arch-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1rem;font-weight:900}
+        .arch-card.type-1 .arch-icon{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
+        .arch-card.type-2 .arch-icon{background:linear-gradient(135deg,#3b82f6,#06b6d4);color:#fff}
+        .arch-card.type-3 .arch-icon{background:linear-gradient(135deg,#10b981,#06b6d4);color:#fff}
+        .arch-card.type-4 .arch-icon{background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff}
+        .arch-card h4{font-size:1.1rem;font-weight:700;margin-bottom:.35rem;letter-spacing:-.01em}
+        .arch-card .age{font-size:.78rem;color:var(--accent2);font-weight:600;margin-bottom:1rem}
+        .arch-card p{font-size:.85rem;color:var(--text2);line-height:1.65;margin-bottom:.75rem}
+        .arch-card .metrics{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+        .arch-card .metrics .m{font-size:.75rem;color:var(--text3)}
+        .arch-card .metrics .m strong{color:var(--text);font-weight:700;display:block;font-size:.88rem}
+
+        /* === QUOTE BOX === */
+        .quote-box{background:linear-gradient(135deg,var(--surface2),rgba(139,92,246,.04));border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:1.5rem 1.75rem;margin:1.5rem 0;position:relative}
+        .quote-box .q{font-size:1rem;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:.6rem}
+        .quote-box .src{font-size:.78rem;color:var(--text3);letter-spacing:.03em}
+        .quote-box .src strong{color:var(--accent2);font-weight:600}
+
+        /* === CALLOUT === */
+        .callout{border-radius:16px;padding:1.5rem 1.75rem;margin:1.25rem 0}
+        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)}
+        .callout-warn h4{color:var(--red);font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18)}
+        .callout-info h4{color:var(--green);font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+        .callout-blue{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.18)}
+        .callout-blue h4{color:var(--blue);font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+        .callout p{font-size:.88rem;color:var(--text2);line-height:1.7}
+        .callout strong{color:var(--text);font-weight:600}
+        .callout ul{margin-top:.5rem;margin-left:1.25rem;list-style:none}
+        .callout li{font-size:.85rem;color:var(--text2);line-height:1.7;position:relative;padding-left:1rem}
+        .callout li::before{content:'•';position:absolute;left:0;color:currentColor;opacity:.6}
+
+        /* === INSIGHT CARDS === */
+        .insight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2rem}
+        .insight-card{background:linear-gradient(160deg,rgba(139,92,246,.06),rgba(236,72,153,.03));border:1px solid rgba(139,92,246,.2);border-radius:18px;padding:2rem;position:relative;overflow:hidden;transition:all .3s}
+        .insight-card:hover{border-color:rgba(139,92,246,.4);transform:translateY(-3px)}
+        .insight-card .num{font-size:3.5rem;font-weight:900;position:absolute;top:.5rem;right:1rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.15;line-height:1}
+        .insight-card h4{font-size:1.05rem;font-weight:700;margin-bottom:.75rem;position:relative;letter-spacing:-.01em}
+        .insight-card p{font-size:.88rem;color:var(--text2);line-height:1.7;position:relative}
+
+        /* === TL;DR === */
+        .tldr{border-radius:24px;padding:2.5rem;background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(245,158,11,.04));border:1px solid rgba(239,68,68,.25);margin-top:2.5rem}
+        .tldr .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fca5a5;margin-bottom:1rem}
+        .tldr h3{font-size:1.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-.01em}
+        .tldr p{font-size:.95rem;color:var(--text2);line-height:1.75}
+        .tldr p + p{margin-top:.8rem}
+
+        /* === CHANNELS GRID === */
+        .channel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+        .channel-card{padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;transition:all .3s}
+        .channel-card:hover{border-color:rgba(139,92,246,.25)}
+        .channel-card h5{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem}
+        .channel-card h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+        .channel-card p{font-size:.82rem;color:var(--text2);line-height:1.65}
+        .channel-card ul{margin-top:.6rem;list-style:none}
+        .channel-card li{font-size:.78rem;color:var(--text2);margin-bottom:.35rem;padding-left:.85rem;position:relative}
+        .channel-card li::before{content:'→';position:absolute;left:0;color:var(--accent2)}
+
+        /* === FOOTER === */
+        footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;background:linear-gradient(0deg,rgba(139,92,246,.03),transparent)}
+        footer p{color:var(--text3);font-size:.78rem}
+
+        .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* === MOBILE === */
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.05rem;font-weight:500;padding:.75rem 2rem;border-radius:12px}
+        .mobile-nav a:hover{color:var(--text);background:rgba(139,92,246,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent2);text-decoration:none;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:8px;border:1px solid rgba(139,92,246,.2);transition:all .25s;margin-bottom:1.5rem}
+        .back-link:hover{background:rgba(139,92,246,.1)}
+
+        @media(max-width:768px){
+            nav .nav-links{display:none}
+            .menu-toggle{display:block;min-width:44px;min-height:44px}
+            .slide{padding:5rem 1rem 4rem;min-height:auto}
+            .hero{min-height:100vh;padding:4rem 1.25rem}
+            .section-title{font-size:1.6rem}
+            .hero-stats{gap:1.25rem}
+            .hero-stat .value{font-size:1.5rem}
+            .scam-grid,.archetype-grid,.insight-grid{grid-template-columns:1fr}
+            .scam-card .sum{font-size:1.4rem}
+            .trust-row{flex-wrap:wrap}
+            .trust-platform{min-width:120px;font-size:.75rem}
+            .trust-score{min-width:50px;font-size:.75rem}
+            .timeline{padding-left:1.75rem}
+            .tldr{padding:1.75rem}
+            .tldr h3{font-size:1.2rem}
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+    <div class="inner">
+        <div class="logo"><a href="index.html">UPG<span>_</span>GG</a></div>
+        <div class="nav-links">
+            <a href="index.html">Обзор</a>
+            <a href="business.html">Бизнес</a>
+            <a href="revenue.html">Доходы</a>
+            <a href="money.html">Воронка $</a>
+            <a href="gtm.html">GTM</a>
+            <span style="width:1px;height:16px;background:var(--border2);margin:0 .25rem;display:inline-block"></span>
+            <a href="#scams">Скамы</a>
+            <a href="#platforms">Платформы</a>
+            <a href="#shocks">Valve-шоки</a>
+            <a href="#archetypes">Архетипы</a>
+            <a href="#insights">Инсайты</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html" style="color:var(--accent2);font-weight:600">Обзор ниши</a>
+    <a href="business.html" style="color:var(--accent2);font-weight:600">Бизнес</a>
+    <a href="revenue.html" style="color:var(--accent2);font-weight:600">Доходы</a>
+    <a href="money.html" style="color:var(--accent2);font-weight:600">Воронка $</a>
+    <a href="gtm.html" style="color:var(--accent2);font-weight:600">GTM</a>
+    <span style="display:block;width:60px;height:1px;background:var(--border2);margin:.5rem auto"></span>
+    <a href="#scams">Скамы</a>
+    <a href="#platforms">Платформы</a>
+    <a href="#shocks">Valve-шоки</a>
+    <a href="#archetypes">Архетипы</a>
+    <a href="#insights">Инсайты</a>
+</div>
+
+<main id="content">
+
+<!-- HERO -->
+<div class="slide hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="slide-content">
+        <a href="index.html" class="back-link">&larr; Основное исследование</a>
+        <div class="hero-badge" style="margin-top:1rem"><span class="dot"></span> Голос рынка &middot; Апрель 2026</div>
+        <h1>Что говорят<br><span class="red">те, кто внутри</span></h1>
+        <p class="subtitle">Собрано с Reddit, Trustpilot, Steam Community, Pikabu, DTF, VC.ru, Pikabu, Хабра, Telegram. Реальные скам-истории, суммы, Valve-шоки и СНГ-специфика. Без маркетинговой воды.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="value">$3B</div><div class="label">Испарились за 48 часов (23.10.2025)</div></div>
+            <div class="hero-stat"><div class="value">600K ₽</div><div class="label">Проиграл s1mple под градусом</div></div>
+            <div class="hero-stat"><div class="value">$270K</div><div class="label">Слил 20-летний за сутки</div></div>
+            <div class="hero-stat"><div class="value">$1B ₽</div><div class="label">Украли у CS.MONEY в 2022</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- SCAMS -->
+<div class="slide" id="scams">
+    <div class="slide-content">
+        <div class="section-num reveal">01 &mdash; Скам-истории</div>
+        <h2 class="section-title reveal">Жирные кейсы<br>с конкретными суммами</h2>
+        <p class="section-desc reveal">Не страшилки &mdash; реальные истории с Trustpilot, DTF, Хабра, Steam Community. С именами, датами и механикой развода.</p>
+
+        <div class="scam-grid">
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">Upgrader.pro</span>
+                    <span class="when">Март 2026 &middot; Trustpilot</span>
+                </div>
+                <div class="sum">65 000 ₽</div>
+                <p class="quote">"Заблокировали мои 65 000 их валюты. Саппорт меняет показания. Сказали &mdash; даже если документы не примут, деньги останутся заблокированы".</p>
+                <p class="detail">Автор: <strong>Tenik</strong>. Классика: KYC под видом &laquo;security review&raquo;, шаблонные ответы, баланс в заморозке без сроков.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">SkinSwap</span>
+                    <span class="when">Январь 2026</span>
+                </div>
+                <div class="sum">20+ часов</div>
+                <p class="quote">"Stripe-депозиты виснут 20&ndash;22 часа в статусе &laquo;Needs Approval&raquo;. Написал саппорту &mdash; сказали ждать".</p>
+                <p class="detail">Жалоба повторяется регулярно. Покупка ножа за <strong>$1800 &mdash; &laquo;scratched because they can&rsquo;t display float&raquo;</strong>. &laquo;1% комиссия на крипту&raquo; по факту превращается в 3%.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">CSGORoll</span>
+                    <span class="when">Январь 2026 &middot; скандал</span>
+                </div>
+                <div class="sum">~$200 000</div>
+                <p class="quote">"Наторговал больше 1 млн BRL. Потом обновление &mdash; всё обнулили. Менеджмент называл нас &laquo;пиявками&raquo;".</p>
+                <p class="detail">Автор: <strong>Cleber Magalh&atilde;es</strong>. CSGORoll массово удалил reward-систему, выкинул юзеров которые годами гриндили. Valve начал банить их Steam-ботов.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">CS.MONEY</span>
+                    <span class="when">Август 2022 &middot; Хабр</span>
+                </div>
+                <div class="sum">~1 млрд ₽</div>
+                <p class="quote">"Взлом через GrowthBook: дефолтные encryption keys = &laquo;dev&raquo;. Угнали 394,000 предметов".</p>
+                <p class="detail">Хакера нашли по IP, списались в WhatsApp &mdash; вернул ботов. Показательная дыра: **продакшн-ключ &laquo;dev&raquo;** в проде.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">s1mple</span>
+                    <span class="when">Русскоязычный CS-мир</span>
+                </div>
+                <div class="sum">600 000 ₽</div>
+                <p class="quote">"Один юзер всё время выигрывал у меня на низких шансах &mdash; похоже, это админ".</p>
+                <p class="detail">Под градусом лил ножи Claw Marble Fade и Classic Knife Gradient в coin-flip на русской рулетке. Мем <strong>&laquo;пьяный слив s1mple&raquo;</strong> обошёл все СНГ-паблики и работает как <strong>контент-маркетинг для рулеток</strong>.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">skinsroom.com</span>
+                    <span class="when">2021 &middot; Steam-форум</span>
+                </div>
+                <div class="sum">8 800 ₽ + скины</div>
+                <p class="quote">"Модератор предложил 50/50 с рулеткой. Три победы подряд → при выводе требуют комиссию 20,000, потом ещё и ещё".</p>
+                <p class="detail">Утрачены <strong>M4A1-S Guardian, AK-47 Asiimov, M4A4 Emperor</strong>. Классическая схема &laquo;доверительный модератор&raquo; + бесконечные предоплаты.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">Waxpeer</span>
+                    <span class="when">Хронически</span>
+                </div>
+                <div class="sum">1 из 15 скинов</div>
+                <p class="quote">"Из 15 купленных скинов пришёл один. Продавцы не отправляют".</p>
+                <p class="detail">Анонимное владение из Киева, лицензий не видно. Крупная вторичная площадка с хронической проблемой &laquo;продал и молчит&raquo;.</p>
+            </div>
+
+            <div class="scam-card reveal">
+                <div class="scam-head">
+                    <span class="platform">Admin Button</span>
+                    <span class="when">DTF &middot; инсайдер</span>
+                </div>
+                <div class="sum">$10 000/день</div>
+                <p class="quote">"Была магическая кнопка для предопределённого исхода. Промо-аккаунт завлекал мелких, потом лил $1000 и нажимал &laquo;выиграть&raquo;".</p>
+                <p class="detail">Исповедь маркетолога русской рулетки. Схему сломал юзер Артём, выигравший 12 раз подряд &mdash; на него обратили внимание. Комиссия 10% давала сайту <strong>$3.6M/год</strong>.</p>
+            </div>
+
+            <div class="scam-card reveal" style="grid-column:1/-1">
+                <div class="scam-head">
+                    <span class="platform">Лондонский парень</span>
+                    <span class="when">24 октября 2025 &middot; Fontanka</span>
+                </div>
+                <div class="sum">$270 000 &mdash; за одни сутки</div>
+                <p class="quote">"Слил всё, что копилось годами, за 24 часа после апдейта Valve. &laquo;Бабочка&raquo; у футболиста Смолова рухнула с $1500 до $390. А на Steam-форуме: я потратил два миллиона на нож, а кто-то получил такой же за 500 рублей".</p>
+                <p class="detail">Обвал 23.10.2025 после расширения Trade-Up контрактов. Рынок потерял <strong>~$3 млрд за 48 часов (-48%)</strong>. ЦБ РФ ответил: <strong>&laquo;Мы не регулируем рынок ножей в CS&raquo;</strong>.</p>
+            </div>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>Общий паттерн разводов (по всем 8 кейсам)</h4>
+            <p>Депозит быстро &rarr; иллюзия выигрыша &rarr; при выводе &laquo;security review&raquo; или &laquo;комиссия к оплате&raquo; &rarr; блокировка баланса без сроков &rarr; шаблонные ответы саппорта &rarr; потеря интереса юзера к борьбе. <strong>Юзер сливает не сразу, а после того как платформа &laquo;заразила&raquo; его ложным успехом</strong>.</p>
+        </div>
+    </div>
+</div>
+
+<!-- PLATFORMS -->
+<div class="slide" id="platforms">
+    <div class="slide-content">
+        <div class="section-num reveal">02 &mdash; Платформы</div>
+        <h2 class="section-title reveal">Реальные<br>Trustpilot-оценки</h2>
+        <p class="section-desc reveal">Что думают юзеры о ключевых игроках &mdash; с конкретными причинами низких оценок.</p>
+
+        <div class="trust-bars reveal">
+            <div class="trust-row">
+                <div class="trust-platform">SkinSwap</div>
+                <div class="trust-bar"><div class="trust-fill" style="width:94%;background:var(--gradient-green)">4.7/5</div></div>
+                <div class="trust-score">4.7/5</div>
+            </div>
+            <p class="trust-issue" style="margin-left:170px;margin-bottom:1rem">Держится, но жалобы на deposit holds 20+ часов накапливаются</p>
+
+            <div class="trust-row">
+                <div class="trust-platform">BitSkins</div>
+                <div class="trust-bar"><div class="trust-fill" style="width:86%;background:var(--green)">4.3/5</div></div>
+                <div class="trust-score">4.3/5</div>
+            </div>
+            <p class="trust-issue" style="margin-left:170px;margin-bottom:1rem">Техничка: боты теряют Steam-сессию, скины зависают в выводе</p>
+
+            <div class="trust-row">
+                <div class="trust-platform">Clash.gg</div>
+                <div class="trust-bar"><div class="trust-fill" style="width:76%;background:var(--orange)">3.8/5</div></div>
+                <div class="trust-score">3.8/5</div>
+            </div>
+            <p class="trust-issue" style="margin-left:170px;margin-bottom:1rem">Triple green на рулетке без выплаты, KYC 7+ дней</p>
+
+            <div class="trust-row">
+                <div class="trust-platform">GGDROP (СНГ)</div>
+                <div class="trust-bar"><div class="trust-fill" style="width:72%;background:var(--orange)">3.6/5</div></div>
+                <div class="trust-score">3.6/5</div>
+            </div>
+            <p class="trust-issue" style="margin-left:170px;margin-bottom:1rem">Блокировка после депа, требование паспорта после оплаты</p>
+
+            <div class="trust-row">
+                <div class="trust-platform">Upgrader.pro</div>
+                <div class="trust-bar"><div class="trust-fill" style="width:58%;background:var(--red)">2.9/5</div></div>
+                <div class="trust-score">2.9/5</div>
+            </div>
+            <p class="trust-issue" style="margin-left:170px;margin-bottom:1rem">62% one-star. Блокировки балансов, саппорт меняет показания</p>
+
+            <div class="trust-row">
+                <div class="trust-platform">CSGORoll</div>
+                <div class="trust-bar"><div class="trust-fill" style="width:40%;background:var(--red)">2.0/5</div></div>
+                <div class="trust-score">репут. обвал</div>
+            </div>
+            <p class="trust-issue" style="margin-left:170px;margin-bottom:1rem">Массовые баны аккаунтов, обнулённые балансы, &laquo;leeches&raquo;-скандал</p>
+        </div>
+
+        <div class="quote-box reveal">
+            <p class="q">"CSGOEmpire прислал нам $20 000 &mdash; расследовать CSGORoll. Вместо этого я выпустил серию про войну Monarch vs Killian: подкуп, defamatory листовки, попытки сорвать турниры".</p>
+            <p class="src"><strong>Coffeezilla</strong>, декабрь 2024 &middot; YouTube expos&eacute;</p>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>Война двух гигантов = маркетинг</h4>
+            <p>CSGOEmpire публично обвиняет CSGORoll, CSGORoll банит юзеров Empire, Monarch (владелец Empire) пишет PDF на 17 страниц с обвинениями. <strong>Пользователи переходят под влиянием инфо-войны, а не из-за UX</strong>. Новой платформе без &laquo;врага&raquo; в нарративе &mdash; труднее зайти.</p>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>3DMAX разорвал спонсорство с CSGOEmpire</h4>
+            <p>В 2025 году CS-клуб 3DMAX отказался от рекламы CSGOEmpire после того как те <strong>написали расистское оскорбление</strong> тренеру Melan1n в твиттере. Контекст &mdash; инцидент с white-supremacist стримером, который оказался их аффилиатом. Valve после этого ужесточил политику скин-спонсорств на licensed events.</p>
+        </div>
+    </div>
+</div>
+
+<!-- VALVE SHOCKS -->
+<div class="slide" id="shocks">
+    <div class="slide-content">
+        <div class="section-num reveal">03 &mdash; Valve-шоки</div>
+        <h2 class="section-title reveal">Хронология<br>потрясений 2025-2026</h2>
+        <p class="section-desc reveal">Рынок зависит от одного решения частной компании. Вот что Valve сделал за последние полтора года и как это реально ударило.</p>
+
+        <div class="timeline">
+            <div class="timeline-item warn reveal">
+                <div class="date">16 июля 2025</div>
+                <h4>Trade Protection — 7-дневный trade hold</h4>
+                <p>Любая сделка откатывается в течение 7 дней. Цель &mdash; защита от scammed аккаунтов. Эффект: <strong>high-frequency торговля умерла</strong>, маржа апгрейдер-сайтов через quick-flip режется. Reddit: &laquo;Если бы 1-2 дня вместо 7 &mdash; рынок расцвёл&raquo;.</p>
+                <div class="impact">Ликвидность рынка упала на ~25%</div>
+            </div>
+
+            <div class="timeline-item warn reveal">
+                <div class="date">Сентябрь 2025</div>
+                <h4>Genesis Terminal — обход EU-законов</h4>
+                <p>Новая механика Valve для Европы: юзер видит конкретный скин и цену <strong>до покупки</strong>. Формально не рандом, не лутбокс &mdash; значит, не попадает под EU gambling rules. <strong>Первый тест обхода</strong> после рекомендации Еврокомиссии (32 за / 5 против) забанить лутбоксы.</p>
+                <div class="impact">Если пройдёт юридически — классические кейсы умрут в EU</div>
+            </div>
+
+            <div class="timeline-item danger reveal">
+                <div class="date">23 октября 2025 &middot; 04:37 UTC</div>
+                <h4>Trade-Up Contract — апокалипсис за 48 часов</h4>
+                <p>Valve расширил trade-up: <strong>5 Covert-скинов = нож/перчатки</strong>. Раньше ножи дропались только из кейсов. Рынок обвалился с ~$6 млрд до ~$3.5 млрд. <strong>~$2.5-3 млрд испарились за 30-48 часов</strong>. Крупные ножевые трейдеры объявили уход.</p>
+                <div class="impact">$3B wiped. Pro Spinx бросил CS2.</div>
+            </div>
+
+            <div class="timeline-item danger reveal">
+                <div class="date">Ноябрь 2025</div>
+                <h4>Valve банит скин-спонсорства на major-турнирах</h4>
+                <p>После скандалов CSGOEmpire / 3DMAX Valve ужесточил политику: licensed CS2 events больше не могут иметь скин-казино в качестве спонсоров. <strong>Обрушение рекламного рынка</strong> для gambling-платформ в esport-вертикали.</p>
+                <div class="impact">CSGOEmpire лишился премиальной рекламы</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="date">Декабрь 2025 &mdash; Февраль 2026</div>
+                <h4>Россия: блокировка 469 VPN + VLESS/SOCKS5</h4>
+                <p>Роскомнадзор заблокировал 469 VPN-сервисов, пошёл по современным протоколам. <strong>Steam Genesis Terminal в РФ стал недоступен</strong> даже через VPN. Юзеры массово мигрируют в Telegram-боты с крипто-пополнением, где Valve-риска нет.</p>
+                <div class="impact">Steam + P2P умирает в РФ, побеждает Telegram + USDT</div>
+            </div>
+
+            <div class="timeline-item warn reveal">
+                <div class="date">Весна 2026 &middot; ожидание</div>
+                <h4>EU: финальный бан лутбоксов?</h4>
+                <p>После рекомендации Еврокомиссии (32-5-9) страны-члены готовят нацзаконы. Netherlands, Belgium, France уже недоступны для случайных покупок. <strong>Если UK присоединится &mdash; 300M+ юзеров уходят с рандом-механик</strong>. Платформы готовятся к Genesis-like моделям.</p>
+                <div class="impact">Тектонический сдвиг ниши — рандом умирает</div>
+            </div>
+        </div>
+
+        <div class="callout callout-info reveal" style="margin-top:2rem">
+            <h4>Квадрант возможностей 2026</h4>
+            <p>Legitimacy premium &mdash; главный тренд. <strong>Платформы с KYC + age-gate + не-рандом механиками переживут регуляторную волну</strong>. Те, кто пока живёт на &laquo;серой&raquo; стороне (CSGORoll, Clash.gg, мелкие upgrader-сайты) &mdash; первыми пойдут под бан.</p>
+            <ul>
+                <li><strong>Рост</strong>: Rain.gg, Gamdom (crypto-first, rakeback 60%), CSFloat (P2P, обход Steam-holds), Duel.com (новый проект Monarch)</li>
+                <li><strong>Кризис</strong>: CSGORoll, CSGOEmpire (репутационный обвал), мелкие upgrader-сайты без лицензии</li>
+                <li><strong>Новое окно</strong>: детерминированные trade-mechanics с игровым progression, P2P-escrow со страховкой, legitimate marketplace с открытым Trustpilot</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ARCHETYPES -->
+<div class="slide" id="archetypes">
+    <div class="slide-content">
+        <div class="section-num reveal">04 &mdash; Архетипы юзеров</div>
+        <h2 class="section-title reveal">Кто реально<br>платит &mdash; по данным форумов</h2>
+        <p class="section-desc reveal">Четыре портрета, собранные из Pikabu, DTF, Tinkoff-Журнала, Steam Community и ludomah.com (1.1 млн сообщений о зависимости).</p>
+
+        <div class="archetype-grid">
+            <div class="arch-card type-1 reveal">
+                <div class="arch-icon">&#128104;&#8205;&#127891;</div>
+                <h4>Школьник с маминой картой</h4>
+                <div class="age">13-15 лет &middot; Россия, Украина, Казахстан</div>
+                <p>&laquo;Это не деньги, это скины&raquo; &mdash; главное когнитивное искажение. KYC не просят, Steam Family View не включён, карта мамы прикреплена к Steam-кошельку. Основной вход: Telegram-каналы с промокодами (@Ggdropru 50K+ подписчиков) и стримеры.</p>
+                <div class="metrics">
+                    <div class="m"><strong>500-3000 ₽</strong>депозит</div>
+                    <div class="m"><strong>Telegram</strong>канал входа</div>
+                    <div class="m"><strong>СБП/Мир</strong>платёж</div>
+                </div>
+            </div>
+
+            <div class="arch-card type-2 reveal">
+                <div class="arch-icon">&#127891;</div>
+                <h4>Студент-отыграться</h4>
+                <div class="age">18-22 лет &middot; &laquo;поднять с 500 до 50K&raquo;</div>
+                <p>Вирусные истории с VC/DTF о том, как поднял с 500₽ до 50К₽ &mdash; топливо для следующих жертв. Реальный путь обычно: 700₽ на 3 кейса &rarr; выиграл на 50₽ &rarr; докинул 400₽ &rarr; слил всё. <strong>Chase loss</strong>. Студенческая стипендия исчезает за вечер.</p>
+                <div class="metrics">
+                    <div class="m"><strong>5-50K ₽</strong>за сессию</div>
+                    <div class="m"><strong>&laquo;Выигрыши&raquo;</strong>мотиватор</div>
+                    <div class="m"><strong>Крипта/СБП</strong>канал</div>
+                </div>
+            </div>
+
+            <div class="arch-card type-3 reveal">
+                <div class="arch-icon">&#128184;</div>
+                <h4>Работяга-коллекционер</h4>
+                <div class="age">23-35 лет &middot; &laquo;это инвестиция&raquo;</div>
+                <p>Считает скины активом, не gambling. &laquo;Я не играю, я коллекционирую&raquo;. Пока Valve не дропнул trade-up 23.10.2025 &mdash; было логично. После &mdash; миллион в ножах превратился в 500K. Публичный пример: <strong>Фёдор Смолов и его &laquo;бабочка&raquo; $1500 &rarr; $390</strong>. Реальная лудомания маскируется под &laquo;инвестирование&raquo;.</p>
+                <div class="metrics">
+                    <div class="m"><strong>50K-500K ₽</strong>портфель</div>
+                    <div class="m"><strong>Долгое</strong>удержание</div>
+                    <div class="m"><strong>LIS-SKINS</strong>маркетплейс</div>
+                </div>
+            </div>
+
+            <div class="arch-card type-4 reveal">
+                <div class="arch-icon">&#128139;</div>
+                <h4>Про / VIP-кит под градусом</h4>
+                <div class="age">18-30 лет &middot; s1mple-type</div>
+                <p>Про-игроки, стримеры, взрослые с лишними деньгами. Депы <strong>100-600K ₽ за сессию</strong>. <strong>s1mple слил 600K под алкоголем</strong> на русской рулетке (coin-flip на ножах). 20-летний парень из Лондона &mdash; $270K за сутки после Valve-апдейта. Обычно с личным менеджером VIP-уровня, закрытым Telegram-чатом, персональными бонусами.</p>
+                <div class="metrics">
+                    <div class="m"><strong>100-600K ₽</strong>/сессия</div>
+                    <div class="m"><strong>5%</strong>юзеров = 70-80% выручки</div>
+                    <div class="m"><strong>VIP-менеджер</strong>удерживает</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box reveal">
+            <p class="q">"Настоящая лудомания начинается не когда впервые зашёл на сайт со скинами, а когда виртуальный актив управляет реальными решениями: брать кредиты, врать семье, пропускать важные встречи ради свежей волны дропа".</p>
+            <p class="src"><strong>dausovet</strong> &middot; форум ludomah.com (1.1 млн сообщений)</p>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>Underage-мина под всей отраслью</h4>
+            <p>Coffeezilla в расследовании показал: <strong>13-летние заводят депозиты на сайтах без KYC</strong>. Elijah позвонил на hotline с мыслями о суициде после потери всех денег (включая родительских). Депутат Метелев с трибуны Госдумы: <strong>&laquo;В Roblox 10 детей перевели мошенникам миллионы с родительских карт&raquo;</strong>. CS2 следующий на очереди. Любой громкий случай &mdash; и ниша получает congressional hearings или UK review v2.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CHANNELS CNG -->
+<div class="slide" id="channels">
+    <div class="slide-content">
+        <div class="section-num reveal">05 &mdash; СНГ-специфика</div>
+        <h2 class="section-title reveal">Каналы, способы<br>и схемы СНГ-рынка</h2>
+        <p class="section-desc reveal">Чего нет на Западе и почему СНГ &mdash; отдельная вселенная в этой нише.</p>
+
+        <div class="channel-grid">
+            <div class="channel-card reveal">
+                <h5>Telegram &mdash; канал №1</h5>
+                <h4>@Ggdropru &mdash; 50K+</h4>
+                <p>Официальный канал GGDROP, стримы открытия кейсов live.</p>
+                <ul>
+                    <li>@gg_promo (LeFive) — агрегатор промокодов</li>
+                    <li>@go_casespromo (GC.SKINS Промокоды)</li>
+                    <li>@cybercase, @run_case — раздачи</li>
+                    <li>zen14/+14%, zen12/+12%, zen10/+10% (порог 850-3000₽)</li>
+                </ul>
+            </div>
+
+            <div class="channel-card reveal">
+                <h5>Стримеры-амбассадоры</h5>
+                <h4>Mellstroy, Evelone, Buster, Папич</h4>
+                <p>На <strong>W.TV от 1win</strong> работают как soft-ownership. В HyperDrop &mdash; именные кейсы Dilara, Aunkere, Shoke.</p>
+                <ul>
+                    <li>100% rakeback на спонсорских кампаниях</li>
+                    <li>&laquo;Fake winning videos&raquo; — триггер первых депозитов</li>
+                    <li>На Западе такая модель умерла после CSGOLotto 2016, в СНГ процветает</li>
+                </ul>
+            </div>
+
+            <div class="channel-card reveal">
+                <h5>Pikabu как легальный шлюз</h5>
+                <h4>promokod.pikabu.ru/shops/upgrader</h4>
+                <p>Русский top-tier UGC-портал держит <strong>официальную аффилиат-страницу Upgrader</strong> с фразой &laquo;создан и контролируется командой Пикабу&raquo;.</p>
+                <ul>
+                    <li>VC.ru, DTF — тоже SEO-рейтинги с рефами</li>
+                    <li>На Западе немыслимо без регуляторных проблем</li>
+                </ul>
+            </div>
+
+            <div class="channel-card reveal">
+                <h5>Платёжные рельсы</h5>
+                <h4>Crypto &gt; СБП &gt; карта</h4>
+                <p>USDT-TRC20 &mdash; дефолт (дёшево, быстро, принимают везде). СБП через Skinsback/SkinPay &mdash; с риском чарджбэка.</p>
+                <ul>
+                    <li>Kaspi Pay — уникальный канал КЗ (от 1000 тенге)</li>
+                    <li>Belkart, OPLATI — Беларусь</li>
+                    <li>ЮMoney, Мир — РФ</li>
+                    <li>ApplePay — после блокировок мёртв</li>
+                </ul>
+            </div>
+
+            <div class="channel-card reveal">
+                <h5>VPN-кризис</h5>
+                <h4>469 VPN заблокированы к 02.2026</h4>
+                <p>Роскомнадзор в декабре 2025 пошёл по протоколам <strong>VLESS, SOCKS5, L2TP</strong>. FACEIT сломан у россиян.</p>
+                <ul>
+                    <li>Минцифры давит на операторов ограничить Apple ID</li>
+                    <li>Steam Genesis Terminal недоступен даже через VPN</li>
+                    <li>Миграция в Telegram-боты с крипто-пополнением</li>
+                </ul>
+            </div>
+
+            <div class="channel-card reveal">
+                <h5>ЦБ РФ отвечает на обвал</h5>
+                <h4>"Не регулируем рынок ножей"</h4>
+                <p>После испарения $3B в октябре 2025 на официальной прессухе Центробанк заявил: <strong>&laquo;Мы не регулируем рынок ножей в CS&raquo;</strong> (Kommersant).</p>
+                <ul>
+                    <li>Госдума (Метелев) обещает защиту несовершеннолетних</li>
+                    <li>Реально — регуляторный вакуум</li>
+                    <li>Окно: принимать легко, выводить больно</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-blue reveal" style="margin-top:2rem">
+            <h4>Ключевой СНГ-парадокс 2026</h4>
+            <p>Крипто-пополнение остаётся свободным, а честный KYC-вывод в рубли на карту &mdash; всё сложнее. <strong>Это встроено в UX почти всех русских платформ: заходишь легко, выходишь больно</strong>. Побочный эффект &mdash; деньги юзеров дольше остаются внутри экосистемы &rarr; больше прокрутов &rarr; больше маржи платформы.</p>
+        </div>
+    </div>
+</div>
+
+<!-- INSIGHTS -->
+<div class="slide" id="insights">
+    <div class="slide-content">
+        <div class="section-num reveal">06 &mdash; Инсайты</div>
+        <h2 class="section-title reveal">Что это всё<br>меняет для нового продукта</h2>
+        <p class="section-desc reveal">10 неочевидных выводов из форумного ресёрча. Что реально работает, что обречено, где свободный квадрант.</p>
+
+        <div class="insight-grid">
+            <div class="insight-card reveal">
+                <div class="num">01</div>
+                <h4>Главный актив — doubt-tolerance юзеров</h4>
+                <p>SkinSwap при очевидных проблемах (депозит холды 20+ часов, deceptive pricing) держит Trustpilot 4.7. Юзеры прощают &laquo;честный скам через комиссии&raquo; если скорость и UX вывозят. <strong>Скамом называют только тех, кто блокирует баланс без объяснений</strong>. Значит, &laquo;честный скрытый спред&raquo; конвертится лучше, чем open-ended mystery.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">02</div>
+                <h4>Война платформ = источник трафика</h4>
+                <p>Coffeezilla-история ($20K bribe), CSGOEmpire vs CSGORoll, Monarch vs Killian &mdash; это <strong>не шум, а маркетинг</strong>. Юзеры уходят с одной площадки и идут на другую под влиянием нарратива, а не из-за UX. Новому продукту без &laquo;врага&raquo; сложнее зайти &mdash; нужна точка отталкивания.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">03</div>
+                <h4>7-day Trade Lock — окно для нового маркетплейса</h4>
+                <p>HF-торговля умерла, маржа upgrader-сайтов режется. <strong>Любой, кто решит liquidity-проблему legally</strong> (instant credit под escrow, страховка, P2P-bridge) &mdash; забирает куски от Swap.gg, BitSkins, Waxpeer. Это реальное свободное окно 2026.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">04</div>
+                <h4>Valve идёт к не-рандом механикам</h4>
+                <p>Genesis Terminal, trade-up contract &mdash; явный сигнал: <strong>&laquo;рандом за деньги&raquo; умирает юридически</strong>. Перспективное направление &mdash; детерминированные механики обмена с игровым progression (выбрал скин &rarr; прогриндил path &rarr; получил). Кто первый сделает легально &mdash; съест рынок после EU-банов.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">05</div>
+                <h4>Underage — юридическая мина</h4>
+                <p>Coffeezilla показал 13-летних депозиторов. Один громкий случай (смерть школьника, congressional hearings) &mdash; и вся ниша получает регуляторную волну. <strong>Платформа с бескомпромиссным KYC + age-gate на уровне Steam-аккаунта оказывается в белом списке</strong>, пока остальные переписывают Terms.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">06</div>
+                <h4>Kaspi Pay — незакрытая вертикаль KZ</h4>
+                <p>Все скин-платформы в Казахстане первым пунктом показывают Kaspi QR (от 1000 тенге). <strong>Западные платформы Kaspi не поддерживают</strong> &mdash; это открывает нишу для локализованного скин-продукта в Казахстане без конкуренции с гигантами.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">07</div>
+                <h4>Стример = акционер, не рекламщик</h4>
+                <p>Mellstroy, Evelone, Buster, Папич запускают W.TV под брендом 1win как <strong>амбассадоры-совладельцы</strong>. Не платные промо &mdash; доля в бизнесе. На Западе после скандала CSGOLotto 2016 такая модель умерла из-за регуляторных обвинений. В СНГ &mdash; процветает.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">08</div>
+                <h4>Телеграм-боты съедают Steam</h4>
+                <p>После Trade Lock + VPN-кризиса ру-юзеры массово мигрируют в Telegram-боты с крипто-пополнением. <strong>Меньше KYC, меньше Valve-рисков, проще UX</strong>. Новый продукт в СНГ без Telegram-интеграции &mdash; упущенная половина рынка.</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">09</div>
+                <h4>"Пьяный слив s1mple" — архетипный контент</h4>
+                <p>600K ₽ на рулетке под градусом &mdash; <strong>не повод для анти-гэмблинг-кампании, а мем</strong> который генерит трафик на те же рулетки. В СНГ проигрыш про-игрока легитимизирует нишу (в отличие от Запада, где Drake-стримы делают то же медленнее из-за регуляторного давления).</p>
+            </div>
+
+            <div class="insight-card reveal">
+                <div class="num">10</div>
+                <h4>Legitimacy premium — главный тренд 2026</h4>
+                <p>Legal wrapper, KYC, открытый Trustpilot, P2P-escrow, не-рандом механики &mdash; это <strong>не ограничение, а конкурентное преимущество</strong>. Migrating-аудитория с тонущих CSGORoll/Empire идёт к тем, кто выглядит &laquo;legal-looking&raquo;. Прозрачность курса (как Robinhood после PFOF-скандала) = доверие при той же экономике.</p>
+            </div>
+        </div>
+
+        <!-- FINAL TLDR -->
+        <div class="tldr reveal">
+            <div class="kicker">Итог для upg_gg</div>
+            <h3>Ниша злая, перегретая, политизированная — но окно есть</h3>
+            <p>Аудитория делится на школоту с маминой картой, студенчество с пятитысячным депо и китов под градусом с ножами за 600K. Доверие к классическому казино-формату (рулетка, coin-flip) почти убито серией скандалов 2024-2026. Новая волна &mdash; &laquo;честные апгрейдеры с RTP 99%&raquo; &mdash; это рыночная реакция на выжженную доверчивость.</p>
+            <p>Ключевые точки входа для нового продукта: <strong>SEO в DTF/VC/Pikabu + Telegram-бот с USDT-депо + интеграция Kaspi/СБП + честный Provably Fair + KYC age-gate как anti-CSGORoll-позиционирование</strong>.</p>
+            <p>Главный риск &mdash; Valve-риск (один апдейт = -48% рынка за 48 часов). Главная возможность &mdash; legitimacy premium: быть &laquo;скучно-легальным&raquo; в мире мафиозных войн. Если выстрелит EU-бан классических лутбоксов &mdash; кто подготовился к детерминированным механикам, съест рынок.</p>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<footer><p>UPG_GG Research &middot; Голос рынка &middot; Апрель 2026</p></footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = scrollPercent + '%';
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('open'));
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
+        mobileNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+
+// Animate trust bars when in view
+const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bars = entry.target.querySelectorAll('.trust-fill');
+            bars.forEach(bar => {
+                const w = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => { bar.style.width = w; }, 100);
+            });
+            barObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+document.querySelectorAll('.trust-bars').forEach(el => barObserver.observe(el));
+</script>
+
+</body>
+</html>
