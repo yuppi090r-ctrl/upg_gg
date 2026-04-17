@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPG_GG — GTM-стратегия и анализ рисков</title>
+    <meta name="description" content="Go-to-market стратегия для платформы CS2 скинов: каналы привлечения, CAC, юрисдикции, риски Valve, барьеры входа и M&A.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -182,7 +183,7 @@
         @media(max-width:768px){
             .grid-2,.grid-3{grid-template-columns:1fr}
             nav .nav-links{display:none}
-            .menu-toggle{display:block}
+            .menu-toggle{display:block;min-width:44px;min-height:44px}
             .slide{padding:5rem 1rem 4rem;min-height:auto}
             .hero{min-height:100vh;padding:4rem 1.25rem}
             .section-title{font-size:1.6rem}
@@ -191,7 +192,7 @@
             .metric-box .val{font-size:1.3rem}
             .tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
             .tabs::-webkit-scrollbar{display:none}
-            .tab-btn{flex-shrink:0;font-size:.75rem}
+            .tab-btn{flex-shrink:0;padding:.7rem 1rem;font-size:.75rem;min-height:44px}
             .table-container{border-radius:14px}
             table{min-width:700px}
             .glass-card{padding:1.5rem;border-radius:16px}
@@ -213,6 +214,10 @@
     <div class="inner">
         <div class="logo"><a href="index.html">UPG<span>_</span>GG</a></div>
         <div class="nav-links">
+            <a href="index.html">Обзор</a>
+            <a href="business.html">Бизнес</a>
+            <a href="revenue.html">Доходы</a>
+            <span style="width:1px;height:16px;background:var(--border2);margin:0 .25rem;display:inline-block"></span>
             <a href="#gtm">GTM</a>
             <a href="#channels">Каналы</a>
             <a href="#regulatory">Регуляция</a>
@@ -222,10 +227,14 @@
             <a href="#comparables">Аналоги</a>
             <a href="#kpi">KPI</a>
         </div>
-        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" style="color:var(--accent2);font-weight:600">Обзор ниши</a>
+    <a href="business.html" style="color:var(--accent2);font-weight:600">Бизнес-аналитика</a>
+    <a href="revenue.html" style="color:var(--accent2);font-weight:600">Доходы и трафик</a>
+    <span style="display:block;width:60px;height:1px;background:var(--border2);margin:.5rem auto"></span>
     <a href="#gtm">GTM</a>
     <a href="#channels">Каналы</a>
     <a href="#regulatory">Регуляция</a>
@@ -235,6 +244,8 @@
     <a href="#comparables">Аналоги</a>
     <a href="#kpi">KPI</a>
 </div>
+
+<main id="content">
 
 <!-- ==================== HERO ==================== -->
 <div class="slide hero" id="hero">
@@ -1507,6 +1518,8 @@
         </div>
     </div>
 </div>
+
+</main>
 
 <footer>
     <p>UPG_GG GTM Strategy &middot; Апрель 2026 &middot; <a href="index.html" style="color:var(--accent2);text-decoration:none">Основное исследование &rarr;</a></p>

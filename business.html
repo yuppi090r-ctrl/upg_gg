@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPG_GG — Бизнес-аналитика CS2 скинов</title>
+    <meta name="description" content="Бизнес-модели ниши CS2 скинов: TAM/SAM/SOM, unit-экономика, 3 модели монетизации, стоимость запуска MVP и конкурентные рвы.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -184,7 +185,7 @@
             .grid-2,.grid-3{grid-template-columns:1fr}
             .grid-4{grid-template-columns:repeat(2,1fr)}
             nav .nav-links{display:none}
-            .menu-toggle{display:block}
+            .menu-toggle{display:block;min-width:44px;min-height:44px}
             .slide{padding:3.5rem 1rem;min-height:auto}
             .hero{min-height:100vh;padding:4rem 1.25rem}
             .hero .subtitle{font-size:1rem}
@@ -239,7 +240,7 @@
             <a href="revenue.html">Доходы</a>
             <a href="gtm.html">GTM</a>
         </div>
-        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
@@ -248,6 +249,8 @@
     <a href="revenue.html">Доходы</a>
     <a href="gtm.html">GTM</a>
 </div>
+
+<main id="content">
 
 <!-- ==================== HERO ==================== -->
 <div class="slide hero" id="hero">
@@ -781,6 +784,8 @@
         </div>
     </div>
 </div>
+
+</main>
 
 <footer><p>UPG_GG Business Analytics &middot; Апрель 2026</p></footer>
 

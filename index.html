@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPG_GG — Исследование ниши CS2 скинов</title>
+    <meta name="description" content="Полный разбор рынка CS2 скинов на $4-6 млрд: референсы Upgrader и SkinSwap, 20+ конкурентов, воронки, монетизация и ключевые инсайты.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -202,7 +203,7 @@
             .grid-2,.grid-3,.funnel-container{grid-template-columns:1fr}
             .grid-4{grid-template-columns:repeat(2,1fr)}
             nav .nav-links{display:none}
-            .menu-toggle{display:block}
+            .menu-toggle{display:block;min-width:44px;min-height:44px}
             .slide{padding:3.5rem 1rem;min-height:auto}
             .hero{min-height:100vh;padding:4rem 1.25rem}
             .hero .subtitle{font-size:1rem}
@@ -217,7 +218,9 @@
             .comp-metric .val{font-size:.95rem}
             .tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
             .tabs::-webkit-scrollbar{display:none}
-            .tab-btn{flex-shrink:0;padding:.5rem 1rem;font-size:.78rem}
+            .tabs-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+            .tabs-wrap::-webkit-scrollbar{display:none}
+            .tab-btn{flex-shrink:0;padding:.7rem 1rem;font-size:.78rem;min-height:44px}
             .detail-card{padding:1.25rem}
             .detail-card h4{font-size:.85rem}
             .detail-card li{font-size:.8rem}
@@ -268,7 +271,7 @@
             <a href="#insights">Инсайты</a>
             <a href="#questions">Вопросы</a>
         </div>
-        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
@@ -285,6 +288,8 @@
     <a href="#insights">Инсайты</a>
     <a href="#questions">Вопросы</a>
 </div>
+
+<main id="content">
 
 <!-- ==================== HERO ==================== -->
 <div class="slide hero" id="hero">
@@ -402,8 +407,8 @@
                     <li>Выбираешь целевой скин (дороже)</li>
                     <li>Система показывает точный % ДО подтверждения</li>
                     <li>Шанс зависит от соотношения стоимости</li>
-                    <li>Множители: x2, x5, x10</li>
-                    <li>Фиксированные шансы: 30%, 50%, 70%</li>
+                    <li>Множители: x2, x4, x8</li>
+                    <li>Фиксированные шансы: 35%, 55%, 75%</li>
                     <li>Результат мгновенный &mdash; win или lose</li>
                     <li>При проигрыше &mdash; кэшбэк-кейс</li>
                 </ul></div>
@@ -493,7 +498,7 @@
         <div id="upg-mktg" class="tab-panel" data-group="upg">
             <div class="grid-3">
                 <div class="detail-card"><h4>Telegram (основной)</h4><ul>
-                    <li>@upgraderCS &mdash; 90,500</li>
+                    <li>@upgraderCS &mdash; 90.5K</li>
                     <li>431 фото, 26 видео, 344 ссылки</li>
                     <li>Посты несколько раз в день</li>
                     <li>Розыгрыши 100G-1000G</li>
@@ -852,7 +857,7 @@
                 <thead><tr><th style="width:22%">Параметр</th><th style="width:39%">Upgrader</th><th style="width:39%">SkinSwap</th></tr></thead>
                 <tbody>
                     <tr><td><b>Тип</b></td><td><span class="pill pill-red">Gambling</span></td><td><span class="pill pill-green">Marketplace</span></td></tr>
-                    <tr><td><b>Основан</b></td><td>Конец 2025 (юрлицо окт 2024)</td><td>Август 2021</td></tr>
+                    <tr><td><b>Основан</b></td><td>Окт 2024 (Innospace LTD)</td><td>Август 2021</td></tr>
                     <tr><td><b>Юрлицо</b></td><td>Innospace LTD (Кипр) + 2 других</td><td>DES Labs LLC (VA, USA)</td></tr>
                     <tr><td><b>Лицензия</b></td><td><span class="pill pill-red">Нет</span></td><td><span class="pill pill-orange">N/A</span></td></tr>
                     <tr><td><b>Игры</b></td><td>CS2</td><td>CS2 + Rust</td></tr>
@@ -1002,6 +1007,8 @@
         </div>
     </div>
 </div>
+
+</main>
 
 <footer><p>UPG_GG Research &middot; Апрель 2026</p></footer>
 
