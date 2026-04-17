@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin.Club — Полный разбор проекта</title>
+    <meta name="description" content="Глубокий парс case-opening платформы Skin.Club: механика, Moontain Limited, Team Vitality, ACMA warning, воронка заработка, отзывы Trustpilot и скам-кейсы.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#07060e;--surface:#0f0d1a;--surface2:#16132a;--surface3:#1e1a35;
+            --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
+            --text:#f4f2ff;--text2:#9d97c0;--text3:#6b6490;
+            --accent:#8b5cf6;--accent2:#c4b5fd;
+            --green:#10b981;--red:#ef4444;--orange:#f59e0b;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;--yellow:#fbbf24;
+            --gradient:linear-gradient(135deg,#8b5cf6,#ec4899,#6366f1);
+            --gradient-cyan:linear-gradient(135deg,#06b6d4,#3b82f6,#6366f1);
+            --gradient-red:linear-gradient(135deg,#ef4444,#f59e0b);
+            --glass:rgba(6,182,212,.04);
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(6,182,212,.08),transparent)}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:.88rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);text-decoration:none;text-shadow:0 0 30px rgba(139,92,246,.2)}
+        nav .logo a{color:inherit;text-decoration:none}
+        nav .logo span{color:var(--accent2)}
+        nav .nav-links{display:flex;gap:.15rem;align-items:center;flex-wrap:wrap}
+        nav .nav-links a{color:var(--text2);text-decoration:none;font-size:.82rem;font-weight:500;padding:.55rem .95rem;border-radius:10px;transition:all .2s ease}
+        nav .nav-links a:hover{color:var(--text);background:rgba(6,182,212,.08)}
+        nav .nav-links a.active{color:#fff;background:linear-gradient(135deg,rgba(6,182,212,.22),rgba(59,130,246,.14));border:1px solid rgba(6,182,212,.35);box-shadow:0 4px 20px rgba(6,182,212,.18);font-weight:600}
+        .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gradient-cyan);z-index:1001;transition:width .15s;box-shadow:0 0 20px rgba(6,182,212,.5)}
+
+        .slide{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden}
+        .slide-content{max-width:1100px;width:100%;position:relative;z-index:2}
+
+        .hero{text-align:center;align-items:center;padding-top:0}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border:1px solid rgba(6,182,212,.3);border-radius:100px;font-size:.8rem;color:#67e8f9;margin-bottom:2.5rem;background:rgba(6,182,212,.08);backdrop-filter:blur(10px)}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);animation:pulse-dot 2s infinite;box-shadow:0 0 12px var(--cyan)}
+        @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+        .hero h1{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;line-height:1;margin-bottom:1.5rem;letter-spacing:-.04em}
+        .hero h1 .cyan{background:var(--gradient-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero .subtitle{font-size:1.2rem;color:var(--text2);max-width:720px;margin:0 auto 3rem;font-weight:300;line-height:1.6}
+        .hero .domain{font-family:'JetBrains Mono','SF Mono',Consolas,monospace;font-size:1rem;color:#67e8f9;margin-bottom:2.5rem;letter-spacing:.05em}
+        .hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .value{font-size:2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-stat .label{font-size:.7rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+        .hero-glow{position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(6,182,212,.1) 0%,rgba(59,130,246,.05) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+
+        .section-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#67e8f9;margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+        .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);max-width:120px;opacity:.5}
+        .section-title{font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
+        .section-desc{font-size:1rem;color:var(--text2);max-width:650px;margin-bottom:3rem;font-weight:300;line-height:1.7}
+
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+
+        .glass-card{background:linear-gradient(160deg,rgba(6,182,212,.04),rgba(59,130,246,.02),var(--glass));border:1px solid var(--border);border-radius:18px;padding:1.75rem;transition:all .3s}
+        .glass-card:hover{border-color:rgba(6,182,212,.25);transform:translateY(-3px)}
+        .glass-card h4{font-size:.9rem;font-weight:700;margin-bottom:.85rem;color:#67e8f9;letter-spacing:.02em}
+        .glass-card ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+        .glass-card li{font-size:.85rem;color:var(--text2);padding-left:1.1rem;position:relative;line-height:1.6}
+        .glass-card li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--cyan);opacity:.7;box-shadow:0 0 6px rgba(6,182,212,.3)}
+        .glass-card li strong{color:var(--text);font-weight:600}
+
+        .overview-card{padding:0;overflow:hidden;border:1px solid rgba(6,182,212,.25);background:linear-gradient(160deg,rgba(6,182,212,.04),var(--surface2));border-radius:20px}
+        .overview-head{padding:1.75rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1.25rem;background:linear-gradient(135deg,rgba(6,182,212,.05),transparent)}
+        .overview-logo{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#06b6d4,#3b82f6);color:#fff;flex-shrink:0}
+        .overview-head h3{font-size:1.35rem;font-weight:800;margin-bottom:.2rem}
+        .overview-head .sub{font-size:.82rem;color:var(--text3);font-family:'JetBrains Mono',monospace}
+        .overview-tag{margin-left:auto;padding:.4rem .9rem;background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.3);border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+        .overview-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;border-bottom:1px solid var(--border)}
+        .overview-metric{padding:1.25rem 1.4rem;border-right:1px solid var(--border);text-align:center}
+        .overview-metric:last-child{border-right:none}
+        .overview-metric .val{font-size:1.15rem;font-weight:700;color:var(--text)}
+        .overview-metric .lbl{font-size:.68rem;color:var(--text3);margin-top:.25rem;letter-spacing:.04em}
+
+        .mech-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.85rem;margin:1.5rem 0}
+        .mech-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem}
+        .mech-box .tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#67e8f9;margin-bottom:.5rem}
+        .mech-box .v{font-size:1.4rem;font-weight:800;background:var(--gradient-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
+        .mech-box .sub{font-size:.78rem;color:var(--text3);margin-top:.3rem}
+
+        .stage{display:grid;grid-template-columns:130px 1fr;gap:1.5rem;margin-bottom:1.25rem;background:linear-gradient(170deg,var(--surface2),rgba(6,182,212,.03));border:1px solid var(--border);border-radius:18px;padding:1.6rem 1.9rem;transition:all .3s;position:relative;overflow:hidden}
+        .stage:hover{border-color:rgba(6,182,212,.3);transform:translateX(4px)}
+        .stage::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);opacity:.6}
+        .stage.tier-0::before{background:#6b7280;opacity:.3}
+        .stage.tier-low::before{background:var(--blue)}
+        .stage.tier-mid::before{background:var(--orange)}
+        .stage.tier-high::before{background:var(--cyan);box-shadow:0 0 20px rgba(6,182,212,.4)}
+        .stage.tier-critical::before{background:linear-gradient(180deg,#06b6d4,#0891b2);width:5px;box-shadow:0 0 30px rgba(6,182,212,.6)}
+        .stage-num{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}
+        .stage-num .n{font-size:2.4rem;font-weight:900;line-height:1;background:var(--gradient-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.04em}
+        .stage-num .tag{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .55rem;border-radius:6px}
+        .tag-none{background:rgba(107,114,128,.15);color:#9ca3af;border:1px solid rgba(107,114,128,.2)}
+        .tag-low{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+        .tag-mid{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
+        .tag-high{background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid rgba(6,182,212,.2)}
+        .tag-critical{background:var(--gradient-cyan);color:#fff;box-shadow:0 0 20px rgba(6,182,212,.4)}
+        .stage-body h4{font-size:1.1rem;font-weight:700;margin-bottom:.3rem;letter-spacing:-.01em}
+        .stage-body .stage-name{font-size:.7rem;font-weight:600;color:#67e8f9;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem}
+        .stage-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.9rem}
+        .stage-col h5{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem}
+        .stage-col.hook h5::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
+        .stage-col.money h5::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+        .stage-col p{font-size:.84rem;color:var(--text2);line-height:1.6}
+
+        .formula-box{background:linear-gradient(135deg,var(--surface2),var(--surface3));border:1px solid rgba(6,182,212,.2);border-radius:20px;padding:2.25rem;margin:2rem 0;position:relative;overflow:hidden}
+        .formula-box::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,.15),transparent 60%);pointer-events:none}
+        .formula-box .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#67e8f9;margin-bottom:1rem}
+        .formula-box pre{font-family:'JetBrains Mono','SF Mono',Consolas,monospace;font-size:.86rem;color:var(--text);background:rgba(0,0,0,.3);padding:1.15rem 1.4rem;border-radius:12px;border:1px solid var(--border);overflow-x:auto;line-height:1.7;margin-bottom:1.1rem}
+        .formula-box .comment{color:var(--text3);font-style:italic}
+        .formula-box .hl{color:#67e8f9;font-weight:600}
+        .formula-box p{font-size:.9rem;color:var(--text2);line-height:1.75}
+
+        .rev-split{margin:1.5rem 0}
+        .rev-split h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem}
+        .rev-row{display:flex;align-items:center;gap:.9rem;margin-bottom:.6rem}
+        .rev-row .rev-label{font-size:.82rem;color:var(--text2);min-width:180px;font-weight:500}
+        .rev-row .rev-bar{flex:1;height:22px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
+        .rev-row .rev-fill{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding:0 .75rem;font-size:.7rem;font-weight:700;color:#fff;min-width:fit-content}
+        .rev-row .rev-pct{font-size:.8rem;font-weight:700;min-width:60px;text-align:right;color:var(--text)}
+
+        .callout{border-radius:16px;padding:1.5rem 1.75rem;margin:1.25rem 0}
+        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)}
+        .callout-warn h4{color:var(--red);font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18)}
+        .callout-info h4{color:var(--green);font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+        .callout-blue{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2)}
+        .callout-blue h4{color:#67e8f9;font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+        .callout p{font-size:.88rem;color:var(--text2);line-height:1.7}
+        .callout strong{color:var(--text);font-weight:600}
+        .callout ul{margin-top:.5rem;list-style:none}
+        .callout li{font-size:.85rem;color:var(--text2);line-height:1.7;position:relative;padding-left:1rem;margin-bottom:.25rem}
+        .callout li::before{content:'•';position:absolute;left:0;color:currentColor;opacity:.6}
+
+        .review-card{background:linear-gradient(170deg,rgba(239,68,68,.04),var(--surface2));border:1px solid rgba(239,68,68,.18);border-left:4px solid var(--red);border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1rem}
+        .review-head{display:flex;gap:.75rem;align-items:center;margin-bottom:.75rem;flex-wrap:wrap}
+        .review-stars{color:var(--red);letter-spacing:.1em;font-size:.95rem}
+        .review-author{font-weight:700;color:var(--text);font-size:.88rem}
+        .review-date{font-size:.75rem;color:var(--text3)}
+        .review-sum{margin-left:auto;font-size:.95rem;font-weight:900;color:var(--red)}
+        .review-card .q{font-size:.92rem;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:.7rem}
+        .review-card .detail{font-size:.82rem;color:var(--text2);line-height:1.6}
+
+        .trust-break{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin:1.5rem 0}
+        .trust-break h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1.25rem}
+        .trust-score-big{display:flex;align-items:baseline;gap:.5rem;margin-bottom:1.25rem}
+        .trust-score-big .big{font-size:3rem;font-weight:900;background:var(--gradient-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;letter-spacing:-.03em}
+        .trust-score-big .total{font-size:.82rem;color:var(--text3)}
+        .trust-break .dist-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.45rem}
+        .trust-break .dist-star{font-size:.78rem;min-width:60px;color:var(--text2);font-weight:500}
+        .trust-break .dist-bar{flex:1;height:12px;background:var(--surface2);border-radius:4px;overflow:hidden}
+        .trust-break .dist-fill{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+        .trust-break .dist-pct{font-size:.78rem;min-width:50px;text-align:right;color:var(--text3);font-weight:600}
+
+        .pro-con-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem}
+        .pro-col h4,.con-col h4{font-size:.9rem;font-weight:700;margin-bottom:1rem;letter-spacing:.02em;display:flex;align-items:center;gap:.5rem}
+        .pro-col h4{color:var(--green)}
+        .con-col h4{color:var(--red)}
+        .pro-col h4::before{content:'+';width:24px;height:24px;border-radius:6px;background:rgba(16,185,129,.15);color:var(--green);display:inline-flex;align-items:center;justify-content:center;font-weight:900}
+        .con-col h4::before{content:'−';width:24px;height:24px;border-radius:6px;background:rgba(239,68,68,.15);color:var(--red);display:inline-flex;align-items:center;justify-content:center;font-weight:900}
+        .pc-item{padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:.6rem}
+        .pc-item h5{font-size:.88rem;font-weight:600;margin-bottom:.3rem}
+        .pc-item p{font-size:.8rem;color:var(--text2);line-height:1.6}
+
+        .geo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin:1.25rem 0}
+        .geo-cell{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center}
+        .geo-cell .geo-country{font-size:.88rem;font-weight:600}
+        .geo-cell .geo-pct{font-size:1rem;font-weight:800;background:var(--gradient-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+        .event-card{background:linear-gradient(160deg,rgba(245,158,11,.05),var(--surface2));border:1px solid rgba(245,158,11,.2);border-radius:16px;padding:1.5rem 1.75rem;margin-bottom:1rem;position:relative}
+        .event-card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
+        .event-card h4{font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+        .event-card p{font-size:.88rem;color:var(--text2);line-height:1.7}
+        .event-card .date{display:inline-block;padding:.25rem .7rem;background:rgba(245,158,11,.1);color:var(--orange);border:1px solid rgba(245,158,11,.2);border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.02em;margin-bottom:.6rem}
+
+        .tldr{border-radius:24px;padding:2.5rem;background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(59,130,246,.04));border:1px solid rgba(6,182,212,.25);margin-top:2.5rem}
+        .tldr .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#67e8f9;margin-bottom:1rem}
+        .tldr h3{font-size:1.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-.01em}
+        .tldr p{font-size:.95rem;color:var(--text2);line-height:1.75}
+        .tldr p + p{margin-top:.8rem}
+
+        .vs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1.5rem 0}
+        .vs-card{padding:1.25rem 1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+        .vs-card.this{border-color:rgba(6,182,212,.3);background:linear-gradient(160deg,rgba(6,182,212,.06),var(--surface))}
+        .vs-card h4{font-size:.95rem;font-weight:800;margin-bottom:.6rem}
+        .vs-card.this h4{color:#67e8f9}
+        .vs-card ul{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+        .vs-card li{font-size:.78rem;color:var(--text2);line-height:1.55}
+        .vs-card li strong{color:var(--text)}
+
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.05rem;font-weight:500;padding:.75rem 2rem;border-radius:12px}
+        .mobile-nav a:hover{color:var(--text);background:rgba(6,182,212,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        footer{border-top:1px solid var(--border);padding:4rem 2rem 2rem;background:linear-gradient(0deg,rgba(6,182,212,.04),transparent)}
+        .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+        .footer-brand .footer-logo{font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.5rem}
+        .footer-brand .footer-logo span{color:var(--accent2)}
+        .footer-brand p{color:var(--text3);font-size:.85rem;line-height:1.6}
+        .footer-links h5,.footer-meta h5{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#67e8f9;margin-bottom:1rem}
+        .footer-links{display:flex;flex-direction:column;gap:.25rem}
+        .footer-links a{color:var(--text2);text-decoration:none;font-size:.85rem;transition:all .2s;padding:.4rem 0;display:inline-block}
+        .footer-links a:hover{color:var(--text);padding-left:.35rem}
+        .footer-meta p{color:var(--text3);font-size:.82rem;line-height:1.6;margin-bottom:.5rem}
+        .footer-bottom{max-width:1100px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);text-align:center}
+        .footer-bottom p{color:var(--text3);font-size:.75rem}
+
+        .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        .back-link{display:inline-flex;align-items:center;gap:.4rem;color:#67e8f9;text-decoration:none;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:8px;border:1px solid rgba(6,182,212,.2);transition:all .25s;margin-bottom:1.5rem}
+        .back-link:hover{background:rgba(6,182,212,.1)}
+
+        @media(max-width:1024px){
+            .stage{grid-template-columns:100px 1fr;gap:1rem;padding:1.4rem}
+            .stage-num .n{font-size:2rem}
+            .vs-grid{grid-template-columns:1fr}
+            .mech-row{grid-template-columns:1fr}
+        }
+        @media(max-width:768px){
+            nav .nav-links{display:none}
+            .menu-toggle{display:block;min-width:44px;min-height:44px}
+            .slide{padding:5rem 1rem 4rem;min-height:auto}
+            .hero{min-height:100vh;padding:4rem 1.25rem}
+            .section-title{font-size:1.6rem}
+            .hero-stats{gap:1.25rem}
+            .hero-stat .value{font-size:1.4rem}
+            .grid-2,.grid-3,.stage-row,.pro-con-grid{grid-template-columns:1fr}
+            .stage{grid-template-columns:1fr;padding:1.25rem}
+            .stage-num{flex-direction:row;align-items:center;gap:.75rem;margin-bottom:.25rem}
+            .stage-num .n{font-size:1.6rem}
+            .overview-head{flex-wrap:wrap;padding:1.25rem}
+            .overview-tag{margin-left:0;margin-top:.5rem}
+            .rev-row{flex-wrap:wrap}
+            .rev-row .rev-label{min-width:120px;font-size:.76rem}
+            .formula-box{padding:1.5rem;overflow-x:auto}
+            .formula-box pre{font-size:.72rem;padding:.85rem}
+            .tldr{padding:1.75rem}
+            .footer-inner{grid-template-columns:1fr;gap:2rem}
+        }
+        @media(max-width:640px){
+            .overview-metrics{grid-template-columns:1fr !important}
+            .overview-metric{border-right:0 !important;border-bottom:1px solid var(--border)}
+            .overview-metric:last-child{border-bottom:0}
+            footer{padding:3rem 1rem 1.5rem}
+            .footer-links a{min-height:44px;display:inline-flex;align-items:center}
+            .back-link{min-height:44px;padding:.65rem 1rem}
+            .rev-row{flex-wrap:wrap;gap:.4rem}
+            .rev-row .rev-label{flex:1 1 100%;min-width:auto}
+            .rev-row .rev-bar{flex:1 1 calc(100% - 70px)}
+            .rev-row .rev-pct{flex:0 0 60px}
+            .mech-box .v{font-size:1.75rem}
+            .review-sum{margin-left:0;margin-top:.3rem;flex:1 1 100%}
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+    <div class="inner">
+        <div class="logo"><a href="../index.html">UPG<span>_</span>GG</a></div>
+        <div class="nav-links">
+            <a href="../index.html">Обзор ниши</a>
+            <a href="../money.html">Воронка $</a>
+            <a href="../upgrader-pro/index.html">Upgrader.pro</a>
+            <a href="index.html" class="active">Skin.Club</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="../index.html" style="color:var(--accent2);font-weight:600">Обзор ниши</a>
+    <a href="../business.html" style="color:var(--accent2);font-weight:600">Бизнес-аналитика</a>
+    <a href="../revenue.html" style="color:var(--accent2);font-weight:600">Доходы и трафик</a>
+    <a href="../money.html" style="color:var(--accent2);font-weight:600">Воронка заработка</a>
+    <a href="../reality.html" style="color:var(--accent2);font-weight:600">Голос рынка</a>
+    <a href="../upgrader-pro/index.html" style="color:var(--accent2);font-weight:600">Upgrader.pro</a>
+    <a href="../gtm.html" style="color:var(--accent2);font-weight:600">GTM и риски</a>
+</div>
+
+<main id="content">
+
+<!-- HERO -->
+<div class="slide hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="slide-content">
+        <a href="../index.html" class="back-link">&larr; Основное исследование</a>
+        <div class="hero-badge" style="margin-top:1rem"><span class="dot"></span> Глубокий разбор &middot; 18 апреля 2026</div>
+        <h1 style="margin-bottom:1rem">Skin<span class="cyan">.Club</span></h1>
+        <div class="domain">skin.club &middot; case-opening с 2017</div>
+        <p class="subtitle">Глобальная case-opening платформа на Кипре. 4M+ зарегистрированных, 300M+ открытых кейсов, партнёрство с Team Vitality. Полный парс: воронка, юрстуктура, отзывы и ACMA warning.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="value">4.3M</div><div class="label">Визитов/мес</div></div>
+            <div class="hero-stat"><div class="value">300M+</div><div class="label">Кейсов открыто</div></div>
+            <div class="hero-stat"><div class="value">4M+</div><div class="label">Юзеров</div></div>
+            <div class="hero-stat"><div class="value">3.5/5</div><div class="label">Trustpilot (1 712)</div></div>
+            <div class="hero-stat"><div class="value">Июнь 2020</div><div class="label">Moontain LTD</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- 1. OVERVIEW -->
+<div class="slide" id="overview">
+    <div class="slide-content">
+        <div class="section-num reveal">01 &mdash; Быстрый обзор</div>
+        <h2 class="section-title reveal">Что это такое</h2>
+        <p class="section-desc reveal">Case-opening платформа для CS2 с расширенным ассортиментом: кейсы, case battles, upgrader, contracts и трейд-ап. Глобальный продукт с брендом и 6-летней историей &mdash; совсем другая лига чем Upgrader.pro.</p>
+
+        <div class="overview-card reveal">
+            <div class="overview-head">
+                <div class="overview-logo">S</div>
+                <div>
+                    <h3>Skin.Club</h3>
+                    <div class="sub">skin.club &middot; community.skin.club &middot; merchskin.club</div>
+                </div>
+                <div class="overview-tag">Case Opening &middot; Глобал</div>
+            </div>
+            <div class="overview-metrics">
+                <div class="overview-metric"><div class="val">4.3M</div><div class="lbl">Визитов/мес</div></div>
+                <div class="overview-metric"><div class="val">-5.5% MoM</div><div class="lbl">Тренд трафика</div></div>
+                <div class="overview-metric"><div class="val">#7 752</div><div class="lbl">Global Rank</div></div>
+                <div class="overview-metric"><div class="val">12.45</div><div class="lbl">Pages/visit</div></div>
+                <div class="overview-metric"><div class="val">6:11</div><div class="lbl">Сессия</div></div>
+                <div class="overview-metric"><div class="val">2017</div><div class="lbl">Домен</div></div>
+            </div>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:2rem">
+            <div class="glass-card">
+                <h4>Что уникального</h4>
+                <ul>
+                    <li><strong>Универсал</strong> &mdash; кейсы + батлы + апгрейдер + trade-up</li>
+                    <li>Нет crash/roulette/dice &mdash; чистая case-opening вертикаль</li>
+                    <li>8 лет на рынке &mdash; старый игрок</li>
+                    <li>Team Vitality партнёрство (2024&ndash;2025)</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Чем цепляет</h4>
+                <ul>
+                    <li>&laquo;Вариативное gambling-казино&raquo; &mdash; 4 механики под разные вкусы</li>
+                    <li>Live drops в ленте &mdash; social proof</li>
+                    <li>Дорогие кейсы (до $200+) для китов</li>
+                    <li>Бесплатные daily для retention</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Позиционирование</h4>
+                <ul>
+                    <li>&laquo;Не казино, а entertainment&raquo; (регуляторный щит)</li>
+                    <li>Фокус на глобальной аудитории США/EU/LATAM</li>
+                    <li>Бренд через киберспорт (Vitality, SAW)</li>
+                    <li>Provably Fair без внешнего аудитора</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2. LEGAL -->
+<div class="slide" id="legal">
+    <div class="slide-content">
+        <div class="section-num reveal">02 &mdash; Юридическая структура</div>
+        <h2 class="section-title reveal">Moontain Limited<br>и ACMA warning</h2>
+        <p class="section-desc reveal">Кипрская шелл, UBO скрыт, игровой лицензии нет. В июле 2025 получили formal warning от австралийского регулятора.</p>
+
+        <div class="grid-3 reveal">
+            <div class="glass-card">
+                <h4>Moontain Limited (Кипр)</h4>
+                <ul>
+                    <li>HE 410299 &middot; зарег. <strong>19 июня 2020</strong></li>
+                    <li>Kypranoros 13, EVI Building, Floor 2, Office 205, 1061 Nicosia</li>
+                    <li>Директор + Секретарь: <strong>Xanthos Ioannou</strong> (номинал из SPL Audit Cyprus)</li>
+                    <li>UBO <strong>скрыт</strong> &mdash; Кипр не публикует</li>
+                    <li>В десятках других кипрских ООО Ioannou тоже директор</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Домен vs юрлицо</h4>
+                <ul>
+                    <li>skin.club &mdash; <strong>зарегистрирован 04.09.2017</strong></li>
+                    <li>Moontain LTD создан <strong>на 3 года позже</strong></li>
+                    <li>2017&ndash;2020: операции через другое юрлицо (BVI/Seychelles/HK?)</li>
+                    <li>Миграция на Кипр &mdash; ход под EU-платёжки</li>
+                    <li>DNS Cloudflare, hosting AWS Frankfurt</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Лицензирование</h4>
+                <ul>
+                    <li><strong>Игровая лицензия: отсутствует</strong></li>
+                    <li>Кипр вообще не выдаёт online casino licenses</li>
+                    <li>Нет Curacao/Anjouan/MGA</li>
+                    <li>Provably Fair &mdash; свой, без аудитора</li>
+                    <li>skin.club.com.au &mdash; отдельная AU-сущность (Trustpilot 1.3/5)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="event-card reveal" style="margin-top:2rem">
+            <div class="kicker">Регуляторный инцидент</div>
+            <span class="date">Июль 2025</span>
+            <h4>ACMA Formal Warning &mdash; Австралия</h4>
+            <p>Австралийский регулятор (Australian Communications and Media Authority) <strong>официально предупредил Moontain Limited / Skin.Club</strong> за нарушение Interactive Gambling Act 2001 &mdash; предоставление нелицензированных гэмблинг-услуг резидентам Австралии. Следующий шаг &mdash; блокировка через ISP. Первый публичный регуляторный удар по платформе.</p>
+        </div>
+
+        <div class="event-card reveal">
+            <div class="kicker">Репутационный удар</div>
+            <span class="date">Октябрь 2025</span>
+            <h4>Team Vitality ушли к Skin.Land</h4>
+            <p>В августе 2024 Skin.Club подписали Team Vitality (CS2, ZywOo) на IEM Cologne &mdash; логотип на коллар-боне джерси. В октябре 2025 <strong>Vitality перебежали к конкуренту Skin.Land</strong> (маркетплейс). На фоне ACMA warning и волны Trustpilot-негатива после Valve-шока &mdash; тренд вниз.</p>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>Почему нет лицензии &mdash; осознанный выбор</h4>
+            <p>Многие конкуренты уходят на Anjouan/Curacao за $15&ndash;25K/год. Moontain этого сознательно не делает: <strong>лицензия обязывает KYC, AML, compliance, выплаты</strong>. Работая unlicensed из Кипра, они экономят на compliance и свободнее в блокировке &laquo;невыгодных&raquo; юзеров. Именно это объясняет паттерн Trustpilot-жалоб &laquo;заблокили после крупного выигрыша&raquo;.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 3. MECHANICS -->
+<div class="slide" id="mechanics">
+    <div class="slide-content">
+        <div class="section-num reveal">03 &mdash; Механики</div>
+        <h2 class="section-title reveal">Четыре вертикали<br>в одной платформе</h2>
+        <p class="section-desc reveal">В отличие от Upgrader.pro (только апгрейд) и SkinSwap (только маркетплейс), Skin.Club &mdash; универсал. Кейсы, PvP-батлы, апгрейдер, контракты &mdash; всё под одной крышей.</p>
+
+        <div class="mech-row reveal">
+            <div class="mech-box">
+                <div class="tag">Кейсы</div>
+                <div class="v">200+</div>
+                <div class="sub">$0.03 &mdash; $200+</div>
+            </div>
+            <div class="mech-box">
+                <div class="tag">Case Battles</div>
+                <div class="v">до 15</div>
+                <div class="sub">игроков в лобби</div>
+            </div>
+            <div class="mech-box">
+                <div class="tag">Upgrader</div>
+                <div class="v">до x20</div>
+                <div class="sub">множитель</div>
+            </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:2rem">
+            <div class="glass-card">
+                <h4>Кейсы &mdash; ядро продукта</h4>
+                <ul>
+                    <li>200+ кейсов в 20+ категориях</li>
+                    <li>От $0.03 (бесплатные дейлики) до $200+ (ножи)</li>
+                    <li>Анимация прокрутки + звук открытия</li>
+                    <li>Live drops лента &mdash; чужие выигрыши</li>
+                    <li><strong>300M+ кейсов открыто всего</strong></li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Case Battles &mdash; PvP</h4>
+                <ul>
+                    <li>1&ndash;14 игроков, победитель забирает всё</li>
+                    <li>Режим Group &mdash; пот делится</li>
+                    <li>Entry $0.50 &mdash; $50+</li>
+                    <li><strong>30M+ батлов сыграно</strong></li>
+                    <li>Есть слухи про бот-игроков в лобби</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Upgrader</h4>
+                <ul>
+                    <li>%-апгрейд скина на скин (до x20)</li>
+                    <li>Dump-механика: сливает мелочь с баланса</li>
+                    <li>Слайдер шанса 20&ndash;90%</li>
+                    <li>House edge до 25%</li>
+                    <li><strong>68M+ апгрейдов сделано</strong></li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Contracts / Trade-Up</h4>
+                <ul>
+                    <li>Trade-up 5 скинов в один высшего tier</li>
+                    <li>Exchange внутренний &mdash; скин-на-скин</li>
+                    <li>Daily free cases ($0.10&ndash;$0.50 EV)</li>
+                    <li>Missions &mdash; бонусы за объём</li>
+                    <li>Events (Deep Dive, Easter, Halloween, NY)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4. RTP -->
+<div class="slide" id="rtp">
+    <div class="slide-content">
+        <div class="section-num reveal">04 &mdash; RTP и House Edge</div>
+        <h2 class="section-title reveal">Заявляют 5-15% edge,<br>по тестам 11-18%</h2>
+        <p class="section-desc reveal">Независимые обзоры и Reddit-эксперименты показывают реальный house edge в среднем 11-18%, до 40-60% на дешёвых кейсах. Effective fee на юзера в сессии &mdash; 15-25% от wager.</p>
+
+        <div class="grid-2 reveal">
+            <div class="glass-card">
+                <h4>Заявленные показатели</h4>
+                <ul>
+                    <li>House edge <strong>5&ndash;15%</strong> (зависит от кейса)</li>
+                    <li>&laquo;Provably Fair&raquo; &mdash; своя реализация</li>
+                    <li>Шанс ножа из премиум-кейса ~0.26% (как в Steam)</li>
+                    <li>В ToS: скорректированные цены, не Steam Market</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Что показали тесты</h4>
+                <ul>
+                    <li>Reddit-extension: RTP ~83.5% &rArr; edge <strong>~16.5%</strong></li>
+                    <li>Noonkick-обзор: $20 в кейсах вернули $12 (<strong>-40%</strong>)</li>
+                    <li>Batch $75 &rarr; $45 возврата (<strong>-40%</strong>)</li>
+                    <li>На Upgrader: $10 &rarr; средний возврат $7.50 (<strong>-25%</strong>)</li>
+                    <li>Effective fee: <strong>15&ndash;25%</strong> от wager</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>Скрытый edge #2 &mdash; спред каталожных цен</h4>
+            <p>Жалоба Yordan Neykov на Trustpilot: <strong>&laquo;В каталоге $53, рыночная цена $250 &mdash; меня обманывают на $200&raquo;</strong>. Платформа показывает цены скинов на 2&ndash;5× ниже Steam Market для предметов при выводе через Skin Exchange. Это скрытый спред 8&ndash;15% поверх house edge. Суммарно реальная маржа на серии кликов достигает <strong>30&ndash;50%</strong> от вложенного.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 5. FUNNEL -->
+<div class="slide" id="funnel">
+    <div class="slide-content">
+        <div class="section-num reveal">05 &mdash; Воронка заработка</div>
+        <h2 class="section-title reveal">11 этапов<br><span style="color:var(--cyan)">пути денег</span></h2>
+        <p class="section-desc reveal">Четыре механики + retention-петли + скрытый спред на выходе &mdash; платформа зарабатывает на 4 разных типах маржи одновременно.</p>
+
+        <div class="stage tier-0 reveal">
+            <div class="stage-num"><div class="n">00</div><div class="tag tag-none">Пока $0</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Acquisition</div>
+                <h4>SEO + инфлюенсеры + промокоды</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>Бесплатный кейс при регистрации, промокоды +20%. Блогеры (YouTube/Twitch/TikTok) льют трафик. Агрегаторы cs2code24, csgototem, hellagood в топе SEO по запросу &laquo;skin.club promo code&raquo;.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>0% напрямую. Но аффилиат получает <strong>% с рейка рефералов пожизненно</strong>. Промокоды HELLA, GAMBLE-CSGO дают +20%, W7BLZY9PHXV9 &mdash; +10%.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-low reveal">
+            <div class="stage-num"><div class="n">01</div><div class="tag tag-low">0%</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Landing</div>
+                <h4>Live drops + Vitality-баннер</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>&laquo;Live drops&raquo; справа (чужие $500&ndash;$2000), счётчики 300M/68M/30M, баннер Team Vitality, CTA &laquo;Sign in through Steam&raquo; одной кнопкой.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Bounce 26.65%, 13.43 стр/визит, 6:36 сессия &mdash; <strong>архитектура как у слот-зала</strong>, не e-commerce. Anchor bias: ножи по $3000 рядом с кейсом за $2.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-low reveal">
+            <div class="stage-num"><div class="n">02</div><div class="tag tag-low">0%</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Steam OAuth</div>
+                <h4>Бесшовный вход</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>Клик &laquo;Login through Steam&raquo; &rarr; ты внутри. Нет email, пароля, верификации. Trade URL подтягивается автоматом.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Нулевой friction = максимальная конверсия. Depositвsкинами в 2 клика &mdash; люди заводят то, что картой не внесли бы.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-mid reveal">
+            <div class="stage-num"><div class="n">03</div><div class="tag tag-mid">~5-8%</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Первый депозит</div>
+                <h4>$5 / $0.10 скин + 10-24% бонус</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>Минимум $5 картой / $0.10 скин. Промокод +10&ndash;20% (до 24% в новогоднем календаре). Visa/MC, G2A Pay, крипта напрямую (BTC/ETH/LTC/USDT).</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Бонус &mdash; кредит на сайте, не фиат. Reciprocity (&laquo;мне дали &mdash; надо отработать&raquo;). Процессинг-комиссия 2&ndash;5% на картах (скрытый спред через G2A).</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-critical reveal">
+            <div class="stage-num"><div class="n">04</div><div class="tag tag-critical">55-65% &#9658;</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Первая покупка кейса</div>
+                <h4>Главный источник GGR</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>200+ кейсов $0.03&ndash;$100+. Анимация roulette tick-tick, звук открытия, live-лента чужих выигрышей рядом. Variable ratio reward &mdash; как слот-машина.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Реальный house edge <strong>11&ndash;18%</strong>, до 40&ndash;60% на дешёвых. Цена кейса искусственно накручена над Steam Market. Sunk cost &laquo;отбить&raquo; + near-miss effect.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-high reveal">
+            <div class="stage-num"><div class="n">05</div><div class="tag tag-high">15-20%</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Case Battles</div>
+                <h4>PvP-вовлечение</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>&laquo;Сражайся против 1&ndash;14 игроков, победитель забирает всё&raquo;. Публичное лобби, присоединяйся к чужому батлу. Соц статус + FOMO (&laquo;уходит без тебя&raquo;).</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Сайт берёт <strong>наценку на кейс внутри батла</strong> (те же 10&ndash;15% edge) &times; N участников. По тестам: $75 вложено &rarr; $45 возврата = <strong>-40%</strong> проигрыш.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-high reveal">
+            <div class="stage-num"><div class="n">06</div><div class="tag tag-high">10-15%</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Upgrader</h4>
+                <h4>Добить остатки баланса</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>&laquo;Скин за $1 &mdash; попробуй на $10?&raquo; Слайдер 20&ndash;90% шанса. Самая &laquo;навыковая&raquo; на вид механика &mdash; юзер чувствует illusion of control.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Успех всегда ниже честного EV на <strong>25% house edge</strong> &mdash; самая маржинальная механика. 68M апгрейдов &times; 25% = дойная корова, которая всё ещё выглядит как &laquo;умная игра&raquo;.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-mid reveal">
+            <div class="stage-num"><div class="n">07</div><div class="tag tag-mid">Retention</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Daily cases / Missions</div>
+                <h4>Бесплатная удочка</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>Бесплатный кейс каждый день ($0.10&ndash;$0.50 EV). Миссии &laquo;открой 10 &mdash; получи бонус&raquo;. Новогодний календарь (14&ndash;16 дней, $2&ndash;$10/день).</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Прямой убыток $5/мес за daily, но покрывается retention. Пришёл за фри &mdash; остался на $5 депозит. Streak commitment: пропустил день = потерял прогресс.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-low reveal">
+            <div class="stage-num"><div class="n">08</div><div class="tag tag-low">-0.3%</div></div>
+            <div class="stage-body">
+                <div class="stage-name">VIP / Loyalty</div>
+                <h4>&laquo;Paper Deal&raquo; вместо tier-системы</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>Формального Silver/Gold/Diamond <strong>НЕТ</strong>. Вместо него &mdash; event-points &laquo;Paper Deal&raquo; для обмена на предметы. Иллюзия прогресса.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p><strong>Экономят на рейкбэке</strong>. В классических казино rakeback 5&ndash;20%, здесь &laquo;возвращают&raquo; &lt;0.3% на $500 оборота. <strong>Экономия +5&ndash;10% чистой маржи</strong> vs конкуренты с VIP-программами.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-critical reveal">
+            <div class="stage-num"><div class="n">09</div><div class="tag tag-critical">Двойная маржа &#9658;</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Вывод</div>
+                <h4>Только скины + marketplace спред</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>&laquo;Вывод за 2 минуты через Steam trade&raquo;. Автоматика, без ручной модерации в стандартных случаях. Никакого фиата/крипты обратно.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Внутренний &laquo;Skin Exchange&raquo; отдаёт <strong>85&ndash;90% Steam market value</strong> &mdash; платформа берёт <strong>10&ndash;15% на конверсии баланс&rarr;скин</strong>. Плюс юзер потом идёт на Skinport (еще 6%) или SkinSwap (38&ndash;45% Insta-Sell) &mdash; двойная стрижка.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage tier-high reveal">
+            <div class="stage-num"><div class="n">10</div><div class="tag tag-high">Retention</div></div>
+            <div class="stage-body">
+                <div class="stage-name">Реактивация</div>
+                <h4>Push + email + ивенты</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook"><h5>Крючок</h5><p>Push в Steam, email про новый кейс, промокоды в Twitter/Discord каждую среду (&laquo;It is Wednesday, my dudes&raquo;), сезонные Halloween/NY/Easter.</p></div>
+                    <div class="stage-col money"><h5>Где деньги</h5><p>Возврат спящих юзеров в 3&ndash;5× дешевле, чем новые CPA. NY Calendar: 16 дней бонусов &rarr; средний возврат <strong>$500 ARPU</strong> на реактивированного.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="formula-box reveal" style="margin-top:2.5rem">
+            <div class="kicker">Уравнение заработка Skin.Club</div>
+            <pre><span class="hl">GGR</span> = Cases(55-65%) + Battles(15-20%) + Upgrader(10-15%)
+    + Marketplace_spread(5-10%) − Bonuses_cost(3-5%)
+
+<span class="hl">Revenue</span> ≈ Visits &times; Conv &times; ARPU &times; Retention
+         ≈ 4.3M &times; 8-12% &times; $30-80 &times; 0.4
+         ≈ <span class="hl">$4-15M GGR/мес</span> = $50-180M/год</pre>
+            <p>В отличие от Upgrader.pro (70&ndash;85% выручки с одной механики апгрейда), у Skin.Club <strong>диверсифицированная маржа</strong> с 4 источников. Это делает их устойчивее к регуляторным ударам по одному типу механики &mdash; но усложняет продуктовый фокус.</p>
+        </div>
+
+        <div class="rev-split reveal">
+            <h4>Из чего складывается GGR</h4>
+            <div class="rev-row"><div class="rev-label">Кейсы</div><div class="rev-bar"><div class="rev-fill" style="width:60%;background:var(--gradient-cyan)">Этап 04 &mdash; ядро</div></div><div class="rev-pct">55-65%</div></div>
+            <div class="rev-row"><div class="rev-label">Case Battles</div><div class="rev-bar"><div class="rev-fill" style="width:18%;background:var(--blue)">Этап 05</div></div><div class="rev-pct">15-20%</div></div>
+            <div class="rev-row"><div class="rev-label">Upgrader</div><div class="rev-bar"><div class="rev-fill" style="width:13%;background:#8b5cf6">Этап 06</div></div><div class="rev-pct">10-15%</div></div>
+            <div class="rev-row"><div class="rev-label">Marketplace spread</div><div class="rev-bar"><div class="rev-fill" style="width:8%;background:var(--orange)">Этап 09</div></div><div class="rev-pct">5-10%</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- 6. TRAFFIC -->
+<div class="slide" id="traffic">
+    <div class="slide-content">
+        <div class="section-num reveal">06 &mdash; Трафик и гео</div>
+        <h2 class="section-title reveal">Глобальный продукт<br>без СНГ-ядра</h2>
+        <p class="section-desc reveal">В отличие от Upgrader.pro (63% РФ), у Skin.Club равномерный международный трафик с акцентом на США, Испанию и Германию. Это принципиально другая аудитория.</p>
+
+        <div class="geo-grid reveal">
+            <div class="geo-cell"><div class="geo-country">🇺🇸 США</div><div class="geo-pct">12.9%</div></div>
+            <div class="geo-cell"><div class="geo-country">🇪🇸 Испания</div><div class="geo-pct">7.9%</div></div>
+            <div class="geo-cell"><div class="geo-country">🇩🇪 Германия</div><div class="geo-pct">7.5%</div></div>
+            <div class="geo-cell"><div class="geo-country">🇸🇪 Швеция</div><div class="geo-pct">6.3%</div></div>
+            <div class="geo-cell"><div class="geo-country">🇬🇧 UK</div><div class="geo-pct">5.3%</div></div>
+            <div class="geo-cell"><div class="geo-country">🌍 Прочее</div><div class="geo-pct">60.1%</div></div>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:1.5rem">
+            <div class="glass-card">
+                <h4>Каналы трафика</h4>
+                <ul>
+                    <li><strong>Direct 64.1%</strong> &mdash; сильный бренд</li>
+                    <li>Organic Search ~15&ndash;20% (брендовые ключи)</li>
+                    <li>Referral ~10&ndash;12% (промо-сайты)</li>
+                    <li>Social &lt;3%</li>
+                    <li>Paid near 0 (органика + инфлюенсеры)</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Демография</h4>
+                <ul>
+                    <li>Мужчины <strong>76.7%</strong>, женщины 23.3%</li>
+                    <li>Ядро <strong>18&ndash;24 лет</strong></li>
+                    <li>Классика CS2-геймеров</li>
+                    <li>В отличие от Upgrader (СНГ школьники 14&ndash;17)</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Оценка активных</h4>
+                <ul>
+                    <li>MAU: <strong>1.0&ndash;1.3M</strong></li>
+                    <li>DAU: 80&ndash;120K</li>
+                    <li>Payers: 40&ndash;90K/мес (4&ndash;7% от MAU)</li>
+                    <li>VIP-киты: топ-1% даёт 50&ndash;60% handle</li>
+                    <li>Зарегистрированных всего: 3.5&ndash;4M</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-blue reveal">
+            <h4>SEO-парадокс Skin.Club</h4>
+            <p>64% direct &mdash; сильный бренд, но <strong>весь SEO чисто брендовый</strong>. Ранжируются по &laquo;skinclub&raquo;, &laquo;skin club&raquo;, &laquo;skin.club promo code&raquo;. <strong>Нет генериков</strong> &laquo;CS2 cases&raquo;, &laquo;best case opening&raquo;. Это дыра в $2&ndash;5M upside/год &mdash; конкуренты (Hellcase, Clash) тут агрессивнее ловят холодный трафик.</p>
+        </div>
+
+        <div class="callout callout-info reveal">
+            <h4>Ниша LATAM/ES &mdash; скрытый moat</h4>
+            <p>Испания #2 (7.9%), Швеция #4 &mdash; <strong>нестандартно для CS2-gambling</strong>. Там обычно DE/UK/PL/RU. Skin.Club целенаправленно работает с испаноязычными стримерами и латинской аудиторией. Это ниша, где конкуренты слабее &mdash; <strong>возможно, главный скрытый актив платформы</strong>.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 7. FINANCIALS -->
+<div class="slide" id="finance">
+    <div class="slide-content">
+        <div class="section-num reveal">07 &mdash; Финансовая оценка</div>
+        <h2 class="section-title reveal">NGR $2.5-6M<br>прибыль $0.5-2M</h2>
+        <p class="section-desc reveal">На основе трафика 4.3M и бенчмарков гэмблинг-индустрии. Официально Moontain финотчётность не публикует &mdash; это оценка от 3 независимых источников.</p>
+
+        <div class="grid-3 reveal">
+            <div class="glass-card">
+                <h4>Handle (оборот ставок)</h4>
+                <ul>
+                    <li>$3.5M &mdash; $6.5M в месяц</li>
+                    <li><strong>$42M &mdash; $78M в год</strong></li>
+                    <li>Handle/deposit ratio ×8&ndash;12 (gambling-норма)</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>GGR и NGR</h4>
+                <ul>
+                    <li>Margin/hold: 6&ndash;9%</li>
+                    <li>GGR: <strong>$3.0M &mdash; $7.0M</strong>/год</li>
+                    <li>NGR (после бонусов): $2.5M &mdash; $6.0M/год</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Прибыль</h4>
+                <ul>
+                    <li>EBITDA margin 20&ndash;35%</li>
+                    <li><strong>$0.5M &mdash; $2M/год чистой</strong></li>
+                    <li>ARPU платящего: $55&ndash;100/мес</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="vs-grid reveal" style="margin-top:2rem">
+            <div class="vs-card">
+                <h4 style="color:var(--red)">CSGORoll (S)</h4>
+                <ul>
+                    <li><strong>15&ndash;20M визитов/мес</strong></li>
+                    <li>NGR $80&ndash;150M/год</li>
+                    <li>Скандалы, массовые баны</li>
+                </ul>
+            </div>
+            <div class="vs-card this">
+                <h4>Skin.Club (B+)</h4>
+                <ul>
+                    <li><strong>4.3M визитов/мес</strong></li>
+                    <li>NGR $3&ndash;7M/год</li>
+                    <li>Партнёрство Vitality, ACMA warning</li>
+                </ul>
+            </div>
+            <div class="vs-card">
+                <h4 style="color:var(--orange)">Upgrader.pro (C)</h4>
+                <ul>
+                    <li>0.4&ndash;0.7M визитов/мес</li>
+                    <li>NGR $3.5&ndash;23M/год</li>
+                    <li>+123% MoM, СНГ-only</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 8. MARKETING -->
+<div class="slide" id="marketing">
+    <div class="slide-content">
+        <div class="section-num reveal">08 &mdash; Маркетинг и каналы</div>
+        <h2 class="section-title reveal">Esports-бренд<br>через Vitality</h2>
+        <p class="section-desc reveal">В отличие от Upgrader.pro (Telegram + блогеры), Skin.Club строит бренд через Tier-1 киберспортивные партнёрства. Это их главное отличие.</p>
+
+        <div class="grid-2 reveal">
+            <div class="glass-card">
+                <h4>Esports-партнёрства</h4>
+                <ul>
+                    <li><strong>Team Vitality</strong> (авг 2024 &mdash; окт 2025) &mdash; логотип на джерси, IEM Cologne</li>
+                    <li><strong>SAW</strong> (2024) &mdash; португальский CS2, главный спонсор</li>
+                    <li>Стоимость deal: $150&ndash;400K/год для tier-1 команд</li>
+                    <li>Vitality ушли к конкуренту Skin.Land в окт 2025</li>
+                    <li>Цель: <strong>легитимность перед Valve бан-волной</strong></li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Стримеры</h4>
+                <ul>
+                    <li>Sparkles, Haix &mdash; получают реальные $</li>
+                    <li>Мелкие каналы &mdash; <strong>fake balance</strong> (по обвинениям)</li>
+                    <li>Контракты через partnership form, до 2 недель ревью</li>
+                    <li>Revenue share + фикса + бонусы за стримы</li>
+                    <li>Noonkick-обзор: &laquo;only winners here are streamers with fake money&raquo;</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>SEO и промокоды</h4>
+                <ul>
+                    <li>Топ ключ: <strong>skinclub 60 500 запросов/мес</strong></li>
+                    <li>SEO только брендовое &mdash; нет генериков</li>
+                    <li>Промо-сайты: cs2code24, csgototem, hellagood</li>
+                    <li>Коды: HELLA, GAMBLE-CSGO, W7BLZY9PHXV9 и ~20 активных</li>
+                    <li>Backlinks: 733K, реф-доменов 5.87K</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h4>Соцсети</h4>
+                <ul>
+                    <li>YouTube &mdash; десятки стримеров со sponsorship</li>
+                    <li>Discord &mdash; большая активная comm (giveaways)</li>
+                    <li>X/Twitter &mdash; промокод каждую среду</li>
+                    <li>TikTok &mdash; органика растёт (&laquo;how to withdraw&raquo;)</li>
+                    <li>Собственного YouTube-канала нет</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 9. REVIEWS -->
+<div class="slide" id="reviews">
+    <div class="slide-content">
+        <div class="section-num reveal">09 &mdash; Отзывы</div>
+        <h2 class="section-title reveal">Trustpilot 3.5/5<br><span style="color:var(--red)">28% одна звезда</span></h2>
+        <p class="section-desc reveal">1 712 отзывов. Распределение типичное для gambling: 65% пятёрок (VIP + выжившие) и 28% единиц (забанили после выигрыша или ушёл баланс). Дочерний skin.club.com.au &mdash; 1.3/5.</p>
+
+        <div class="trust-break reveal">
+            <h4>Trustpilot skin.club</h4>
+            <div class="trust-score-big">
+                <div class="big">3.5</div>
+                <div class="total">/5 &middot; 1 712 отзывов</div>
+            </div>
+            <div class="dist-row">
+                <div class="dist-star">★ 5</div>
+                <div class="dist-bar"><div class="dist-fill" style="width:65%;background:var(--green)"></div></div>
+                <div class="dist-pct">65%</div>
+            </div>
+            <div class="dist-row">
+                <div class="dist-star">★ 4</div>
+                <div class="dist-bar"><div class="dist-fill" style="width:4%;background:rgba(16,185,129,.5)"></div></div>
+                <div class="dist-pct">4%</div>
+            </div>
+            <div class="dist-row">
+                <div class="dist-star">★ 3</div>
+                <div class="dist-bar"><div class="dist-fill" style="width:1%;background:var(--yellow)"></div></div>
+                <div class="dist-pct">1%</div>
+            </div>
+            <div class="dist-row">
+                <div class="dist-star">★ 2</div>
+                <div class="dist-bar"><div class="dist-fill" style="width:2%;background:var(--orange)"></div></div>
+                <div class="dist-pct">2%</div>
+            </div>
+            <div class="dist-row">
+                <div class="dist-star">★ 1</div>
+                <div class="dist-bar"><div class="dist-fill" style="width:28%;background:var(--red)"></div></div>
+                <div class="dist-pct">28%</div>
+            </div>
+        </div>
+
+        <p style="font-size:.85rem;color:var(--text3);margin:1rem 0 1.5rem">Саппорт отвечает на 100% негативных отзывов в течение 48 часов. Шаблон: &laquo;Provably Fair&raquo;, &laquo;не баним за выигрыши&raquo;, &laquo;обратитесь в поддержку&raquo;.</p>
+
+        <div style="margin-top:1rem" class="reveal">
+            <div class="review-card">
+                <div class="review-head">
+                    <div class="review-stars">★</div>
+                    <div class="review-author">Yordan Neykov (BG)</div>
+                    <div class="review-date">17.04.2026</div>
+                    <div class="review-sum">-$200</div>
+                </div>
+                <p class="q">"The price in their site is $53, the actual price is $250, so I'm being scammed of $200".</p>
+                <p class="detail">Подкрученные каталожные цены при выводе. Пример скрытого спреда 370% относительно Steam Market.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-head">
+                    <div class="review-stars">★</div>
+                    <div class="review-author">Thành Thái (VN)</div>
+                    <div class="review-date">17.04.2026</div>
+                    <div class="review-sum">-$396</div>
+                </div>
+                <p class="q">"The item disappeared and my balance remained at $0.11... This is either a massive technical glitch or an attempt to scam".</p>
+                <p class="detail">Потеря предмета + обнуление баланса. Техническая ли это ошибка или умышленный сценарий &mdash; саппорт не раскрывает.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-head">
+                    <div class="review-stars">★</div>
+                    <div class="review-author">Mohammed Ebrahimi (SE)</div>
+                    <div class="review-date">03.04.2026</div>
+                    <div class="review-sum">-$800</div>
+                </div>
+                <p class="q">"You withdraw it, then they take it back and say you can't get your skins back".</p>
+                <p class="detail">Откат трейда после успешного вывода &mdash; типичный сценарий после Valve-апдейта октября 2025.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-head">
+                    <div class="review-stars">★</div>
+                    <div class="review-author">Christelle Q. (ES)</div>
+                    <div class="review-date">04.03.2026</div>
+                    <div class="review-sum">-$1 600</div>
+                </div>
+                <p class="q">"Was trying to deposit 1.6k with my skins... then did 2 battles, won it and get a ban".</p>
+                <p class="detail">Классический паттерн &laquo;ban after win&raquo;. Депозит $1.6K &rarr; 2 успешных батла &rarr; бан аккаунта без объяснений.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-head">
+                    <div class="review-stars">★</div>
+                    <div class="review-author">Reddit r/csgo</div>
+                    <div class="review-date">2025-2026</div>
+                    <div class="review-sum">-$2 300 / -$4 000</div>
+                </div>
+                <p class="q">"SkinClub just scammed me 2.3k" (депо $1800 + выигрыш $3K, получил 1 скин из 2) &middot; "Won $4K со ставки $20 &mdash; аккаунт забанили сразу".</p>
+                <p class="detail">Тред-заголовок <strong>&laquo;PSA: Winning on SkinClub isn't allowed&raquo;</strong> стал мемом. Паттерн: «everything fine when you lose, problems start when you withdraw».</p>
+            </div>
+        </div>
+
+        <div class="event-card reveal" style="margin-top:1.5rem">
+            <div class="kicker">Технический дисклоз</div>
+            <span class="date">23.03.2025 &middot; Change.org</span>
+            <h4>"Demand Valve & ESL Address SkinClub Vulnerabilities"</h4>
+            <p><strong>Дупликационный баг более 2 лет</strong>: AWP Medusa в бэкпаке давала два дропа с одного ролла. Вебмастер ответил дисклозеру: <strong>&laquo;let me keep the skins without addressing the issue&raquo;</strong> &mdash; то есть предложили спонсорский контракт вместо bug bounty. Баг не чинили, покрывали через deposit partner insurance. Key-Drop на аналогичной инфре платит bounty, Skin.Club &mdash; замалчивает.</p>
+        </div>
+
+        <div class="event-card reveal">
+            <div class="kicker">Репутационный пик-негатива</div>
+            <span class="date">23-31 октября 2025</span>
+            <h4>Valve Trade-Up обвал + trade reversals</h4>
+            <p>После апдейта Valve 23.10.2025 (trade-up 5 Covert = нож) рынок обвалился на $3B. Skin.Club <strong>массово откатывали трейды на Covert-скинах</strong>, забирая уже выданные предметы у юзеров. Вывод Covert-скинов был <strong>temporarily unavailable несколько недель</strong>. Пик негативных постов на Trustpilot и Reddit.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 10. SWOT -->
+<div class="slide" id="swot">
+    <div class="slide-content">
+        <div class="section-num reveal">10 &mdash; SWOT</div>
+        <h2 class="section-title reveal">Сильные и<br>слабые места</h2>
+        <p class="section-desc reveal">Skin.Club &mdash; не скам, но с накопленным репутационным долгом. Сильный бренд через Vitality, но ушедший партнёр и ACMA-ревью &mdash; сигналы тренда.</p>
+
+        <div class="pro-con-grid reveal">
+            <div class="pro-col">
+                <h4>Сильные стороны</h4>
+                <div class="pc-item">
+                    <h5>Диверсификация механик</h5>
+                    <p>4 вертикали (кейсы/батлы/апгрейдер/контракты) &mdash; выдерживают удар если одну зарегулируют. Upgrader.pro с одной механикой более уязвим.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Глобальный трафик</h5>
+                    <p>Нет СНГ-ядра (как у Upgrader 63% РФ) &mdash; устойчивее к санкциям и РКН. США/EU/LATAM спред.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Бренд через киберспорт</h5>
+                    <p>Team Vitality и SAW дали легитимность, которой не купишь CPA. Это окно возможностей до Valve бан-волны.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>8 лет на рынке</h5>
+                    <p>Пережили обвал 2018, ADM-удары, Valve-апдейты. В отличие от Upgrader (15 мес) &mdash; proven infrastructure.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Нет формального VIP</h5>
+                    <p>&laquo;Paper Deal&raquo; &lt;0.3% вместо rakeback 5&ndash;20% &mdash; экономия +5&ndash;10% чистой маржи.</p>
+                </div>
+            </div>
+            <div class="con-col">
+                <h4>Слабые места</h4>
+                <div class="pc-item">
+                    <h5>ACMA warning (июль 2025)</h5>
+                    <p>Первый публичный регуляторный удар. Следующий шаг &mdash; ISP-блокировка в Австралии. Прецедент для других регуляторов.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Отток Vitality</h5>
+                    <p>В окт 2025 Team Vitality ушли к Skin.Land. Сигнал: бренд-партнёры соскакивают с проектов без лицензии.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Тренд -5.5% MoM</h5>
+                    <p>Трафик падает на фоне Valve-шока и волны негатива. В отличие от Upgrader (+123%) &mdash; в фазе спада.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>&laquo;Ban after win&raquo; как паттерн</h5>
+                    <p>Мем на Reddit &laquo;Winning on SkinClub isn't allowed&raquo;. Репутационный яд, который не фиксится легко.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Скрытый спред $53 vs $250</h5>
+                    <p>Каталожные цены в 2&ndash;5× ниже Steam Market. Пойманы в конкретных кейсах &mdash; это основа большинства скам-жалоб.</p>
+                </div>
+                <div class="pc-item">
+                    <h5>Change.org петиция</h5>
+                    <p>Дупликационный баг AWP Medusa более 2 лет &mdash; вебмастер предложил дисклозеру &laquo;молчание за скины&raquo;. Публичное подтверждение non-security культуры.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 11. COMPARE -->
+<div class="slide" id="compare">
+    <div class="slide-content">
+        <div class="section-num reveal">11 &mdash; Сравнение</div>
+        <h2 class="section-title reveal">Skin.Club vs<br>Upgrader.pro vs SkinSwap</h2>
+        <p class="section-desc reveal">Три разные модели в одной нише. Три способа зарабатывать на скинах.</p>
+
+        <div class="vs-grid reveal" style="grid-template-columns:1fr 1fr 1fr">
+            <div class="vs-card this">
+                <h4>Skin.Club</h4>
+                <ul>
+                    <li><strong>Тип:</strong> Case opening (универсал)</li>
+                    <li><strong>Запуск:</strong> 2017 (домен), 2020 (юрлицо)</li>
+                    <li><strong>Оператор:</strong> Moontain LTD (Кипр)</li>
+                    <li><strong>Механик:</strong> 4 (cases/battles/upgrader/contracts)</li>
+                    <li><strong>House edge:</strong> 11&ndash;18%, до 40&ndash;60% на дешёвых</li>
+                    <li><strong>Трафик:</strong> 4.3M/мес, -5.5% тренд</li>
+                    <li><strong>Гео:</strong> Глобал (US 13%, ES 8%)</li>
+                    <li><strong>Trustpilot:</strong> 3.5/5 (1 712)</li>
+                    <li><strong>NGR:</strong> $3&ndash;7M/год</li>
+                    <li><strong>Бренд:</strong> Vitality, SAW (ушли)</li>
+                </ul>
+            </div>
+            <div class="vs-card">
+                <h4 style="color:var(--red)">Upgrader.pro</h4>
+                <ul>
+                    <li><strong>Тип:</strong> Только апгрейд</li>
+                    <li><strong>Запуск:</strong> 31.01.2025</li>
+                    <li><strong>Оператор:</strong> Innospace LTD (Кипр) + RustMagic</li>
+                    <li><strong>Механик:</strong> 1 (upgrader)</li>
+                    <li><strong>House edge:</strong> 4&ndash;7% средневзвешенный</li>
+                    <li><strong>Трафик:</strong> 0.4&ndash;0.7M/мес, +123%</li>
+                    <li><strong>Гео:</strong> СНГ (RU 63%, UA 13%)</li>
+                    <li><strong>Trustpilot:</strong> 2.9/5 (13)</li>
+                    <li><strong>NGR:</strong> $3.5&ndash;23M/год</li>
+                    <li><strong>Бренд:</strong> Telegram 90.5K, блогеры</li>
+                </ul>
+            </div>
+            <div class="vs-card">
+                <h4 style="color:var(--green)">SkinSwap</h4>
+                <ul>
+                    <li><strong>Тип:</strong> Marketplace (не казино)</li>
+                    <li><strong>Запуск:</strong> август 2021</li>
+                    <li><strong>Оператор:</strong> DES Labs LLC (VA, USA)</li>
+                    <li><strong>Механик:</strong> 3 (trade/sell/buy)</li>
+                    <li><strong>Take rate:</strong> 10&ndash;45% (Insta-Sell spread)</li>
+                    <li><strong>Трафик:</strong> 366K/мес</li>
+                    <li><strong>Гео:</strong> Глобал (US 37%)</li>
+                    <li><strong>Trustpilot:</strong> 3.8&ndash;4.7/5 (1 751)</li>
+                    <li><strong>Revenue:</strong> ~$3&ndash;5M/год</li>
+                    <li><strong>Бренд:</strong> Partner-affiliate 1%</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tldr reveal">
+            <div class="kicker">Итоговый инсайт для upg_gg</div>
+            <h3>Skin.Club — это "Netflix в gambling"</h3>
+            <p><strong>Одна ниша (case opening), но глубоко выкрученная:</strong> кейсы, батлы, апгрейдер, контракты, события &mdash; всё кристаллизовано в одной экосистеме. В отличие от CSGORoll/Gamdom (полные казино с crash+roulette) &mdash; Skin.Club осознанно выбрал узкую вертикаль чтобы проходить комплаенс как &laquo;entertainment service&raquo;.</p>
+            <p>Сильная сторона для копирования: <strong>диверсификация монетизации внутри одной ниши</strong>. Слабая: <strong>накопленный репутационный долг</strong> (Change.org, &laquo;ban after win&raquo;, скрытые спреды) &mdash; при конкуренции с новым прозрачным продуктом Skin.Club уязвим. Их 3.5/5 Trustpilot + отток Vitality + ACMA warning = <strong>окно для чистого позиционирования</strong>.</p>
+            <p><strong>Точка входа для нового продукта:</strong> скопировать диверсификацию механик (cases + battles + upgrader), но с публичным take rate, активным bug bounty, реальной лицензией Anjouan/Curacao и KYC до выигрыша. Обогнать на прозрачности &mdash; единственный способ против 8-летнего бренда.</p>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo">UPG<span>_</span>GG</div>
+            <p>Глубокий разбор Skin.Club &mdash; глобальной case-opening платформы. Moontain LTD, Team Vitality, ACMA warning, воронка и отзывы.</p>
+        </div>
+        <div class="footer-links">
+            <h5>Разделы</h5>
+            <a href="../index.html">Обзор ниши</a>
+            <a href="../business.html">Бизнес-аналитика</a>
+            <a href="../revenue.html">Доходы и трафик</a>
+            <a href="../money.html">Воронка заработка</a>
+            <a href="../reality.html">Голос рынка</a>
+            <a href="../upgrader-pro/index.html">Upgrader.pro разбор</a>
+            <a href="../gtm.html">GTM и риски</a>
+        </div>
+        <div class="footer-meta">
+            <h5>Источники</h5>
+            <p>Trustpilot, SimilarWeb, SEMrush, Noonkick, Reddit, i-Cyprus (Moontain HE410299), ACMA, Change.org, Steam Community.</p>
+            <p>Обновлено: 18 апреля 2026.</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>UPG_GG Deep Dive &middot; Skin.Club &middot; Research only &middot; Апрель 2026</p>
+    </div>
+</footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = scrollPercent + '%';
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('open'));
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
+        mobileNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+
+const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bars = entry.target.querySelectorAll('.rev-fill, .dist-fill');
+            bars.forEach(bar => {
+                const w = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => { bar.style.width = w; }, 100);
+            });
+            barObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+document.querySelectorAll('.rev-split, .trust-break').forEach(el => barObserver.observe(el));
+</script>
+
+</body>
+</html>
