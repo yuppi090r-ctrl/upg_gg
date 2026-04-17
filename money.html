@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPG_GG — Воронка заработка: чем цепляют и где деньги</title>
+    <meta name="description" content="Пошаговая воронка заработка Upgrader.pro и SkinSwap.com: где платформы цепляют пользователя и на каком этапе снимают маржу.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#07060e;--surface:#0f0d1a;--surface2:#16132a;--surface3:#1e1a35;
+            --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
+            --text:#f4f2ff;--text2:#9d97c0;--text3:#6b6490;
+            --accent:#8b5cf6;--accent2:#c4b5fd;--accent-glow:rgba(139,92,246,.2);
+            --green:#10b981;--red:#ef4444;--orange:#f59e0b;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;--yellow:#fbbf24;
+            --gradient:linear-gradient(135deg,#8b5cf6,#ec4899,#6366f1);
+            --gradient-red:linear-gradient(135deg,#ef4444,#f59e0b);
+            --gradient-green:linear-gradient(135deg,#10b981,#06b6d4);
+            --glass:rgba(139,92,246,.04);
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
+
+        /* === NAV === */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s;background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);text-shadow:0 0 30px rgba(139,92,246,.2)}
+        nav .logo a{color:inherit;text-decoration:none}
+        nav .logo span{color:var(--accent2)}
+        nav .nav-links{display:flex;gap:.25rem;flex-wrap:wrap}
+        nav .nav-links a{color:var(--text3);text-decoration:none;font-size:.74rem;font-weight:500;padding:.45rem .7rem;border-radius:8px;transition:all .25s;letter-spacing:.02em}
+        nav .nav-links a:hover{color:var(--text2)}
+        nav .nav-links a.active{color:#fff;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.2)}
+        .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gradient);z-index:1001;transition:width .15s;box-shadow:0 0 20px rgba(139,92,246,.5)}
+
+        /* === SECTIONS === */
+        .slide{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden}
+        .slide-content{max-width:1100px;width:100%;position:relative;z-index:2}
+
+        /* === HERO === */
+        .hero{text-align:center;align-items:center;padding-top:0}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border:1px solid rgba(139,92,246,.3);border-radius:100px;font-size:.8rem;color:var(--accent2);margin-bottom:2.5rem;background:rgba(139,92,246,.08);backdrop-filter:blur(10px)}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite;box-shadow:0 0 12px var(--green)}
+        @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+        .hero h1{font-size:clamp(2.5rem,6.5vw,5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-.04em}
+        .hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero h1 .red{background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero h1 .green{background:var(--gradient-green);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero .subtitle{font-size:1.2rem;color:var(--text2);max-width:720px;margin:0 auto 3rem;font-weight:300;line-height:1.6}
+        .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .value{font-size:2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-stat .label{font-size:.7rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+        .hero-glow{position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(139,92,246,.1) 0%,rgba(236,72,153,.05) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+
+        /* === SECTION HEADERS === */
+        .section-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;text-shadow:0 0 30px rgba(139,92,246,.4)}
+        .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);max-width:120px;opacity:.5}
+        .section-title{font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
+        .section-desc{font-size:1rem;color:var(--text2);max-width:650px;margin-bottom:3rem;font-weight:300;line-height:1.7}
+
+        /* === GLASS CARD === */
+        .glass-card{background:linear-gradient(160deg,rgba(139,92,246,.04),rgba(236,72,153,.02),var(--glass));border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(8px);transition:all .35s ease}
+        .glass-card:hover{border-color:rgba(139,92,246,.25);transform:translateY(-3px);box-shadow:0 20px 60px rgba(139,92,246,.08)}
+
+        /* === BIG IDEA BLOCK === */
+        .big-idea{border-radius:24px;padding:3rem 2.5rem;position:relative;overflow:hidden;margin-bottom:3rem}
+        .big-idea.red{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(245,158,11,.04));border:1px solid rgba(239,68,68,.25)}
+        .big-idea.green{background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(6,182,212,.04));border:1px solid rgba(16,185,129,.25)}
+        .big-idea .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem;opacity:.75}
+        .big-idea.red .kicker{color:var(--red)}
+        .big-idea.green .kicker{color:var(--green)}
+        .big-idea h3{font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:800;line-height:1.2;margin-bottom:1rem;letter-spacing:-.02em}
+        .big-idea p{font-size:1rem;color:var(--text2);line-height:1.7;max-width:780px}
+        .big-idea .insight-glow{position:absolute;width:400px;height:400px;border-radius:50%;pointer-events:none;filter:blur(100px);opacity:.3;top:-50%;right:-10%}
+        .big-idea.red .insight-glow{background:var(--red)}
+        .big-idea.green .insight-glow{background:var(--green)}
+
+        /* === FUNNEL STAGE CARD === */
+        .stage{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;margin-bottom:1.5rem;background:linear-gradient(170deg,var(--surface2),rgba(139,92,246,.03));border:1px solid var(--border);border-radius:18px;padding:1.75rem 2rem;transition:all .3s;position:relative;overflow:hidden}
+        .stage:hover{border-color:rgba(139,92,246,.2);transform:translateX(4px)}
+        .stage::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);opacity:.6}
+        .stage.tier-0::before{background:#6b7280;opacity:.3}
+        .stage.tier-low::before{background:var(--blue)}
+        .stage.tier-mid::before{background:var(--orange)}
+        .stage.tier-high::before{background:var(--red);box-shadow:0 0 20px rgba(239,68,68,.4)}
+        .stage.tier-critical::before{background:linear-gradient(180deg,#ef4444,#dc2626);width:5px;box-shadow:0 0 30px rgba(239,68,68,.6)}
+
+        .stage-num{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}
+        .stage-num .n{font-size:2.8rem;font-weight:900;line-height:1;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.04em}
+        .stage-num .tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:6px}
+        .tag-none{background:rgba(107,114,128,.15);color:#9ca3af;border:1px solid rgba(107,114,128,.2)}
+        .tag-low{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+        .tag-mid{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
+        .tag-high{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+        .tag-critical{background:var(--gradient-red);color:#fff;box-shadow:0 0 20px rgba(239,68,68,.4)}
+
+        .stage-body h4{font-size:1.15rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.01em}
+        .stage-body .stage-name{font-size:.72rem;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+        .stage-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem}
+        .stage-col h5{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;display:flex;align-items:center;gap:.35rem}
+        .stage-col.hook h5::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+        .stage-col.money h5::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red)}
+        .stage-col p{font-size:.85rem;color:var(--text2);line-height:1.65}
+        .stage-foot{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+        .trigger-pill{font-size:.7rem;padding:.25rem .65rem;border-radius:6px;background:rgba(139,92,246,.08);color:var(--accent2);border:1px solid rgba(139,92,246,.15)}
+
+        /* === FORMULA BOX === */
+        .formula-box{background:linear-gradient(135deg,var(--surface2),var(--surface3));border:1px solid rgba(139,92,246,.2);border-radius:20px;padding:2.5rem;margin:2rem 0;position:relative;overflow:hidden}
+        .formula-box::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,.15),transparent 60%);pointer-events:none}
+        .formula-box .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem}
+        .formula-box pre{font-family:'JetBrains Mono','SF Mono',Consolas,monospace;font-size:.88rem;color:var(--text);background:rgba(0,0,0,.3);padding:1.25rem 1.5rem;border-radius:12px;border:1px solid var(--border);overflow-x:auto;line-height:1.7;margin-bottom:1.25rem}
+        .formula-box pre .comment{color:var(--text3);font-style:italic}
+        .formula-box pre .hl{color:var(--accent2);font-weight:600}
+        .formula-box .explain{font-size:.92rem;color:var(--text2);line-height:1.75}
+
+        /* === METRICS TABLE === */
+        .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin:1.5rem 0}
+        .metric-cell{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem}
+        .metric-cell .label{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:.35rem}
+        .metric-cell .value{font-size:1rem;font-weight:700;color:var(--text);line-height:1.3}
+
+        /* === COMPARE TABLE === */
+        .table-container{border-radius:18px;border:1px solid var(--border);overflow:hidden;background:var(--surface);margin-top:2rem}
+        table{width:100%;border-collapse:collapse;font-size:.85rem}
+        thead{background:var(--surface2)}
+        th{padding:1rem 1.25rem;text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);border-bottom:1px solid var(--border)}
+        td{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);vertical-align:top}
+        tr:last-child td{border-bottom:none}
+        tr:hover td{background:rgba(139,92,246,.04)}
+        .pill{display:inline-block;padding:.2rem .6rem;border-radius:6px;font-size:.72rem;font-weight:600}
+        .pill-red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+        .pill-green{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+        .pill-blue{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+        .pill-orange{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
+
+        /* === CALLOUTS === */
+        .callout{border-radius:16px;padding:1.5rem 1.75rem;margin:1.25rem 0}
+        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)}
+        .callout-warn h4{color:var(--red);font-size:.9rem;font-weight:600;margin-bottom:.5rem}
+        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18)}
+        .callout-info h4{color:var(--green);font-size:.9rem;font-weight:600;margin-bottom:.5rem}
+        .callout p{font-size:.88rem;color:var(--text2);line-height:1.7}
+        .callout strong{color:var(--text);font-weight:600}
+
+        /* === REVENUE BAR === */
+        .rev-split{margin:1.5rem 0}
+        .rev-split h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem}
+        .rev-row{display:flex;align-items:center;gap:.9rem;margin-bottom:.65rem}
+        .rev-row .rev-label{font-size:.82rem;color:var(--text2);min-width:180px;font-weight:500}
+        .rev-row .rev-bar{flex:1;height:22px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
+        .rev-row .rev-fill{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding:0 .75rem;font-size:.72rem;font-weight:700;color:#fff;min-width:fit-content}
+        .rev-row .rev-pct{font-size:.8rem;font-weight:700;min-width:60px;text-align:right;color:var(--text)}
+
+        /* === TL;DR BOX === */
+        .tldr{border-radius:24px;padding:2.5rem;background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(236,72,153,.04));border:1px solid rgba(139,92,246,.25);margin-top:2rem}
+        .tldr .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem}
+        .tldr h3{font-size:1.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-.01em}
+        .tldr p{font-size:.95rem;color:var(--text2);line-height:1.75}
+        .tldr p + p{margin-top:.8rem}
+
+        /* === MOBILE MENU === */
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.05rem;font-weight:500;padding:.75rem 2rem;border-radius:12px;transition:all .25s}
+        .mobile-nav a:hover{color:var(--text);background:rgba(139,92,246,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        /* === FOOTER === */
+        footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;background:linear-gradient(0deg,rgba(139,92,246,.03),transparent)}
+        footer p{color:var(--text3);font-size:.78rem}
+
+        /* === ANIMATIONS === */
+        .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* === SECTION GLOWS === */
+        #upg-funnel::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(239,68,68,.05),transparent 60%);top:10%;right:-15%;pointer-events:none}
+        #skin-funnel::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(16,185,129,.05),transparent 60%);top:10%;left:-15%;pointer-events:none}
+        #compare::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(236,72,153,.05),transparent 60%);bottom:0;right:-10%;pointer-events:none}
+
+        /* === BACK LINK === */
+        .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent2);text-decoration:none;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:8px;border:1px solid rgba(139,92,246,.2);transition:all .25s;margin-bottom:1.5rem}
+        .back-link:hover{background:rgba(139,92,246,.1)}
+
+        /* === RESPONSIVE === */
+        @media(max-width:1024px){
+            .stage{grid-template-columns:100px 1fr;gap:1rem;padding:1.5rem 1.5rem}
+            .stage-num .n{font-size:2.2rem}
+        }
+        @media(max-width:768px){
+            nav .nav-links{display:none}
+            .menu-toggle{display:block;min-width:44px;min-height:44px}
+            .slide{padding:5rem 1rem 4rem;min-height:auto}
+            .hero{min-height:100vh;padding:4rem 1.25rem}
+            .section-title{font-size:1.6rem}
+            .hero-stats{gap:1.25rem}
+            .hero-stat .value{font-size:1.5rem}
+            .big-idea{padding:2rem 1.5rem}
+            .stage{grid-template-columns:1fr;padding:1.25rem}
+            .stage-num{flex-direction:row;align-items:center;gap:.75rem;margin-bottom:.25rem}
+            .stage-num .n{font-size:1.75rem}
+            .stage-row{grid-template-columns:1fr;gap:1rem}
+            .formula-box{padding:1.5rem}
+            .formula-box pre{font-size:.78rem;padding:1rem}
+            .rev-row .rev-label{min-width:120px;font-size:.76rem}
+            .rev-row{flex-wrap:wrap}
+            .table-container{overflow-x:auto}
+            table{min-width:620px}
+            .tldr{padding:1.75rem}
+            .tldr h3{font-size:1.2rem}
+        }
+        @media(max-width:480px){
+            .hero h1{font-size:2rem}
+            .hero-stat .value{font-size:1.2rem}
+            .section-num{font-size:.6rem}
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+    <div class="inner">
+        <div class="logo"><a href="index.html">UPG<span>_</span>GG</a></div>
+        <div class="nav-links">
+            <a href="index.html">Обзор</a>
+            <a href="business.html">Бизнес</a>
+            <a href="revenue.html">Доходы</a>
+            <a href="gtm.html">GTM</a>
+            <span style="width:1px;height:16px;background:var(--border2);margin:0 .25rem;display:inline-block"></span>
+            <a href="#idea-upg">Идея Upgrader</a>
+            <a href="#upg-funnel">Upgrader воронка</a>
+            <a href="#idea-skin">Идея SkinSwap</a>
+            <a href="#skin-funnel">SkinSwap воронка</a>
+            <a href="#compare">Сравнение</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html" style="color:var(--accent2);font-weight:600">Обзор ниши</a>
+    <a href="business.html" style="color:var(--accent2);font-weight:600">Бизнес-аналитика</a>
+    <a href="revenue.html" style="color:var(--accent2);font-weight:600">Доходы и трафик</a>
+    <a href="gtm.html" style="color:var(--accent2);font-weight:600">GTM и риски</a>
+    <span style="display:block;width:60px;height:1px;background:var(--border2);margin:.5rem auto"></span>
+    <a href="#idea-upg">Идея Upgrader</a>
+    <a href="#upg-funnel">Воронка Upgrader</a>
+    <a href="#idea-skin">Идея SkinSwap</a>
+    <a href="#skin-funnel">Воронка SkinSwap</a>
+    <a href="#compare">Сравнение</a>
+</div>
+
+<main id="content">
+
+<!-- ==================== HERO ==================== -->
+<div class="slide hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="slide-content">
+        <a href="index.html" class="back-link">&larr; Основное исследование</a>
+        <div class="hero-badge" style="margin-top:1rem"><span class="dot"></span> Воронка заработка &middot; Апрель 2026</div>
+        <h1>Чем цепляют<br><span class="gradient">и где снимают</span></h1>
+        <p class="subtitle">Пошаговый разбор воронки заработка двух платформ. Где стоит крючок, где уходят деньги пользователя, и на каком этапе платформа получает больше всего.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="value">70-85%</div><div class="label">Доход Upgrader &mdash; house edge</div></div>
+            <div class="hero-stat"><div class="value">50-60%</div><div class="label">Доход SkinSwap &mdash; Insta-Sell spread</div></div>
+            <div class="hero-stat"><div class="value">55-75%</div><div class="label">Реальный RTP Upgrader (заявлен 99%)</div></div>
+            <div class="hero-stat"><div class="value">38-45%</div><div class="label">Скрытая маржа SkinSwap на продаже</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== UPGRADER: BIG IDEA ==================== -->
+<div class="slide" id="idea-upg">
+    <div class="slide-content">
+        <div class="section-num reveal">01 &mdash; Upgrader</div>
+        <h2 class="section-title reveal">Они продают<br>не шанс &mdash; сюжет</h2>
+        <p class="section-desc reveal">Главная психологическая находка Upgrader: пользователь заходит не за математическим ожиданием, а за идеей &laquo;я в одном клике от дрим-скина&raquo;. Математика работает против, но ощущение &mdash; за.</p>
+
+        <div class="big-idea red reveal">
+            <div class="insight-glow"></div>
+            <div class="kicker">Ключевая формула цепляния</div>
+            <h3>Edge 5% &times; оборот &times;8 = 40% депозита уходит платформе за одну сессию</h3>
+            <p>Пользователь чувствует, что &laquo;почти выиграл&raquo;. Near-miss дизайн (стрелка останавливается в ±2&deg; от цели) активирует те же нейросхемы, что и победа. Дофамин капает, деньги уходят, RTP 99% &mdash; маркетинг, а не реальность.</p>
+        </div>
+
+        <div class="callout callout-warn reveal">
+            <h4>Заявленный RTP &laquo;до 99%&raquo; &mdash; честная правда про одну игру x1.5 без бонусов</h4>
+            <p>Реальный эффективный возврат по всей воронке &mdash; после вагеров, кэшбэк-циклов, скин-спредов и wager-wall &mdash; составляет <strong>55&ndash;75%</strong>. Остальное &mdash; маржа платформы. Формулировка &laquo;до&raquo; работает как маркетинговый якорь.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== UPGRADER FUNNEL ==================== -->
+<div class="slide" id="upg-funnel">
+    <div class="slide-content">
+        <div class="section-num reveal">02 &mdash; Воронка Upgrader</div>
+        <h2 class="section-title reveal">10 этапов <span style="color:var(--red)">пути денег</span></h2>
+        <p class="section-desc reveal">Каждый этап &mdash; отдельный инструмент. Цветная полоска слева показывает &laquo;жирность&raquo; этапа для платформы: от серого (нулевая прямая монетизация) до красного (главная дойка).</p>
+
+        <!-- STAGE 0 -->
+        <div class="stage tier-0 reveal">
+            <div class="stage-num">
+                <div class="n">00</div>
+                <div class="tag tag-none">Пока 0₽</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Acquisition</div>
+                <h4>Как трафик приходит</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Бесплатный скин, промокод, &laquo;честный RTP 99%&raquo;, &laquo;моментальный вывод&raquo;. SEO-обзоры на ру-сетке (cs-config.ru, csgamer.ru, vc.ru), Telegram-каналы, инфлюенсеры с промокодами CSCONFIG/CS2PROMO/FREECS.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Прямой выручки ноль &mdash; чистый CAC. Но фокус: промокоды выдают <strong>партнёры</strong>. Бонус +5% стоит копейки, а будущая потеря юзера на house edge &times; оборот окупает промо <strong>x5&ndash;x10</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">FOMO</span>
+                    <span class="trigger-pill">Социальное доказательство</span>
+                    <span class="trigger-pill">Авторитет гайдов</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 1 -->
+        <div class="stage tier-low reveal">
+            <div class="stage-num">
+                <div class="n">01</div>
+                <div class="tag tag-low">0%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Landing</div>
+                <h4>Первые 10 секунд</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Визуал ножа/AWP Dragon Lore в центре. Слайдер x2/x4/x8. Живая лента выигрышей. Плашка &laquo;RTP до 99%&raquo;. Кнопка &laquo;Войти через Steam&raquo; &mdash; один клик.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Пока 0₽ &mdash; но продавливается решение &laquo;попробовать бесплатно нельзя, надо пополнить&raquo;. Лента побед &mdash; выживший в выживших, но мозг читает как &laquo;шанс&raquo;.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Chase the dream</span>
+                    <span class="trigger-pill">Low-friction CTA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div class="stage tier-mid reveal">
+            <div class="stage-num">
+                <div class="n">02</div>
+                <div class="tag tag-mid">~2%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Steam OAuth</div>
+                <h4>Почему только Steam и 1 клик</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Ни регистрации, ни пароля, ни email. Через Steam &mdash; сразу готовый инвентарь-депозит. Иллюзия &laquo;Steam-безопасности&raquo;, когнитивная лёгкость по Канеману.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Steam-логин = <strong>подкроватный депозитник</strong>. Скин ощущается не как деньги &mdash; люди депозитят на 500&ndash;2000₽, которые не внесли бы картой. Комиссия Skinsback на приёме скина <strong>5&ndash;15%</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Когнитивная лёгкость</span>
+                    <span class="trigger-pill">Обезболивание платежа</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3 -->
+        <div class="stage tier-low reveal">
+            <div class="stage-num">
+                <div class="n">03</div>
+                <div class="tag tag-low">0-2%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Первое пополнение</div>
+                <h4>Минимум 50₽ &mdash; массовый funnel</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;Всего 50₽ чтобы попробовать&raquo;. Промокод +5%. СБП/карта/крипта &mdash; любой способ. Anchor 50₽ &mdash; &laquo;это ж копейки&raquo;.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Порог 50₽ = дети 14&ndash;18 депают карманные. Бонус +5% &mdash; <strong>фейк-щедрость</strong>: 2.5₽ на 50₽ растворятся за 2&ndash;3 апгрейда. Крипта обходит возрастные ограничения.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Endowment effect</span>
+                    <span class="trigger-pill">Anchor bias</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 4 — MAIN -->
+        <div class="stage tier-critical reveal">
+            <div class="stage-num">
+                <div class="n">04</div>
+                <div class="tag tag-critical">70-85% &#9658;</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Первый апгрейд</div>
+                <h4>Ядро монетизации &mdash; печатный станок</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Слайдер x2/x4/x8/x20. Проценты шанса: 2x&asymp;48%, 4x&asymp;23%, 8x&asymp;12%, 20x&asymp;4.5%. <strong>Near-miss дизайн</strong>: стрелка часто замирает в ±2&deg; от цели &mdash; дофамин тот же, что от победы. Автоапгрейд &laquo;безопасно на 70%&raquo;.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>House edge <strong>4&ndash;7%</strong> средневзвешенный (при заявленных 1&ndash;3%). <strong>Скрытый edge #2</strong>: мид-прайс спред &mdash; скин в апгрейдере на 10&ndash;15% дороже чем на маркете. Юзер с 500₽ оборотом &times;8 теряет 40% депозита за вечер.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Near-miss</span>
+                    <span class="trigger-pill">Illusion of control</span>
+                    <span class="trigger-pill">Variable-ratio reward (Скиннер)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 5 -->
+        <div class="stage tier-high reveal">
+            <div class="stage-num">
+                <div class="n">05</div>
+                <div class="tag tag-high">Retention-цемент</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Первая потеря</div>
+                <h4>Кэшбэк-кейс &laquo;отыграться&raquo;</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>После проигрыша выпадает утешительный кейс, кэшбэк 10&ndash;30% от неудачного апгрейда. Пуш: &laquo;Не сдавайся, сыграй ещё&raquo;. Loss aversion: потеря в 2.5 раза болезненнее равного выигрыша.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Кэшбэк &mdash; <strong>не деньги, а бонус-баланс с вагером x2&ndash;x3</strong>. При edge 5% и вагере x3 возвращение = 100% &minus; 15% = 85% кэшбэка съедается математикой. Конверсия &laquo;первая потеря &rarr; второй депозит&raquo; вырастает <strong>в 2&ndash;3 раза</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Sunk cost</span>
+                    <span class="trigger-pill">Loss chasing</span>
+                    <span class="trigger-pill">Endowment на бонус</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 6 -->
+        <div class="stage tier-high reveal">
+            <div class="stage-num">
+                <div class="n">06</div>
+                <div class="tag tag-high">~20-30%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Втягивание</div>
+                <h4>Ежедневные ритуалы</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Daily-кейс за заход. Пуши в Telegram: &laquo;твой ежедневный кейс готов&raquo;. Пятничный кэшбэк. Миссии &laquo;сделай 5 апгрейдов на 100₽&raquo;. Streak-эффект &mdash; не хочется сбрасывать дни.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>40&ndash;60% откроют daily-кейс и <strong>дозакинут</strong>. Миссии = привязанный вагер: edge капает с каждого оборота. Пятничный кэшбэк формирует <strong>habit loop</strong> (Cue &rarr; Routine &rarr; Reward).</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Оперантное обусловливание</span>
+                    <span class="trigger-pill">FOMO daily</span>
+                    <span class="trigger-pill">Streak effect</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 7 -->
+        <div class="stage tier-mid reveal">
+            <div class="stage-num">
+                <div class="n">07</div>
+                <div class="tag tag-mid">5-10%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Вагер</div>
+                <h4>Почему деньги не выводятся сразу</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;Моментальный вывод!&raquo; (маркетинг) vs реальность TOS. Bonus-баланс от промокодов/кэшбэка/daily имеет <strong>wagering x2&ndash;x5</strong>. Бонусы могут &laquo;заражать&raquo; депо-баланс.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Вывод <strong>только скинами через Steam</strong> &mdash; фиата обратно нет. При вагере x3 и edge 5% математика удержать бонус = 85% съедается системой. Trustpilot 2.9/5, 62% one-star: жалобы на блокировку, пропавшие предметы.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Goal gradient</span>
+                    <span class="trigger-pill">Completion bias</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 8 -->
+        <div class="stage tier-critical reveal">
+            <div class="stage-num">
+                <div class="n">08</div>
+                <div class="tag tag-critical">40-60% &#9658;</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">VIP-лестница</div>
+                <h4>Дойка китов</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Bronze&rarr;Silver&rarr;Gold&rarr;Platinum&rarr;Obsidian. Прогресс-бар. Закрытый Telegram-чат VIP. Персональный менеджер. Эксклюзивные кейсы. Пороги: $50/мес &rarr; $100K+/мес.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p><strong>Whale-эффект</strong>: 5% юзеров приносят 70&ndash;80% выручки. Rakeback 5&ndash;10% кажется &laquo;возвратом&raquo;, но при edge 5% и rakeback 5% матожидание = 0 &mdash; а юзер думает что в плюсе. Личный менеджер &mdash; это <strong>удерживающий закладыш</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Статус</span>
+                    <span class="trigger-pill">Sunk cost на уровне</span>
+                    <span class="trigger-pill">Эксклюзивность</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 9 -->
+        <div class="stage tier-mid reveal">
+            <div class="stage-num">
+                <div class="n">09</div>
+                <div class="tag tag-mid">Retention</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Отток и реактивация</div>
+                <h4>Последняя попытка выжать</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Юзер перестал заходить &mdash; запускается reactivation-flow: 3-й день &laquo;твой кейс&raquo;, 7-й &laquo;пополни 43₽ до бесплатного кейса&raquo;, 14-й &laquo;возврат 15% на следующий депозит&raquo;, 30-й &laquo;приятель апнул нож&raquo;.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Конверсия кампаний <strong>3&ndash;8%</strong>, но средний возврат депозита 500&ndash;2000₽. При edge 5&ndash;10% пуши окупаются многократно.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">FOMO</span>
+                    <span class="trigger-pill">Социальное сравнение</span>
+                    <span class="trigger-pill">Guilt (&laquo;бросил любимое&raquo;)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULA -->
+        <div class="formula-box reveal" style="margin-top:3rem">
+            <div class="kicker">Уравнение заработка Upgrader</div>
+            <pre><span class="hl">GGR</span> = Σ (Handle_i &times; Edge_i) + Deposit_Fees + Withdrawal_Spread
+<span class="hl">LTV</span> = GGR_per_user &times; Sessions &times; Retention_Months − CAC</pre>
+            <p class="explain"><strong>Handle</strong> &mdash; общий оборот ставок. <strong>Edge</strong> &mdash; математическое преимущество платформы на каждой ставке. Деньги идут не с проигрышей разово, а с оборота: юзер прокручивает депозит ×8, платформа снимает 4&ndash;7% с каждого прогона.</p>
+        </div>
+
+        <!-- REV SPLIT -->
+        <div class="rev-split reveal">
+            <h4>Из чего складывается выручка Upgrader</h4>
+            <div class="rev-row"><div class="rev-label">House edge (апгрейды)</div><div class="rev-bar"><div class="rev-fill" style="width:75%;background:var(--gradient-red)">Этап 4 + 6</div></div><div class="rev-pct">~70%</div></div>
+            <div class="rev-row"><div class="rev-label">VIP-киты</div><div class="rev-bar"><div class="rev-fill" style="width:55%;background:linear-gradient(90deg,#8b5cf6,#ec4899)">Этап 8</div></div><div class="rev-pct">~50%*</div></div>
+            <div class="rev-row"><div class="rev-label">Спред цен скинов</div><div class="rev-bar"><div class="rev-fill" style="width:15%;background:var(--orange)">Скрытый</div></div><div class="rev-pct">~15%</div></div>
+            <div class="rev-row"><div class="rev-label">Вагер на бонусах</div><div class="rev-bar"><div class="rev-fill" style="width:10%;background:var(--yellow)">Этап 7</div></div><div class="rev-pct">~10%</div></div>
+            <div class="rev-row"><div class="rev-label">Депозит-комиссии</div><div class="rev-bar"><div class="rev-fill" style="width:8%;background:var(--blue)">Этап 2-3</div></div><div class="rev-pct">~5-10%</div></div>
+            <p style="font-size:.75rem;color:var(--text3);margin-top:.75rem">* VIP-киты &mdash; пересекающаяся категория: их house edge уже включён в первую строку, но они создают 70&ndash;80% концентрации оборота.</p>
+        </div>
+
+        <!-- METRICS -->
+        <div class="reveal">
+            <h4 style="font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin:2rem 0 1rem">Числа среднего юзера</h4>
+            <div class="metric-grid">
+                <div class="metric-cell"><div class="label">Первый депозит</div><div class="value">300&ndash;800 ₽</div></div>
+                <div class="metric-cell"><div class="label">Оборот / депозит</div><div class="value">&times;6&ndash;&times;10</div></div>
+                <div class="metric-cell"><div class="label">Средний edge</div><div class="value">4&ndash;7%</div></div>
+                <div class="metric-cell"><div class="label">Потеря / сессия</div><div class="value">25&ndash;50% депо</div></div>
+                <div class="metric-cell"><div class="label">LTV массовый</div><div class="value">1 500&ndash;6 000 ₽</div></div>
+                <div class="metric-cell"><div class="label">LTV кит</div><div class="value">$2K&ndash;$50K+</div></div>
+                <div class="metric-cell"><div class="label">CAC промо</div><div class="value">150&ndash;400 ₽</div></div>
+                <div class="metric-cell"><div class="label">ROI на юзере</div><div class="value">&times;5&ndash;&times;20</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SKINSWAP: BIG IDEA ==================== -->
+<div class="slide" id="idea-skin">
+    <div class="slide-content">
+        <div class="section-num reveal">03 &mdash; SkinSwap</div>
+        <h2 class="section-title reveal">Это не маркетплейс &mdash;<br>это FX-брокер</h2>
+        <p class="section-desc reveal">SkinSwap продаёт не скины &mdash; продаёт скорость. &laquo;Превратить цифру в PayPal за 60 секунд&raquo; &mdash; главный офер. Цена за эту скорость зашита в спред между курсом покупки и продажи, как у валютного брокера.</p>
+
+        <div class="big-idea green reveal">
+            <div class="insight-glow"></div>
+            <div class="kicker">Ключевая формула цепляния</div>
+            <h3>&laquo;0% fee&raquo; &mdash; правда. Take rate 38-45% &mdash; тоже правда</h3>
+            <p>SkinSwap не берёт комиссию в классическом смысле: вся маржа <strong>зашита в курс</strong>. Скин на $100 по Steam Market при Insta-Sell превращается в $55&ndash;62 на PayPal. Разница = прибыль платформы. Скорость (60 сек) убивает сравнение с альтернативами.</p>
+        </div>
+
+        <div class="callout callout-info reveal">
+            <h4>Информационная асимметрия &mdash; главный актив платформы</h4>
+            <p>Пользователь не сравнивает с Steam Market в моменте. Steam даёт ~85% от рыночной, но вывод &mdash; только в Steam-кошелёк. SkinSwap даёт 55&ndash;62%, но в <strong>реал</strong>. Для юзера с потребностью в кэше разница &laquo;85% на Steam&raquo; vs &laquo;60% в PayPal&raquo; несравнимы &mdash; первый вариант просто нерелевантен.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SKINSWAP FUNNEL ==================== -->
+<div class="slide" id="skin-funnel">
+    <div class="slide-content">
+        <div class="section-num reveal">04 &mdash; Воронка SkinSwap</div>
+        <h2 class="section-title reveal">8 этапов <span style="color:var(--green)">drip pricing</span></h2>
+        <p class="section-desc reveal">Тактика SkinSwap &mdash; маленькие комиссии на каждом шаге. По отдельности каждая выглядит честной, в сумме &mdash; take rate 38&ndash;45% на главном канале.</p>
+
+        <!-- STAGE 0 -->
+        <div class="stage tier-0 reveal">
+            <div class="stage-num">
+                <div class="n">00</div>
+                <div class="tag tag-none">0%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Acquisition</div>
+                <h4>Многоканальный захват</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Trustpilot 3.8&ndash;4.3/5 + YouTube-туториалы &laquo;как продать скины CS2 за реал&raquo; + SEO-блог (&laquo;How to profit trading CS2 skins&raquo;) + партнёрка 1% lifetime + промокоды у стримеров. &laquo;Free case&raquo; триггерит первый депозит.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Прямой ноль. Партнёры получают 1% от оборота <strong>только на баланс SkinSwap</strong> (не кэш) &mdash; комиссия не покидает экосистему, конвертируется обратно в покупку скинов.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Trustpilot как proof</span>
+                    <span class="trigger-pill">Авторитет YouTube</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 1 -->
+        <div class="stage tier-low reveal">
+            <div class="stage-num">
+                <div class="n">01</div>
+                <div class="tag tag-low">0%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Landing</div>
+                <h4>Первое впечатление</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Баннер <strong>&laquo;40% Deposit Bonus + Free Item&raquo;</strong>. Три CTA в герое: Trade / Sell / Buy. Счётчики 480K/500K/680K. Trustpilot-виджет на каждой странице.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Три пути &mdash; не равноправные опции. UX <strong>подталкивает к Sell</strong> (быстрый дофамин), потому что Sell даёт максимальную маржу. 40% бонус &mdash; не подарок, а депозитный матч с <strong>lock-in в экосистему</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Social proof</span>
+                    <span class="trigger-pill">Иллюзия выбора</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div class="stage tier-low reveal">
+            <div class="stage-num">
+                <div class="n">02</div>
+                <div class="tag tag-low">0%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Steam + Trade URL + Email</div>
+                <h4>Барьер входа выше, чем у казино</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Steam OAuth. Trade URL добавляется как &laquo;для быстрых обменов&raquo;. Email молча берётся из Steam или запрашивается. KYC опционально &mdash; нужен только для крупных выводов.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Account binding. Trade URL даёт <strong>ботам возможность слать офферы</strong> без ручного подтверждения. Email &mdash; канал retention (dropped prices, abandoned cart). Без этого ни одна следующая механика не работает.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Steam-trust</span>
+                    <span class="trigger-pill">Обезболивание KYC</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3a -->
+        <div class="stage tier-critical reveal">
+            <div class="stage-num">
+                <div class="n">03&#9673;</div>
+                <div class="tag tag-critical">50-60% &#9658;</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Insta-Sell &mdash; главная дойка</div>
+                <h4>Продай скин за реал за 60 секунд</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;0% fee on selling&raquo; &mdash; правда с подвохом. Скорость 60 сек. PayPal/Venmo/крипта на выходе. Нет сравнения со Steam Market в моменте (разные use-cases).</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Выплата <strong>55&ndash;62% от Steam Market</strong>. Платформа забирает <strong>38&ndash;45%</strong> через спред между выкупом и перепродажей на своём маркете. Tier 1 (дешёвка): 62%. Tier 4 (ножи, AWP): 55% &mdash; чем дороже скин, тем хуже курс (risk premium).</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Скорость vs рациональность</span>
+                    <span class="trigger-pill">Скрытый спред</span>
+                    <span class="trigger-pill">Urgent cash need</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3b -->
+        <div class="stage tier-high reveal">
+            <div class="stage-num">
+                <div class="n">03&#9642;</div>
+                <div class="tag tag-high">25-30%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Trade (бот-обмен)</div>
+                <h4>Скин-на-скин через бота</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;Обменяй ненужный на желанный за 60 сек&raquo;. Слайдер &laquo;твои скины | скины бота&raquo;. Мгновенно. Цены &laquo;динамические&raquo; &mdash; подстраиваются под рынок.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Спред <strong>10&ndash;14%</strong> на стороне покупателя. Отдаёшь скинов на $110&ndash;114 за скин бота в $100. <strong>Excess value не возвращается в Steam</strong> &mdash; падает на внутренний баланс SkinSwap, откуда вывод = ещё комиссия.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Скорость убивает анализ</span>
+                    <span class="trigger-pill">Невидимый спред</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3c -->
+        <div class="stage tier-mid reveal">
+            <div class="stage-num">
+                <div class="n">03&#9671;</div>
+                <div class="tag tag-mid">15-20%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Buy (покупка с маркета)</div>
+                <h4>Double-dipping с двух сторон</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;Скины дешевле Steam Market на X%&raquo; (Steam берёт 15% fee + невыводимый кошелёк &mdash; это лёгкий anchor). Поиск, фильтры по float/pattern, мгновенная доставка.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Комиссия <strong>10&ndash;14%</strong> зашита в цену выставления. Плюс <strong>2&ndash;5% с продавца</strong>. Double-dipping: и продавцу занижают выплату, и покупателю накручивают цену.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Anchor на Steam 15%</span>
+                    <span class="trigger-pill">Double-dipping</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 4 -->
+        <div class="stage tier-mid reveal">
+            <div class="stage-num">
+                <div class="n">04</div>
+                <div class="tag tag-mid">5-10%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Депозит фиатом</div>
+                <h4>40% бонус &mdash; lock-in в экосистему</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Своих скинов мало &mdash; закинь картой или криптой. <strong>+40% бонус на депозит</strong>. Получи &laquo;$140 вместо $100&raquo;.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Card: $0.30 flat + скрытая процессинг-маржа <strong>2&ndash;3%</strong> через Stripe. Crypto: бесплатно. 40% бонус &mdash; <strong>принудительный оборот</strong>: бонусные деньги можно тратить только внутри на покупку скинов. Sunk cost: &laquo;я уже пополнил&raquo;.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Sunk cost</span>
+                    <span class="trigger-pill">Lock-in</span>
+                    <span class="trigger-pill">Иллюзия щедрости</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 5 -->
+        <div class="stage tier-low reveal">
+            <div class="stage-num">
+                <div class="n">05</div>
+                <div class="tag tag-low">3-5%</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Вывод</div>
+                <h4>Финальная стрижка</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;Выведи деньги в крипту/PayPal/Venmo за минуты&raquo;.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>PayPal: <strong>2% + $0.25</strong>. Venmo: $0.25. Крипта: network gas fees (могут inflates сверх реальных). Если юзер пришёл через Insta-Sell: итог = <strong>спред 40% + вывод 2% = ~56% от Steam Market</strong>. Классический <strong>drip pricing</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Drip pricing</span>
+                    <span class="trigger-pill">Мозг списывает шум</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 6 -->
+        <div class="stage tier-high reveal">
+            <div class="stage-num">
+                <div class="n">06</div>
+                <div class="tag tag-high">+20-30% LTV</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Ретеншн</div>
+                <h4>Дофаминовая экосистема</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>Еженедельный giveaway скина на $250. Daily faucet &mdash; каждый день тикет. Задачи: подпишись на Twitter/Discord = доп. тикеты. Email-рассылки &laquo;price dropped on item X&raquo;. Блог с SEO-гайдами возвращает через поиск.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>Giveaway стоит $13K/год. На фоне оборота в миллионы &mdash; копейки. Возврат юзера &times; повторная покупка &times; спред = <strong>кратный ROI</strong>. Вариативное подкрепление (Skinner box) &mdash; юзер возвращается не за скидкой, а за дофамином.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Variable reward</span>
+                    <span class="trigger-pill">Dynamic pricing FOMO</span>
+                    <span class="trigger-pill">SEO-возврат</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 7 -->
+        <div class="stage tier-mid reveal">
+            <div class="stage-num">
+                <div class="n">07</div>
+                <div class="tag tag-mid">-1% (CAC)</div>
+            </div>
+            <div class="stage-body">
+                <div class="stage-name">Рефералка 1% lifetime</div>
+                <h4>Самоокупающийся маркетинг</h4>
+                <div class="stage-row">
+                    <div class="stage-col hook">
+                        <h5>Крючок</h5>
+                        <p>&laquo;Приведи друга &mdash; получай 1% с его трейдов навсегда&raquo;. Промокод + ссылка. Реферал получает &laquo;free case&raquo;. Нет минимума на вывод. Lifetime tracking.</p>
+                    </div>
+                    <div class="stage-col money">
+                        <h5>Где деньги</h5>
+                        <p>1% отдаёт платформа из своего take rate (10&ndash;40%). Чистая маржа на реферале всё равно <strong>9&ndash;39%</strong>. Выплата <strong>только на баланс SkinSwap</strong> &mdash; не выходит из экосистемы, превращается в покупку скинов (ещё 10&ndash;14% спред). <strong>Refund в собственной валюте</strong>.</p>
+                    </div>
+                </div>
+                <div class="stage-foot">
+                    <span class="trigger-pill">Пассивный доход инфлюенсера</span>
+                    <span class="trigger-pill">Lock-in on payout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULA -->
+        <div class="formula-box reveal" style="margin-top:3rem">
+            <div class="kicker">Уравнение заработка SkinSwap</div>
+            <pre><span class="hl">Revenue</span> = (GMV_sell &times; 0.40)      <span class="comment">// Insta-Sell spread — главный двигатель</span>
+        + (GMV_trade &times; 0.12)     <span class="comment">// bot-trade spread</span>
+        + (GMV_buy &times; 0.05)       <span class="comment">// seller commission на маркете</span>
+        + (Deposits &times; 0.02)      <span class="comment">// card processing margin</span>
+        + (Withdrawals &times; 0.02)   <span class="comment">// PayPal/Venmo fee</span>
+        − (Referral_GMV &times; 0.01)  <span class="comment">// affiliate payout</span>
+        − (Giveaways + Blog + CAC)</pre>
+            <p class="explain">Средний юзер приносит <strong>$15&ndash;30 чистой маржи</strong> за первый цикл (при типичном трейде $50&ndash;100). Из них ~70% &mdash; спред на Insta-Sell/Trade, ~15% &mdash; комиссии маркета, ~15% &mdash; процессинг депозитов/выводов.</p>
+        </div>
+
+        <!-- REV SPLIT -->
+        <div class="rev-split reveal">
+            <h4>Из чего складывается выручка SkinSwap</h4>
+            <div class="rev-row"><div class="rev-label">Insta-Sell спред</div><div class="rev-bar"><div class="rev-fill" style="width:60%;background:var(--gradient-green)">Этап 03&bull; &mdash; главная дойка</div></div><div class="rev-pct">50-60%</div></div>
+            <div class="rev-row"><div class="rev-label">Trade спред</div><div class="rev-bar"><div class="rev-fill" style="width:30%;background:var(--cyan)">Этап 03&#9642;</div></div><div class="rev-pct">25-30%</div></div>
+            <div class="rev-row"><div class="rev-label">Buy (double-dipping)</div><div class="rev-bar"><div class="rev-fill" style="width:18%;background:var(--blue)">Этап 03&loz;</div></div><div class="rev-pct">15-20%</div></div>
+            <div class="rev-row"><div class="rev-label">Депозит процессинг</div><div class="rev-bar"><div class="rev-fill" style="width:8%;background:var(--orange)">Этап 04</div></div><div class="rev-pct">5-10%</div></div>
+            <div class="rev-row"><div class="rev-label">Вывод комиссии</div><div class="rev-bar"><div class="rev-fill" style="width:5%;background:var(--yellow)">Этап 05</div></div><div class="rev-pct">3-5%</div></div>
+        </div>
+
+        <!-- METRICS -->
+        <div class="reveal">
+            <h4 style="font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin:2rem 0 1rem">Числа среднего юзера</h4>
+            <div class="metric-grid">
+                <div class="metric-cell"><div class="label">Первая сделка</div><div class="value">$50&ndash;100</div></div>
+                <div class="metric-cell"><div class="label">Insta-Sell take</div><div class="value">38&ndash;45%</div></div>
+                <div class="metric-cell"><div class="label">Trade spread</div><div class="value">10&ndash;14%</div></div>
+                <div class="metric-cell"><div class="label">Buy commission</div><div class="value">10&ndash;14%</div></div>
+                <div class="metric-cell"><div class="label">Deposit bonus</div><div class="value">+40% lock-in</div></div>
+                <div class="metric-cell"><div class="label">PayPal withdraw</div><div class="value">2% + $0.25</div></div>
+                <div class="metric-cell"><div class="label">Referral payout</div><div class="value">1% lifetime</div></div>
+                <div class="metric-cell"><div class="label">Маржа / юзер</div><div class="value">$15&ndash;30</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== COMPARE ==================== -->
+<div class="slide" id="compare">
+    <div class="slide-content">
+        <div class="section-num reveal">05 &mdash; Сравнение моделей</div>
+        <h2 class="section-title reveal">Два подхода<br>к одному кошельку</h2>
+        <p class="section-desc reveal">Одна ниша, один тип юзера, но принципиально разная математика заработка.</p>
+
+        <div class="table-container reveal">
+            <table>
+                <thead><tr><th style="width:26%">Параметр</th><th style="width:37%">Upgrader</th><th style="width:37%">SkinSwap</th></tr></thead>
+                <tbody>
+                    <tr><td><b>Что продают</b></td><td>Сюжет &laquo;почти выиграл&raquo;</td><td>Скорость &laquo;PayPal за 60 сек&raquo;</td></tr>
+                    <tr><td><b>Главная эмоция</b></td><td>Азарт, адреналин</td><td>Срочность, практичность</td></tr>
+                    <tr><td><b>Тип монетизации</b></td><td><span class="pill pill-red">House edge</span></td><td><span class="pill pill-green">Hidden spread</span></td></tr>
+                    <tr><td><b>Размер маржи</b></td><td>4&ndash;7% на оборот (×8 прогонов = 40% депо)</td><td>38&ndash;45% разом на Insta-Sell</td></tr>
+                    <tr><td><b>Где зашита</b></td><td>В шансе апгрейда + в цене скина</td><td>В курсе обмена &laquo;скин &rarr; деньги&raquo;</td></tr>
+                    <tr><td><b>Главный канал денег</b></td><td>Этап 4 + 8 (апгрейды + VIP)</td><td>Этап 03&bull; (Insta-Sell)</td></tr>
+                    <tr><td><b>Что видит юзер</b></td><td>&laquo;Честный RTP 99%&raquo;</td><td>&laquo;0% fee&raquo;</td></tr>
+                    <tr><td><b>Что на деле</b></td><td>Реальный RTP 55&ndash;75%</td><td>Take rate 38&ndash;45%</td></tr>
+                    <tr><td><b>Концентрация дохода</b></td><td>5% китов &rarr; 70&ndash;80% выручки</td><td>Массовый low-ticket, ровное распределение</td></tr>
+                    <tr><td><b>Retention-двигатель</b></td><td>Dopamine loops, daily, VIP-прогресс</td><td>Giveaway, dynamic pricing, email</td></tr>
+                    <tr><td><b>Рефералка</b></td><td>0.5% от ставок</td><td>1% lifetime &mdash; на баланс SkinSwap</td></tr>
+                    <tr><td><b>Вывод денег</b></td><td>Только скины (замкнутый цикл)</td><td>PayPal/крипта (открытый)</td></tr>
+                    <tr><td><b>LTV массового</b></td><td>1 500&ndash;6 000 ₽</td><td>$15&ndash;30 чистой маржи</td></tr>
+                    <tr><td><b>Юридический риск</b></td><td><span class="pill pill-red">Высокий (gambling)</span></td><td><span class="pill pill-orange">Средний (marketplace)</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TL;DR -->
+        <div class="tldr reveal">
+            <div class="kicker">Итоговый инсайт для upg_gg</div>
+            <h3>Обе модели построены на информационной асимметрии</h3>
+            <p><strong>Upgrader</strong> продаёт &laquo;честный шанс 99%&raquo; и зарабатывает на том, что юзер не считает оборот &times;8 с 5% edge. <strong>SkinSwap</strong> продаёт &laquo;0% fee&raquo; и зарабатывает на том, что юзер не сравнивает курс выкупа с Steam Market в моменте.</p>
+            <p>В обоих случаях <strong>скорость убивает аналитическое мышление</strong>: апгрейд за 2 секунды vs Insta-Sell за 60. Когда решение принимается в режиме System 1 (по Канеману), рациональное сравнение альтернатив не включается.</p>
+            <p>Для нового продукта в нише это значит: <strong>конкурировать прозрачностью</strong> при сохранении маржи &mdash; достижимо. Показывать юзеру реальный take rate (как у Robinhood показали Payment for Order Flow после скандала) = доверие при той же экономике. Это единственный действительно свободный квадрант на карте.</p>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<footer><p>UPG_GG Research &middot; Воронка заработка &middot; Апрель 2026</p></footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+const navbar = document.querySelector('nav');
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+
+window.addEventListener('scroll', () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = scrollPercent + '%';
+});
+
+// Reveal animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Burger menu
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    const expanded = menuToggle.classList.contains('open');
+    menuToggle.setAttribute('aria-expanded', expanded);
+});
+
+mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
+        mobileNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+
+// Animate revenue bars when in view
+const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bars = entry.target.querySelectorAll('.rev-fill');
+            bars.forEach(bar => {
+                const w = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => { bar.style.width = w; }, 100);
+            });
+            barObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.rev-split').forEach(el => barObserver.observe(el));
+</script>
+
+</body>
+</html>
