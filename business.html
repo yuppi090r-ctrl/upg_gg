@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPG_GG — Бизнес-аналитика CS2 скинов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#07060e;--surface:#0f0d1a;--surface2:#16132a;--surface3:#1e1a35;
+            --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
+            --text:#f4f2ff;--text2:#9d97c0;--text3:#6b6490;
+            --accent:#8b5cf6;--accent2:#c4b5fd;--accent-glow:rgba(139,92,246,.2);
+            --green:#10b981;--red:#ef4444;--orange:#f59e0b;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;
+            --gradient:linear-gradient(135deg,#8b5cf6,#ec4899,#6366f1);
+            --gradient2:linear-gradient(135deg,#06b6d4,#10b981);
+            --gradient3:linear-gradient(135deg,#f59e0b,#ef4444);
+            --glass:rgba(139,92,246,.04);
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
+
+        /* === NAV === */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s}
+        nav.scrolled{background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);transition:color .3s;text-decoration:none}
+        nav .logo span{color:var(--accent2)}
+        nav .nav-links{display:flex;gap:.25rem}
+        nav .nav-links a{color:var(--text3);text-decoration:none;font-size:.75rem;font-weight:500;padding:.45rem .75rem;border-radius:8px;transition:all .25s;letter-spacing:.02em}
+        nav .nav-links a:hover{color:var(--text2)}
+        nav .nav-links a.active{color:#fff;background:rgba(139,92,246,.15);backdrop-filter:blur(10px);border:1px solid rgba(139,92,246,.2)}
+        .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gradient);z-index:1001;transition:width .15s;box-shadow:0 0 20px rgba(139,92,246,.5)}
+        nav .logo{text-shadow:0 0 30px rgba(139,92,246,.2)}
+
+        /* === SECTIONS === */
+        .slide{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem;position:relative;overflow:hidden}
+        .slide-content{max-width:1100px;width:100%;position:relative;z-index:2}
+
+        /* === HERO === */
+        .hero{text-align:center;padding-top:0}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border:1px solid rgba(139,92,246,.3);border-radius:100px;font-size:.8rem;color:var(--accent2);margin-bottom:2.5rem;background:rgba(139,92,246,.08);backdrop-filter:blur(10px)}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite;box-shadow:0 0 12px var(--green)}
+        @keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 12px var(--green)}50%{opacity:.4;box-shadow:0 0 4px var(--green)}}
+        .hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-.04em}
+        .hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero .subtitle{font-size:1.25rem;color:var(--text2);max-width:650px;margin:0 auto 3.5rem;font-weight:300;line-height:1.6}
+        .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .value{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:brightness(1.2)}
+        .hero-stat .label{font-size:.72rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+        .hero-glow{position:absolute;width:1000px;height:1000px;background:radial-gradient(circle,rgba(139,92,246,.12) 0%,rgba(236,72,153,.06) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+
+        /* === SECTION HEADERS === */
+        .section-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;text-shadow:0 0 30px rgba(139,92,246,.4)}
+        .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);max-width:120px;opacity:.5}
+        .section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
+        .section-desc{font-size:1.05rem;color:var(--text2);max-width:580px;margin-bottom:3rem;font-weight:300;line-height:1.7}
+
+        /* === CARDS === */
+        .glass-card{background:linear-gradient(160deg,rgba(139,92,246,.04),rgba(236,72,153,.02),var(--glass));border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(8px);transition:all .35s ease}
+        .glass-card:hover{border-color:rgba(139,92,246,.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(139,92,246,.08),0 0 0 1px rgba(139,92,246,.1)}
+
+        /* === GRID === */
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+        .grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+
+        /* === METRIC CARDS === */
+        .metric-card{text-align:center;padding:2rem 1.5rem}
+        .metric-card .icon{font-size:2rem;margin-bottom:1rem;display:block}
+        .metric-card .value{font-size:1.8rem;font-weight:800;margin-bottom:.4rem}
+        .metric-card .label{font-size:.8rem;color:var(--text2);font-weight:400}
+
+        /* === DETAIL BLOCKS === */
+        .detail-card{background:linear-gradient(170deg,var(--surface2),rgba(139,92,246,.03));border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:border-color .3s}
+        .detail-card:hover{border-color:rgba(139,92,246,.2)}
+        .detail-card h4{font-size:.9rem;font-weight:600;margin-bottom:1rem;color:var(--accent2);display:flex;align-items:center;gap:.5rem}
+        .detail-card ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+        .detail-card li{font-size:.85rem;color:var(--text2);padding-left:1.25rem;position:relative;line-height:1.65}
+        .detail-card li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7;box-shadow:0 0 8px rgba(139,92,246,.3)}
+
+        /* === TABLE === */
+        .table-container{border-radius:20px;border:1px solid var(--border);overflow:hidden;background:var(--surface)}
+        table{width:100%;border-collapse:collapse;font-size:.85rem}
+        thead{background:var(--surface2)}
+        th{padding:1rem 1.25rem;text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);border-bottom:1px solid var(--border)}
+        td{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);vertical-align:top}
+        tr:last-child td{border-bottom:none}
+        tr{transition:background .2s}
+        tr:hover td{background:rgba(139,92,246,.04)}
+        .pill{display:inline-block;padding:.15rem .55rem;border-radius:6px;font-size:.72rem;font-weight:600;letter-spacing:.01em}
+        .pill-purple{background:rgba(139,92,246,.15);color:var(--accent2);border:1px solid rgba(139,92,246,.2)}
+        .pill-green{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+        .pill-red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+        .pill-orange{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
+        .pill-blue{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+        .pill-cyan{background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid rgba(6,182,212,.2)}
+
+        /* === INSIGHT CARDS === */
+        .insight-card{padding:2.25rem;position:relative;overflow:hidden}
+        .insight-card .num{font-size:4rem;font-weight:900;position:absolute;top:.75rem;right:1.25rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.2;line-height:1}
+        .insight-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .insight-card p{font-size:.85rem;color:var(--text2);line-height:1.7;position:relative}
+
+        /* === CALLOUTS === */
+        .callout{border-radius:16px;padding:1.5rem 1.75rem;margin:1.25rem 0}
+        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);box-shadow:0 4px 20px rgba(239,68,68,.05)}
+        .callout-warn h4{color:var(--red);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);box-shadow:0 4px 20px rgba(16,185,129,.05)}
+        .callout-info h4{color:var(--green);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+        .callout p{font-size:.85rem;color:var(--text2);line-height:1.7}
+
+        /* === MODEL CARDS (big) === */
+        .model-card{padding:0;overflow:hidden}
+        .model-header{padding:1.75rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem}
+        .model-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;flex-shrink:0;color:#fff}
+        .model-info h3{font-size:1.2rem;font-weight:700}
+        .model-info .tagline{font-size:.82rem;color:var(--text3)}
+        .model-body{padding:1.75rem 2rem}
+        .model-body p{font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem}
+        .model-body strong{color:var(--text);font-weight:600}
+        .model-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0;border-top:1px solid var(--border)}
+        .model-metric{padding:1.1rem 1.25rem;border-right:1px solid var(--border);text-align:center}
+        .model-metric:last-child{border-right:none}
+        .model-metric .val{font-size:1.1rem;font-weight:700}
+        .model-metric .lbl{font-size:.68rem;color:var(--text3);margin-top:.2rem}
+
+        /* === COST BREAKDOWN === */
+        .cost-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid var(--border)}
+        .cost-row:last-child{border-bottom:none}
+        .cost-row .item{font-size:.85rem;color:var(--text2)}
+        .cost-row .price{font-size:.85rem;font-weight:600;color:var(--text)}
+        .cost-total{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;margin-top:.5rem;border-top:2px solid var(--accent)}
+        .cost-total .item{font-size:.95rem;font-weight:700;color:var(--text)}
+        .cost-total .price{font-size:1.1rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+        /* === TEAM === */
+        .team-role{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+        .team-role:last-child{border-bottom:none}
+        .team-role .role{font-size:.85rem;font-weight:600;min-width:180px}
+        .team-role .count{font-size:.85rem;color:var(--text2)}
+
+        /* === SCROLL INDICATOR === */
+        .scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--accent2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;animation:float 3s ease-in-out infinite;opacity:.6}
+        .scroll-hint .arrow{width:20px;height:20px;border-right:2px solid var(--accent2);border-bottom:2px solid var(--accent2);transform:rotate(45deg)}
+        @keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+        /* === FOOTER === */
+        footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;background:linear-gradient(0deg,rgba(139,92,246,.03),transparent)}
+        footer p{color:var(--text3);font-size:.78rem;letter-spacing:.02em}
+
+        /* === ANIMATIONS === */
+        .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-delay-1{transition-delay:.1s}
+        .reveal-delay-2{transition-delay:.2s}
+        .reveal-delay-3{transition-delay:.3s}
+
+        /* === SECTION GLOWS === */
+        #market-simple::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(6,182,212,.06),transparent 60%);top:10%;right:-10%;pointer-events:none}
+        #tam::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(139,92,246,.06),transparent 60%);top:5%;left:-10%;pointer-events:none}
+        #models::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(236,72,153,.05),transparent 60%);top:5%;right:-10%;pointer-events:none}
+        #unit-economics::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,.05),transparent 60%);top:10%;left:-10%;pointer-events:none}
+        #moats::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,.05),transparent 60%);bottom:10%;right:-10%;pointer-events:none}
+        #launch-cost::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(99,102,241,.06),transparent 60%);top:5%;left:-15%;pointer-events:none}
+
+        /* === MOBILE MENU === */
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.75rem 2rem;border-radius:12px;transition:all .25s;text-align:center}
+        .mobile-nav a:hover,.mobile-nav a.active{color:var(--text);background:rgba(139,92,246,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        /* === RESPONSIVE === */
+        @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:768px){
+            .grid-2,.grid-3{grid-template-columns:1fr}
+            .grid-4{grid-template-columns:repeat(2,1fr)}
+            nav .nav-links{display:none}
+            .menu-toggle{display:block}
+            .slide{padding:3.5rem 1rem;min-height:auto}
+            .hero{min-height:100vh;padding:4rem 1.25rem}
+            .hero .subtitle{font-size:1rem}
+            .hero-stats{gap:1.25rem}
+            .hero-stat .value{font-size:1.6rem}
+            .section-title{font-size:1.75rem}
+            .section-desc{font-size:.92rem}
+            .glass-card{padding:1.5rem;border-radius:16px}
+            .table-container{border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+            table{min-width:700px}
+            .detail-card{padding:1.25rem}
+            .detail-card h4{font-size:.85rem}
+            .detail-card li{font-size:.8rem}
+            .insight-card{padding:1.5rem}
+            .insight-card .num{font-size:3rem}
+            .insight-card h4{font-size:.9rem}
+            .insight-card p{font-size:.8rem}
+            .callout{padding:1.25rem}
+            .hero-glow{width:500px;height:500px}
+            .model-header{flex-wrap:wrap;padding:1.25rem}
+            .model-body{padding:1.25rem}
+            .model-metrics{grid-template-columns:repeat(3,1fr)}
+            .model-metric{padding:.85rem .75rem;border-bottom:1px solid var(--border)}
+            .model-metric .val{font-size:.95rem}
+            .cost-row .item{font-size:.8rem}
+            .cost-row .price{font-size:.8rem}
+            .team-role{flex-direction:column;align-items:flex-start;gap:.25rem}
+            .team-role .role{min-width:auto}
+        }
+        @media(max-width:480px){
+            .hero h1{font-size:2.2rem}
+            .hero-stats{gap:1rem}
+            .hero-stat .value{font-size:1.4rem}
+            .hero-stat .label{font-size:.65rem}
+            .grid-4{grid-template-columns:1fr}
+            .section-num{font-size:.6rem}
+            .slide{padding:3rem .85rem}
+            .model-metrics{grid-template-columns:repeat(2,1fr)}
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav id="navbar">
+    <div class="inner">
+        <a href="index.html" class="logo">UPG<span>_</span>GG</a>
+        <div class="nav-links">
+            <a href="index.html">Обзор ниши</a>
+            <a href="business.html" class="active">Бизнес</a>
+            <a href="revenue.html">Доходы</a>
+            <a href="gtm.html">GTM</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Обзор ниши</a>
+    <a href="business.html" class="active">Бизнес</a>
+    <a href="revenue.html">Доходы</a>
+    <a href="gtm.html">GTM</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<div class="slide hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="slide-content">
+        <div class="hero-badge"><span class="dot"></span> Бизнес-аналитика &middot; Апрель 2026</div>
+        <h1>CS2 скины<br><span class="gradient">для бизнеса</span></h1>
+        <p class="subtitle">Всё что нужно IT-предпринимателю, который не знает гейминг: рынок, модели, юнит-экономика, стоимость запуска.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="value">$4-6B</div><div class="label">Рынок скинов</div></div>
+            <div class="hero-stat"><div class="value">$8.1B</div><div class="label">TAM (все игры)</div></div>
+            <div class="hero-stat"><div class="value">30-50%</div><div class="label">EBITDA маржа</div></div>
+            <div class="hero-stat"><div class="value">$80-200K</div><div class="label">Стоимость MVP</div></div>
+        </div>
+    </div>
+    <div class="scroll-hint">Скролл<div class="arrow"></div></div>
+</div>
+
+<!-- ==================== SECTION 1: MARKET SIMPLE ==================== -->
+<div class="slide" id="market-simple" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">01 &mdash; Рынок простым языком</div>
+        <h2 class="section-title reveal">Что такое скины CS2<br>и почему это бизнес</h2>
+        <p class="section-desc reveal">Если вы не играете в Counter-Strike &mdash; вот всё что нужно знать за 2 минуты.</p>
+
+        <div class="grid-2">
+            <div class="glass-card detail-card reveal">
+                <h4>Скины = цифровые активы</h4>
+                <ul>
+                    <li>Скин &mdash; визуальная оболочка оружия в Counter-Strike 2 (игра Valve, 20M+ активных игроков)</li>
+                    <li>Как NFT, но ликвиднее: продаются на бирже Steam и десятках сторонних площадок</li>
+                    <li>Цены от $0.03 до $1,500,000+ (реальные сделки)</li>
+                    <li>Факторы цены: редкость, износ (float 0.00-1.00), паттерн (рисунок), наклейки</li>
+                    <li>Каждый предмет уникален &mdash; как серийный номер у купюры</li>
+                </ul>
+            </div>
+            <div class="glass-card detail-card reveal reveal-delay-1">
+                <h4>Масштаб рынка</h4>
+                <ul>
+                    <li>Рынок скинов CS2: $4-6 млрд (больше чем весь Gaming NFT &mdash; $4.8B)</li>
+                    <li>20M+ активных игроков ежемесячно, 1.4M одновременно онлайн</li>
+                    <li>400M+ кейсов открыто (аналог лутбоксов)</li>
+                    <li>Valve заработала $1.15B только на комиссиях Steam за скины</li>
+                    <li>Рынок существует с 2013 года &mdash; 13 лет, не хайп</li>
+                </ul>
+            </div>
+            <div class="glass-card detail-card reveal">
+                <h4>Как торгуются</h4>
+                <ul>
+                    <li>Steam Marketplace &mdash; официальная биржа Valve. Комиссия 15% (!)</li>
+                    <li>Сторонние площадки &mdash; 2-8% комиссии. Через Steam API и ботов</li>
+                    <li>P2P обмены &mdash; напрямую через Steam Trade Offers</li>
+                    <li>7 дней trade hold на все операции (правило Valve)</li>
+                    <li>Крипто-платежи набирают популярность (USDT, BTC, LTC)</li>
+                </ul>
+            </div>
+            <div class="glass-card detail-card reveal reveal-delay-1">
+                <h4>Valve &mdash; монополист</h4>
+                <ul>
+                    <li>Valve Corporation (США) &mdash; владелец Steam и CS2</li>
+                    <li>Контролирует всю экосистему: API, трейды, правила</li>
+                    <li>Может менять правила в любой момент &mdash; экзистенциальный риск</li>
+                    <li>Октябрь 2025: одно обновление обрушило рынок на $3B за 48 часов</li>
+                    <li>Декабрь 2025: запретила gambling-спонсорство на турнирах</li>
+                    <li>Все сторонние бизнесы работают на птичьих правах</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-top:2rem">
+            <h4>Аналогия для бизнесменов</h4>
+            <p>Представьте StockX (биржа кроссовок), но для виртуальных предметов. Коллекционеры платят реальные деньги за редкость и эстетику. Рынок $4-6B с миллионами активных участников &mdash; это не игрушки, это полноценная экономика.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 2: TAM / SAM / SOM ==================== -->
+<div class="slide" id="tam" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">02 &mdash; TAM / SAM / SOM</div>
+        <h2 class="section-title reveal">Размер рынка</h2>
+        <p class="section-desc reveal">Total Addressable Market, Serviceable Addressable Market, Serviceable Obtainable Market.</p>
+
+        <div class="grid-3 reveal">
+            <div class="glass-card metric-card">
+                <div class="icon">&#127758;</div>
+                <div class="value" style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$8.1B</div>
+                <div class="label">TAM &mdash; рынок игровых скинов всех игр</div>
+                <p style="font-size:.78rem;color:var(--text3);margin-top:.75rem;line-height:1.6">Прогноз $25.1B к 2033. CAGR 13.5%. Включает CS2, Dota 2, Rust, TF2, и другие.</p>
+            </div>
+            <div class="glass-card metric-card">
+                <div class="icon">&#127919;</div>
+                <div class="value" style="background:var(--gradient2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$7-8B</div>
+                <div class="label">SAM &mdash; CS2 + gambling handle</div>
+                <p style="font-size:.78rem;color:var(--text3);margin-top:.75rem;line-height:1.6">CS2 капитализация $4.5-5B + skin gambling handle $2.5-2.8B/год.</p>
+            </div>
+            <div class="glass-card metric-card">
+                <div class="icon">&#128640;</div>
+                <div class="value" style="background:var(--gradient3);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$5-15M</div>
+                <div class="label">SOM &mdash; GMV/год нового игрока</div>
+                <p style="font-size:.78rem;color:var(--text3);margin-top:.75rem;line-height:1.6">0.1-0.3% SAM. При take rate 5% = $250K-750K revenue в первый год.</p>
+            </div>
+        </div>
+
+        <h3 style="font-size:1rem;font-weight:600;margin:2.5rem 0 1rem;color:var(--text2)" class="reveal">Сравнение с другими рынками</h3>
+        <div class="table-container reveal">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Рынок</th>
+                        <th>Объём</th>
+                        <th>CAGR</th>
+                        <th>Зрелость</th>
+                        <th>Барьер входа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>CS2 Скины</strong></td>
+                        <td>$4-6B</td>
+                        <td>~13%</td>
+                        <td><span class="pill pill-green">Рост</span></td>
+                        <td><span class="pill pill-orange">Средний</span></td>
+                    </tr>
+                    <tr>
+                        <td>Gaming NFT</td>
+                        <td>$4.8B</td>
+                        <td>~32%</td>
+                        <td><span class="pill pill-orange">Волатильно</span></td>
+                        <td><span class="pill pill-red">Высокий</span></td>
+                    </tr>
+                    <tr>
+                        <td>In-game Purchases</td>
+                        <td>$60-70B</td>
+                        <td>~8%</td>
+                        <td><span class="pill pill-blue">Зрелый</span></td>
+                        <td><span class="pill pill-red">Очень высокий</span></td>
+                    </tr>
+                    <tr>
+                        <td>Онлайн-гэмблинг</td>
+                        <td>$78.7B</td>
+                        <td>~11%</td>
+                        <td><span class="pill pill-blue">Зрелый</span></td>
+                        <td><span class="pill pill-red">Высокий</span></td>
+                    </tr>
+                    <tr>
+                        <td>Игровые скины (все)</td>
+                        <td>$8.1B</td>
+                        <td>~13.5%</td>
+                        <td><span class="pill pill-green">Рост</span></td>
+                        <td><span class="pill pill-orange">Средний</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top:2rem">
+            <h4>Ключевой вывод</h4>
+            <p>CS2 скины &mdash; один из немногих рынков с двузначным ростом, относительно низким барьером входа и 13-летней историей. В отличие от NFT, здесь реальная ликвидность и устоявшаяся аудитория.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 3: BUSINESS MODELS ==================== -->
+<div class="slide" id="models" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">03 &mdash; Три бизнес-модели</div>
+        <h2 class="section-title reveal">Gambling, Marketplace<br>или Гибрид</h2>
+        <p class="section-desc reveal">Каждая модель &mdash; разные деньги, риски и скорость.</p>
+
+        <!-- GAMBLING -->
+        <div class="glass-card model-card reveal" style="margin-bottom:2rem">
+            <div class="model-header">
+                <div class="model-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626)">G</div>
+                <div class="model-info">
+                    <h3>Gambling (Казино для скинов)</h3>
+                    <div class="tagline">Высокая маржа, высокий риск</div>
+                </div>
+            </div>
+            <div class="model-body">
+                <p><strong>Механика:</strong> игрок ставит скин или деньги, получает шанс выиграть предмет дороже. Результат определяется генератором случайных чисел с фиксированным house edge (преимущество казино).</p>
+                <p><strong>Формула дохода:</strong> Handle (объём ставок) &times; House Edge. При handle $100M/мес и edge 5% = <strong>$5M/мес чистого дохода</strong>.</p>
+                <p><strong>RTP</strong> (Return to Player): 85-98%. Это значит из каждого доллара ставок игрок получает обратно 85-98 центов. Остальное &mdash; доход платформы.</p>
+                <p><strong>Аналогия:</strong> онлайн-казино, только вместо фишек &mdash; скины CS2. Вместо Вегаса &mdash; сайт на Кюрасао.</p>
+            </div>
+            <div class="model-metrics">
+                <div class="model-metric"><div class="val" style="color:var(--red)">$5M/мес</div><div class="lbl">Потенциал (handle $100M)</div></div>
+                <div class="model-metric"><div class="val">30-50%</div><div class="lbl">Маржа EBITDA</div></div>
+                <div class="model-metric"><div class="val">$250-400</div><div class="lbl">ARPU/год</div></div>
+                <div class="model-metric"><div class="val">$30-80</div><div class="lbl">CAC</div></div>
+                <div class="model-metric"><div class="val">$30-60K</div><div class="lbl">Лицензия/год</div></div>
+            </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-bottom:2rem">
+            <div class="detail-card">
+                <h4 style="color:var(--green)">Плюсы</h4>
+                <ul>
+                    <li>Быстрая монетизация &mdash; revenue с первого дня</li>
+                    <li>Высокая маржа: EBITDA 30-50%</li>
+                    <li>Масштабируется линейно с трафиком</li>
+                    <li>Низкий CAC ($30-80 vs $280-1400 в традиционном iGaming)</li>
+                    <li>Простая механика &mdash; быстрый MVP</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4 style="color:var(--red)">Минусы</h4>
+                <ul>
+                    <li>Нужна лицензия: $30-60K/год (Кюрасао) или $100K+ (Мальта)</li>
+                    <li>Юридический риск: gambling без лицензии = уголовка</li>
+                    <li>Этические вопросы: несовершеннолетние игроки</li>
+                    <li>Valve может закрыть API в любой момент</li>
+                    <li>Twitch забанил gambling-стримы &mdash; теряется канал привлечения</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MARKETPLACE -->
+        <div class="glass-card model-card reveal" style="margin-bottom:2rem">
+            <div class="model-header">
+                <div class="model-icon" style="background:linear-gradient(135deg,#10b981,#3b82f6)">M</div>
+                <div class="model-info">
+                    <h3>Marketplace (Биржа скинов)</h3>
+                    <div class="tagline">Стабильнее, но сложнее на старте</div>
+                </div>
+            </div>
+            <div class="model-body">
+                <p><strong>Механика:</strong> площадка для P2P обмена, покупки и продажи скинов. Зарабатывает на комиссии с каждой сделки (take rate 2-10%).</p>
+                <p><strong>Формула дохода:</strong> GMV (объём сделок) &times; Take Rate. При GMV $100M/мес и 3% = <strong>$3M/мес</strong>.</p>
+                <p><strong>Аналогия:</strong> StockX для кроссовок, Авито для скинов, eBay для виртуальных предметов.</p>
+            </div>
+            <div class="model-metrics">
+                <div class="model-metric"><div class="val" style="color:var(--green)">$3M/мес</div><div class="lbl">Потенциал (GMV $100M)</div></div>
+                <div class="model-metric"><div class="val">20-40%</div><div class="lbl">Маржа EBITDA</div></div>
+                <div class="model-metric"><div class="val">$50-150</div><div class="lbl">ARPU/год</div></div>
+                <div class="model-metric"><div class="val">$10-30</div><div class="lbl">CAC</div></div>
+                <div class="model-metric"><div class="val">Не нужна</div><div class="lbl">Лицензия</div></div>
+            </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-bottom:2rem">
+            <div class="detail-card">
+                <h4 style="color:var(--green)">Плюсы</h4>
+                <ul>
+                    <li>Легальнее &mdash; не gambling, не нужна игровая лицензия</li>
+                    <li>Стабильнее &mdash; сетевые эффекты создают защиту</li>
+                    <li>Ниже регуляторный риск</li>
+                    <li>Дешевле CAC: $10-30</li>
+                    <li>Выше LTV за счёт lower churn (10-15%/мес vs 15-25%)</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4 style="color:var(--red)">Минусы</h4>
+                <ul>
+                    <li>Cold start problem &mdash; нужна ликвидность (товар) с первого дня</li>
+                    <li>Нижe маржа: 20-40% vs 30-50%</li>
+                    <li>Дольше до break-even</li>
+                    <li>Нужен инвентарь на $50-500K для ботов</li>
+                    <li>Конкуренция с CSFloat (2% комиссия, 4.8/5 Trustpilot)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- HYBRID -->
+        <div class="glass-card model-card reveal" style="margin-bottom:2rem">
+            <div class="model-header">
+                <div class="model-icon" style="background:var(--gradient)">H</div>
+                <div class="model-info">
+                    <h3>Гибрид</h3>
+                    <div class="tagline">Маркетплейс + gambling-элементы для вовлечения</div>
+                </div>
+            </div>
+            <div class="model-body">
+                <p><strong>Механика:</strong> полноценный маркетплейс (обмен, покупка, продажа) + gambling-элементы для вовлечения: апгрейд, кейсы, лутбоксы. Пользователь может торговать И играть на одной площадке.</p>
+                <p><strong>Аналогия:</strong> Robinhood (торговля акциями) + казино-элементы (gamification). Или Amazon + встроенный лотерейный билет.</p>
+            </div>
+            <div class="model-metrics">
+                <div class="model-metric"><div class="val" style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$4-8M/мес</div><div class="lbl">Потенциал (комбо)</div></div>
+                <div class="model-metric"><div class="val">25-45%</div><div class="lbl">Маржа EBITDA</div></div>
+                <div class="model-metric"><div class="val">$150-350</div><div class="lbl">ARPU/год</div></div>
+                <div class="model-metric"><div class="val">$20-50</div><div class="lbl">CAC</div></div>
+                <div class="model-metric"><div class="val">Желательна</div><div class="lbl">Лицензия</div></div>
+            </div>
+        </div>
+
+        <!-- COMPARISON TABLE -->
+        <h3 style="font-size:1rem;font-weight:600;margin:2.5rem 0 1rem;color:var(--text2)" class="reveal">Сводная таблица моделей</h3>
+        <div class="table-container reveal">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Gambling</th>
+                        <th>Marketplace</th>
+                        <th>Гибрид</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Маржа EBITDA</strong></td>
+                        <td><span class="pill pill-green">30-50%</span></td>
+                        <td><span class="pill pill-orange">20-40%</span></td>
+                        <td><span class="pill pill-green">25-45%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>ARPU/год</strong></td>
+                        <td>$250-400</td>
+                        <td>$50-150</td>
+                        <td>$150-350</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CAC</strong></td>
+                        <td>$30-80</td>
+                        <td>$10-30</td>
+                        <td>$20-50</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Регуляция</strong></td>
+                        <td><span class="pill pill-red">Лицензия обязательна</span></td>
+                        <td><span class="pill pill-green">Минимальная</span></td>
+                        <td><span class="pill pill-orange">Желательна</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Time to Revenue</strong></td>
+                        <td><span class="pill pill-green">1-2 мес</span></td>
+                        <td><span class="pill pill-red">3-6 мес</span></td>
+                        <td><span class="pill pill-orange">2-4 мес</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Масштаб</strong></td>
+                        <td><span class="pill pill-green">Линейный</span></td>
+                        <td><span class="pill pill-green">Сетевые эффекты</span></td>
+                        <td><span class="pill pill-green">Оба</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Риск</strong></td>
+                        <td><span class="pill pill-red">Высокий</span></td>
+                        <td><span class="pill pill-green">Низкий</span></td>
+                        <td><span class="pill pill-orange">Средний</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 4: UNIT ECONOMICS ==================== -->
+<div class="slide" id="unit-economics" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">04 &mdash; Unit Economics</div>
+        <h2 class="section-title reveal">Юнит-экономика<br>по моделям</h2>
+        <p class="section-desc reveal">Ключевые метрики на единицу пользователя.</p>
+
+        <div class="grid-2">
+            <!-- GAMBLING UE -->
+            <div class="glass-card reveal" style="padding:0;overflow:hidden">
+                <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(239,68,68,.06),transparent)">
+                    <h3 style="font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:.5rem"><span style="color:var(--red)">&#9824;</span> Gambling</h3>
+                </div>
+                <div style="padding:1.5rem 2rem">
+                    <div class="cost-row"><div class="item">ARPU (средний доход на юзера)</div><div class="price">$250-400/год</div></div>
+                    <div class="cost-row"><div class="item">CAC (стоимость привлечения)</div><div class="price">$30-80</div></div>
+                    <div class="cost-row"><div class="item">LTV (пожизненная ценность)</div><div class="price">$90-320</div></div>
+                    <div class="cost-row"><div class="item">LTV:CAC ratio</div><div class="price" style="color:var(--green)">3:1 &mdash; 5:1</div></div>
+                    <div class="cost-row"><div class="item">Визит &rarr; Регистрация</div><div class="price">8-15%</div></div>
+                    <div class="cost-row"><div class="item">Регистрация &rarr; Депозит</div><div class="price">15-25%</div></div>
+                    <div class="cost-row"><div class="item">Средний депозит (скины)</div><div class="price">$20-80</div></div>
+                    <div class="cost-row"><div class="item">Средний депозит (фиат)</div><div class="price">$50-200</div></div>
+                    <div class="cost-row"><div class="item">Monthly churn</div><div class="price" style="color:var(--red)">15-25%</div></div>
+                </div>
+            </div>
+
+            <!-- MARKETPLACE UE -->
+            <div class="glass-card reveal reveal-delay-1" style="padding:0;overflow:hidden">
+                <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(16,185,129,.06),transparent)">
+                    <h3 style="font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:.5rem"><span style="color:var(--green)">&#9830;</span> Marketplace</h3>
+                </div>
+                <div style="padding:1.5rem 2rem">
+                    <div class="cost-row"><div class="item">ARPU (средний доход на юзера)</div><div class="price">$50-150/год</div></div>
+                    <div class="cost-row"><div class="item">CAC (стоимость привлечения)</div><div class="price">$10-30</div></div>
+                    <div class="cost-row"><div class="item">LTV (пожизненная ценность)</div><div class="price">$80-250</div></div>
+                    <div class="cost-row"><div class="item">LTV:CAC ratio</div><div class="price" style="color:var(--green)">4:1 &mdash; 8:1</div></div>
+                    <div class="cost-row"><div class="item">Визит &rarr; Сделка</div><div class="price">2-5%</div></div>
+                    <div class="cost-row"><div class="item">Monthly churn</div><div class="price" style="color:var(--orange)">10-15%</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-info reveal" style="margin-top:2rem">
+            <h4>Почему CAC в 10x дешевле чем в традиционном iGaming?</h4>
+            <p>В традиционном онлайн-казино CAC составляет $280-1400. В skin gambling &mdash; $30-80. Причина: аудитория уже в экосистеме Steam, привлечение идёт через инфлюенсеров (YouTube/Twitch), промокоды и Telegram. Нет нужды в TV-рекламе и дорогих лицензионных партнёрствах.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 5: COMPETITIVE MOATS ==================== -->
+<div class="slide" id="moats" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">05 &mdash; Competitive Moats</div>
+        <h2 class="section-title reveal">Что создаёт защиту</h2>
+        <p class="section-desc reveal">Какие барьеры мешают новичкам и защищают лидеров.</p>
+
+        <div class="table-container reveal">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Moat (защита)</th>
+                        <th>Пример</th>
+                        <th>Сложность создания</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ликвидность / Network Effects</strong></td>
+                        <td>BUFF163, CSFloat</td>
+                        <td><span class="pill pill-red">Очень высокая</span></td>
+                        <td>Больше продавцов &rarr; лучше цены &rarr; больше покупателей. Замкнутый цикл. Самый мощный moat.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Бот-инфраструктура</strong></td>
+                        <td>CSGORoll, SkinSwap</td>
+                        <td><span class="pill pill-red">Высокая</span></td>
+                        <td>Десятки Steam-аккаунтов с инвентарём на сотни тысяч $. Каждый бот = уникальный телефон + Steam Guard 15 дней.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Бренд и доверие</strong></td>
+                        <td>CSGOEmpire, CSFloat</td>
+                        <td><span class="pill pill-orange">Средняя</span></td>
+                        <td>Trustpilot-рейтинг, время на рынке. CSFloat 4.8/5 за годы работы. Скам-проекты обесценили доверие &mdash; проверенные бренды в цене.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Игровая лицензия</strong></td>
+                        <td>Gamdom, CSGORoll</td>
+                        <td><span class="pill pill-orange">Средняя</span></td>
+                        <td>Кюрасао $30-60K/год, Мальта $100K+. Барьер для мелких, но не для серьёзных игроков.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SEO / Контент</strong></td>
+                        <td>CSFloat, SkinBaron</td>
+                        <td><span class="pill pill-orange">Средняя (6-12 мес)</span></td>
+                        <td>Органический трафик &mdash; самый дешёвый. Но нужно 6-12 месяцев для результатов.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Инфлюенсер-сеть</strong></td>
+                        <td>CSGORoll, Key-Drop</td>
+                        <td><span class="pill pill-green">Низкая-средняя</span></td>
+                        <td>YouTube/Twitch блогеры. Преодолевается деньгами: $500-5000 за интеграцию. Но эксклюзивы дороже.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warn reveal" style="margin-top:2rem">
+            <h4>Главный вывод</h4>
+            <p>Ликвидность и бот-инфраструктура &mdash; два самых сложных moat'а. Новый проект должен решить cold start problem (откуда товар и покупатели?) ДО запуска. Варианты: собственный инвентарь $50-500K, партнёрство с существующим маркетплейсом, или фокус на gambling (не требует ликвидности товаров).</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECTION 6: LAUNCH COST ==================== -->
+<div class="slide" id="launch-cost" style="align-items:flex-start;padding-top:8rem;padding-bottom:6rem">
+    <div class="slide-content">
+        <div class="section-num reveal">06 &mdash; Стоимость запуска</div>
+        <h2 class="section-title reveal">Сколько стоит войти</h2>
+        <p class="section-desc reveal">MVP за 3-6 месяцев, ежемесячные операционные, команда.</p>
+
+        <div class="grid-2">
+            <!-- MVP GAMBLING -->
+            <div class="glass-card reveal" style="padding:0;overflow:hidden">
+                <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(239,68,68,.06),transparent)">
+                    <h3 style="font-size:1.1rem;font-weight:700">MVP: Gambling (3-6 мес)</h3>
+                </div>
+                <div style="padding:1.5rem 2rem">
+                    <div class="cost-row"><div class="item">Разработка (фронт + бэк + боты)</div><div class="price">$30-100K</div></div>
+                    <div class="cost-row"><div class="item">Steam бот-аккаунты</div><div class="price">$500-3K</div></div>
+                    <div class="cost-row"><div class="item">Инвентарь для ботов</div><div class="price">$50-500K</div></div>
+                    <div class="cost-row"><div class="item">Серверы (год)</div><div class="price">$3-15K</div></div>
+                    <div class="cost-row"><div class="item">Игровая лицензия (Кюрасао)</div><div class="price">$30-60K</div></div>
+                    <div class="cost-row"><div class="item">Юрлицо + юристы</div><div class="price">$3-15K</div></div>
+                    <div class="cost-row"><div class="item">UI/UX дизайн</div><div class="price">$5-15K</div></div>
+                    <div class="cost-total"><div class="item">ИТОГО MVP</div><div class="price">$80-200K + инвентарь</div></div>
+                </div>
+            </div>
+
+            <!-- MVP MARKETPLACE -->
+            <div class="glass-card reveal reveal-delay-1" style="padding:0;overflow:hidden">
+                <div style="padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(16,185,129,.06),transparent)">
+                    <h3 style="font-size:1.1rem;font-weight:700">MVP: Marketplace (3-6 мес)</h3>
+                </div>
+                <div style="padding:1.5rem 2rem">
+                    <div class="cost-row"><div class="item">Разработка (фронт + бэк + боты)</div><div class="price">$30-80K</div></div>
+                    <div class="cost-row"><div class="item">Steam бот-аккаунты</div><div class="price">$500-3K</div></div>
+                    <div class="cost-row"><div class="item">Инвентарь для ботов</div><div class="price">$50-500K</div></div>
+                    <div class="cost-row"><div class="item">Серверы (год)</div><div class="price">$3-15K</div></div>
+                    <div class="cost-row"><div class="item">Юрлицо + юристы</div><div class="price">$3-15K</div></div>
+                    <div class="cost-row"><div class="item">UI/UX дизайн</div><div class="price">$5-15K</div></div>
+                    <div class="cost-total"><div class="item">ИТОГО MVP</div><div class="price">$60-150K + инвентарь</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTHLY OPS -->
+        <h3 style="font-size:1rem;font-weight:600;margin:2.5rem 0 1rem;color:var(--text2)" class="reveal">Ежемесячные операционные</h3>
+        <div class="glass-card reveal" style="padding:0;overflow:hidden;max-width:600px">
+            <div style="padding:1.5rem 2rem">
+                <div class="cost-row"><div class="item">Серверы и инфраструктура</div><div class="price">$500-2K</div></div>
+                <div class="cost-row"><div class="item">Поддержка пользователей</div><div class="price">$2-5K</div></div>
+                <div class="cost-row"><div class="item">Маркетинг и привлечение</div><div class="price">$5-20K+</div></div>
+                <div class="cost-row"><div class="item">Разработка и поддержка кода</div><div class="price">$5-15K</div></div>
+                <div class="cost-total"><div class="item">ИТОГО/мес</div><div class="price">$15-50K</div></div>
+            </div>
+        </div>
+
+        <!-- TEAM -->
+        <h3 style="font-size:1rem;font-weight:600;margin:2.5rem 0 1rem;color:var(--text2)" class="reveal">Команда (5-10 человек)</h3>
+        <div class="glass-card reveal" style="padding:0;overflow:hidden;max-width:600px">
+            <div style="padding:1.5rem 2rem">
+                <div class="team-role"><div class="role">Frontend / Fullstack</div><div class="count">2-3 человека</div></div>
+                <div class="team-role"><div class="role">Backend (Steam API, боты)</div><div class="count">1-2 человека</div></div>
+                <div class="team-role"><div class="role">DevOps</div><div class="count">0.5-1 человек</div></div>
+                <div class="team-role"><div class="role">UI/UX дизайнер</div><div class="count">1 человек</div></div>
+                <div class="team-role"><div class="role">Community / Support</div><div class="count">1-2 человека</div></div>
+                <div class="team-role"><div class="role">Founder / Product</div><div class="count">1 человек</div></div>
+            </div>
+        </div>
+
+        <div class="callout callout-info reveal" style="margin-top:2rem">
+            <h4>Реалистичный бюджет для старта</h4>
+            <p>Минимум $150-300K для серьёзного запуска (MVP + инвентарь + 3 месяца операционных). С лицензией gambling: $200-400K. Без gambling-элементов можно уложиться в $100-200K. Самая большая статья &mdash; инвентарь для ботов ($50-500K), но это по сути оборотный капитал, а не расход.</p>
+        </div>
+    </div>
+</div>
+
+<footer><p>UPG_GG Business Analytics &middot; Апрель 2026</p></footer>
+
+<script>
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+// Nav scroll effect
+const navbar = document.getElementById('navbar');
+// Reveal on scroll
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Scroll events
+window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progressBar.style.width = pct + '%';
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('mobileNav').classList.remove('open');
+        document.getElementById('menuToggle').classList.remove('open');
+        document.body.style.overflow = '';
+    });
+});
+
+// Mobile menu toggle
+document.getElementById('menuToggle').addEventListener('click', () => {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('menuToggle');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+</body>
+</html>

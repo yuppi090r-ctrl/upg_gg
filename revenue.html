@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPG_GG — Доходы и трафик конкурентов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#07060e;--surface:#0f0d1a;--surface2:#16132a;--surface3:#1e1a35;
+            --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
+            --text:#f4f2ff;--text2:#9d97c0;--text3:#6b6490;
+            --accent:#8b5cf6;--accent2:#c4b5fd;--accent-glow:rgba(139,92,246,.2);
+            --green:#10b981;--red:#ef4444;--orange:#f59e0b;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;
+            --gradient:linear-gradient(135deg,#8b5cf6,#ec4899,#6366f1);
+            --gradient2:linear-gradient(135deg,#06b6d4,#10b981);
+            --gradient3:linear-gradient(135deg,#f59e0b,#ef4444);
+            --glass:rgba(139,92,246,.04);
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
+
+        /* === NAV === */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s}
+        nav.scrolled{background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);transition:color .3s;text-shadow:0 0 30px rgba(139,92,246,.2)}
+        nav .logo span{color:var(--accent2)}
+        nav .nav-links{display:flex;gap:.25rem}
+        nav .nav-links a{color:var(--text3);text-decoration:none;font-size:.75rem;font-weight:500;padding:.45rem .75rem;border-radius:8px;transition:all .25s;letter-spacing:.02em}
+        nav .nav-links a:hover{color:var(--text2)}
+        nav .nav-links a.active{color:#fff;background:rgba(139,92,246,.15);backdrop-filter:blur(10px);border:1px solid rgba(139,92,246,.2)}
+        .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gradient);z-index:1001;transition:width .15s;box-shadow:0 0 20px rgba(139,92,246,.5)}
+
+        /* === SECTIONS === */
+        .slide{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem;position:relative;overflow:hidden}
+        .slide-content{max-width:1100px;width:100%;position:relative;z-index:2}
+
+        /* === HERO === */
+        .hero{text-align:center;padding-top:0}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border:1px solid rgba(139,92,246,.3);border-radius:100px;font-size:.8rem;color:var(--accent2);margin-bottom:2.5rem;background:rgba(139,92,246,.08);backdrop-filter:blur(10px)}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite;box-shadow:0 0 12px var(--green)}
+        @keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 12px var(--green)}50%{opacity:.4;box-shadow:0 0 4px var(--green)}}
+        .hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-.04em}
+        .hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero .subtitle{font-size:1.25rem;color:var(--text2);max-width:600px;margin:0 auto 3.5rem;font-weight:300;line-height:1.6}
+        .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .value{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:brightness(1.2)}
+        .hero-stat .label{font-size:.72rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+        .hero-glow{position:absolute;width:1000px;height:1000px;background:radial-gradient(circle,rgba(139,92,246,.12) 0%,rgba(236,72,153,.06) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+
+        /* === SECTION HEADERS === */
+        .section-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;text-shadow:0 0 30px rgba(139,92,246,.4)}
+        .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);max-width:120px;opacity:.5}
+        .section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
+        .section-desc{font-size:1.05rem;color:var(--text2);max-width:580px;margin-bottom:3rem;font-weight:300;line-height:1.7}
+
+        /* === CARDS === */
+        .glass-card{background:linear-gradient(160deg,rgba(139,92,246,.04),rgba(236,72,153,.02),var(--glass));border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(8px);transition:all .35s ease}
+        .glass-card:hover{border-color:rgba(139,92,246,.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(139,92,246,.08),0 0 0 1px rgba(139,92,246,.1)}
+
+        /* === GRID === */
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+        .grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+
+        /* === METRIC CARDS === */
+        .metric-card{text-align:center;padding:2rem 1.5rem}
+        .metric-card .icon{font-size:2rem;margin-bottom:1rem;display:block}
+        .metric-card .value{font-size:1.8rem;font-weight:800;margin-bottom:.4rem}
+        .metric-card .label{font-size:.8rem;color:var(--text2);font-weight:400}
+
+        /* === COMPETITOR CARDS === */
+        .comp-card{padding:0;overflow:hidden}
+        .comp-header{padding:1.75rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,rgba(139,92,246,.03),transparent)}
+        .comp-logo{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;flex-shrink:0}
+        .comp-info h3{font-size:1.2rem;font-weight:700}
+        .comp-info .url{font-size:.78rem;color:var(--text3)}
+        .comp-badge{margin-left:auto;padding:.3rem .8rem;border-radius:100px;font-size:.72rem;font-weight:600;letter-spacing:.02em}
+        .comp-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0;border-bottom:1px solid var(--border)}
+        .comp-metric{padding:1.1rem 1.25rem;border-right:1px solid var(--border);text-align:center}
+        .comp-metric:last-child{border-right:none}
+        .comp-metric .val{font-size:1.1rem;font-weight:700}
+        .comp-metric .lbl{font-size:.68rem;color:var(--text3);margin-top:.2rem}
+
+        /* === TABS === */
+        .tabs-wrap{margin-bottom:2rem}
+        .tabs{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;gap:2px;flex-wrap:wrap}
+        .tab-btn{padding:.55rem 1.25rem;border-radius:10px;border:none;background:none;color:var(--text3);font-size:.82rem;font-weight:500;cursor:pointer;transition:all .25s;font-family:inherit;white-space:nowrap}
+        .tab-btn:hover{color:var(--text2)}
+        .tab-btn.active{background:var(--gradient);color:white;box-shadow:0 4px 20px rgba(139,92,246,.4)}
+        .tab-panel{display:none;animation:fadeUp .4s ease}
+        .tab-panel.active{display:block}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+        /* === DETAIL BLOCKS === */
+        .detail-card{background:linear-gradient(170deg,var(--surface2),rgba(139,92,246,.03));border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:border-color .3s}
+        .detail-card:hover{border-color:rgba(139,92,246,.2)}
+        .detail-card h4{font-size:.9rem;font-weight:600;margin-bottom:1rem;color:var(--accent2);display:flex;align-items:center;gap:.5rem}
+        .detail-card ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+        .detail-card li{font-size:.85rem;color:var(--text2);padding-left:1.25rem;position:relative;line-height:1.65}
+        .detail-card li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7;box-shadow:0 0 8px rgba(139,92,246,.3)}
+
+        /* === TABLE === */
+        .table-container{border-radius:20px;border:1px solid var(--border);overflow:hidden;background:var(--surface)}
+        table{width:100%;border-collapse:collapse;font-size:.85rem}
+        thead{background:var(--surface2)}
+        th{padding:1rem 1.25rem;text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);border-bottom:1px solid var(--border)}
+        td{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);vertical-align:top}
+        tr:last-child td{border-bottom:none}
+        tr{transition:background .2s}
+        tr:hover td{background:rgba(139,92,246,.04)}
+        .pill{display:inline-block;padding:.15rem .55rem;border-radius:6px;font-size:.72rem;font-weight:600;letter-spacing:.01em}
+        .pill-purple{background:rgba(139,92,246,.15);color:var(--accent2);border:1px solid rgba(139,92,246,.2)}
+        .pill-green{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+        .pill-red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+        .pill-orange{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
+        .pill-blue{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+        .pill-cyan{background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid rgba(6,182,212,.2)}
+        .pill-pink{background:rgba(236,72,153,.15);color:var(--pink);border:1px solid rgba(236,72,153,.2)}
+
+        /* === INSIGHTS === */
+        .insight-card{padding:2.25rem;position:relative;overflow:hidden}
+        .insight-card .num{font-size:4rem;font-weight:900;position:absolute;top:.75rem;right:1.25rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.2;line-height:1}
+        .insight-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .insight-card p{font-size:.85rem;color:var(--text2);line-height:1.7;position:relative}
+
+        /* === WARNING / INFO BOXES === */
+        .callout{border-radius:16px;padding:1.5rem 1.75rem;margin:1.25rem 0}
+        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);box-shadow:0 4px 20px rgba(239,68,68,.05)}
+        .callout-warn h4{color:var(--red);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);box-shadow:0 4px 20px rgba(16,185,129,.05)}
+        .callout-info h4{color:var(--green);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+        .callout-orange{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);box-shadow:0 4px 20px rgba(245,158,11,.05)}
+        .callout-orange h4{color:var(--orange);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+        .callout p{font-size:.85rem;color:var(--text2);line-height:1.7}
+
+        /* === FORMULA BOX === */
+        .formula-box{background:linear-gradient(135deg,var(--surface2),var(--surface3));border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:2rem;text-align:center;margin:1.5rem 0}
+        .formula-box .formula{font-size:1.3rem;font-weight:700;letter-spacing:.02em;margin-bottom:.75rem}
+        .formula-box .formula .hl{color:var(--accent2)}
+        .formula-box .example{font-size:.88rem;color:var(--text2);line-height:1.8}
+        .formula-box .example strong{color:var(--text);font-weight:600}
+
+        /* === BAR CHART === */
+        .bar-chart{display:flex;flex-direction:column;gap:.65rem}
+        .bar-row{display:flex;align-items:center;gap:.75rem}
+        .bar-label{font-size:.78rem;font-weight:500;min-width:100px;text-align:right;color:var(--text2)}
+        .bar-track{flex:1;height:28px;background:var(--surface2);border-radius:8px;overflow:hidden;position:relative}
+        .bar-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding:0 .75rem;font-size:.72rem;font-weight:600;color:#fff;transition:width .8s ease;min-width:fit-content;white-space:nowrap}
+        .bar-value{font-size:.78rem;font-weight:600;min-width:45px;color:var(--text2)}
+
+        /* === REVENUE CARDS === */
+        .rev-card{padding:0;overflow:hidden}
+        .rev-header{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem}
+        .rev-logo{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;flex-shrink:0;color:#fff}
+        .rev-info h3{font-size:1.05rem;font-weight:700}
+        .rev-info .type-tag{font-size:.72rem;color:var(--text3)}
+        .rev-body{padding:1.5rem 1.75rem}
+        .rev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+        .rev-metric{padding:.6rem 0}
+        .rev-metric .rv{font-size:1rem;font-weight:700}
+        .rev-metric .rl{font-size:.68rem;color:var(--text3);margin-top:.15rem}
+        .rev-highlight{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(236,72,153,.05));border-top:1px solid var(--border);padding:1rem 1.75rem;display:flex;align-items:center;justify-content:space-between}
+        .rev-highlight .big{font-size:1.3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .rev-highlight .tag{font-size:.72rem;color:var(--text3)}
+
+        /* === TRAFFIC CARD === */
+        .traffic-card{padding:1.5rem 1.75rem}
+        .traffic-card h4{font-size:.92rem;font-weight:700;margin-bottom:1.25rem;color:var(--accent2)}
+        .traffic-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
+        .traffic-row .ch-name{font-size:.78rem;color:var(--text2);min-width:90px}
+        .traffic-row .ch-bar{flex:1;height:20px;background:var(--surface2);border-radius:6px;overflow:hidden}
+        .traffic-row .ch-fill{height:100%;border-radius:6px;transition:width .6s ease}
+        .traffic-row .ch-pct{font-size:.75rem;font-weight:600;min-width:40px;text-align:right}
+
+        /* === TIMELINE === */
+        .timeline{position:relative;padding-left:2rem}
+        .timeline::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--red),transparent)}
+        .timeline-item{position:relative;margin-bottom:1.75rem;padding-left:1.5rem}
+        .timeline-item::before{content:'';position:absolute;left:-1.55rem;top:.35rem;width:12px;height:12px;border-radius:50%;border:2px solid var(--accent);background:var(--bg)}
+        .timeline-item.danger::before{border-color:var(--red);box-shadow:0 0 10px rgba(239,68,68,.3)}
+        .timeline-item .year{font-size:.72rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+        .timeline-item .event{font-size:.85rem;color:var(--text2);line-height:1.65}
+
+        /* === SECTION GLOWS === */
+        #gambling-revenue::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.06),transparent 60%);top:10%;right:-10%;pointer-events:none}
+        #marketplace-revenue::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(6,182,212,.05),transparent 60%);top:5%;left:-10%;pointer-events:none}
+        #estimates::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(236,72,153,.05),transparent 60%);top:10%;right:-10%;pointer-events:none}
+        #traffic::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,.05),transparent 60%);top:5%;left:-10%;pointer-events:none}
+        #valve::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(239,68,68,.05),transparent 60%);bottom:10%;left:-15%;pointer-events:none}
+
+        /* === FOOTER === */
+        footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;background:linear-gradient(0deg,rgba(139,92,246,.03),transparent)}
+        footer p{color:var(--text3);font-size:.78rem;letter-spacing:.02em}
+
+        /* === ANIMATIONS === */
+        .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-delay-1{transition-delay:.1s}
+        .reveal-delay-2{transition-delay:.2s}
+        .reveal-delay-3{transition-delay:.3s}
+
+        /* === DIVIDER === */
+        .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);max-width:400px;margin:0 auto}
+
+        /* === MOBILE MENU === */
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.75rem 2rem;border-radius:12px;transition:all .25s;text-align:center}
+        .mobile-nav a:hover,.mobile-nav a.active{color:var(--text);background:rgba(139,92,246,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        /* === RESPONSIVE === */
+        @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:768px){
+            .grid-2,.grid-3{grid-template-columns:1fr}
+            .grid-4{grid-template-columns:repeat(2,1fr)}
+            nav .nav-links{display:none}
+            .menu-toggle{display:block}
+            .slide{padding:3.5rem 1rem;min-height:auto}
+            .hero{min-height:100vh;padding:4rem 1.25rem}
+            .hero .subtitle{font-size:1rem}
+            .hero-stats{gap:1.25rem}
+            .hero-stat .value{font-size:1.6rem}
+            .section-title{font-size:1.75rem}
+            .section-desc{font-size:.92rem}
+            .comp-header,.rev-header{flex-wrap:wrap;padding:1.25rem}
+            .comp-badge{margin-left:0;margin-top:.25rem}
+            .comp-metrics{grid-template-columns:repeat(3,1fr)}
+            .comp-metric{padding:.85rem .75rem;border-bottom:1px solid var(--border)}
+            .comp-metric .val{font-size:.95rem}
+            .tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
+            .tabs::-webkit-scrollbar{display:none}
+            .tab-btn{flex-shrink:0;padding:.5rem 1rem;font-size:.78rem}
+            .detail-card{padding:1.25rem}
+            .detail-card h4{font-size:.85rem}
+            .detail-card li{font-size:.8rem}
+            .glass-card{padding:1.5rem;border-radius:16px}
+            .table-container{border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+            table{min-width:600px}
+            .insight-card{padding:1.5rem}
+            .insight-card .num{font-size:3rem}
+            .insight-card h4{font-size:.9rem}
+            .insight-card p{font-size:.8rem}
+            .callout{padding:1.25rem}
+            .hero-glow{width:500px;height:500px}
+            .bar-label{min-width:70px;font-size:.7rem}
+            .rev-grid{grid-template-columns:1fr}
+            .rev-highlight{flex-direction:column;gap:.25rem;text-align:center}
+            .traffic-row .ch-name{min-width:70px;font-size:.7rem}
+            .formula-box .formula{font-size:1rem}
+            .timeline{padding-left:1.5rem}
+        }
+        @media(max-width:480px){
+            .hero h1{font-size:2.2rem}
+            .hero-stats{gap:1rem}
+            .hero-stat .value{font-size:1.4rem}
+            .hero-stat .label{font-size:.65rem}
+            .comp-metrics{grid-template-columns:repeat(2,1fr)}
+            .grid-4{grid-template-columns:1fr}
+            .section-num{font-size:.6rem}
+            .slide{padding:3rem .85rem}
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav id="navbar">
+    <div class="inner">
+        <div class="logo">UPG<span>_</span>GG</div>
+        <div class="nav-links">
+            <a href="index.html">Обзор ниши</a>
+            <a href="business.html">Бизнес</a>
+            <a href="revenue.html" class="active">Доходы</a>
+            <a href="gtm.html">GTM</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Обзор ниши</a>
+    <a href="business.html">Бизнес</a>
+    <a href="revenue.html" class="active">Доходы</a>
+    <a href="gtm.html">GTM</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<div class="slide hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="slide-content">
+        <div class="hero-badge"><span class="dot"></span> Доходы и трафик &middot; Апрель 2026</div>
+        <h1>Откуда<br><span class="gradient">деньги</span></h1>
+        <p class="subtitle">Как gambling и маркетплейсы зарабатывают на скинах. Оценка выручки, разбор трафика, платформенный риск Valve.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="value">$36-84M</div><div class="label">GGR топ-1 gambling/год</div></div>
+            <div class="hero-stat"><div class="value">$36-150M</div><div class="label">Выручка BUFF163/год</div></div>
+            <div class="hero-stat"><div class="value">3-15%</div><div class="label">House Edge</div></div>
+            <div class="hero-stat"><div class="value">1.5-15%</div><div class="label">Take Rate</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== СЕКЦИЯ 1: GAMBLING ==================== -->
+<div class="slide" id="gambling-revenue" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">01 &mdash; Модель дохода</div>
+        <h2 class="section-title reveal">Как зарабатывают gambling-платформы</h2>
+        <p class="section-desc reveal">Три ключевых термина, которые надо знать. Всё работает как казино, только вместо фишек &mdash; скины CS2.</p>
+
+        <!-- Три термина -->
+        <div class="grid-3 reveal">
+            <div class="glass-card metric-card">
+                <span class="icon">$</span>
+                <div class="value" style="font-size:1.4rem;background:var(--gradient3);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Handle</div>
+                <div class="label" style="margin-top:.75rem;line-height:1.6">Общая сумма ставок за период. Аналог GMV в e-commerce. Юзер поставил $100 &mdash; handle = $100, даже если выиграл.</div>
+            </div>
+            <div class="glass-card metric-card">
+                <span class="icon">%</span>
+                <div class="value" style="font-size:1.4rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">House Edge</div>
+                <div class="label" style="margin-top:.75rem;line-height:1.6">Процент, который математически остаётся платформе. Как комиссия, но скрытая в вероятностях. Юзер видит "шанс 50/50", реально &mdash; 48/52.</div>
+            </div>
+            <div class="glass-card metric-card">
+                <span class="icon">$</span>
+                <div class="value" style="font-size:1.4rem;background:var(--gradient2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">GGR</div>
+                <div class="label" style="margin-top:.75rem;line-height:1.6">Gross Gaming Revenue = Handle &times; House Edge. Это реальная выручка платформы. Аналог чистой комиссии маркетплейса.</div>
+            </div>
+        </div>
+
+        <!-- Формула -->
+        <div class="formula-box reveal" style="margin-top:2rem">
+            <div class="formula"><span class="hl">GGR</span> = Handle &times; House Edge</div>
+            <div class="example">
+                <strong>10,000 юзеров</strong> &times; $50 ставок/день = <strong>$500K/день</strong> = $15M/мес<br>
+                При edge <strong>5%</strong> &rarr; GGR = <strong>$750K/мес</strong> = <strong>$9M/год</strong>
+            </div>
+        </div>
+
+        <!-- Таблица House Edge -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin:2.5rem 0 1.25rem">House Edge по типам игр</h3>
+        <div class="table-container reveal">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Тип игры</th>
+                        <th>House Edge</th>
+                        <th>RTP (возврат игроку)</th>
+                        <th>Маржинальность</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cases (кейсы)</strong></td>
+                        <td><span class="pill pill-red">15-25%+</span></td>
+                        <td>75-85%</td>
+                        <td><span class="pill pill-red">Самый маржинальный</span></td>
+                        <td>Юзер "покупает" кейс, получает случайный скин. Контент и вероятности &mdash; полностью под контролем платформы</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Case Battles</strong></td>
+                        <td><span class="pill pill-orange">5-10%</span></td>
+                        <td>90-95%</td>
+                        <td><span class="pill pill-orange">Высокая</span></td>
+                        <td>Два+ игрока открывают кейсы на скорость. Проигравший отдаёт всё. Комиссия в стоимости кейса</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Upgrade (апгрейд)</strong></td>
+                        <td><span class="pill pill-orange">4-15%</span></td>
+                        <td>85-96%</td>
+                        <td><span class="pill pill-orange">Средне-высокая</span></td>
+                        <td>Ставишь дешёвый скин, пытаешься "превратить" в дорогой. Вероятность пропорциональна разнице цен минус edge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Crash</strong></td>
+                        <td><span class="pill pill-green">3-5%</span></td>
+                        <td>95-97%</td>
+                        <td><span class="pill pill-purple">Средняя</span></td>
+                        <td>Множитель растёт, нужно "забрать" до краша. Edge скрыт в алгоритме краша</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Roulette</strong></td>
+                        <td><span class="pill pill-green">2-5%</span></td>
+                        <td>95-98%</td>
+                        <td><span class="pill pill-purple">Средняя</span></td>
+                        <td>Красное/чёрное/зелёное. Edge в зелёном секторе (как зеро в казино)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coinflip</strong></td>
+                        <td><span class="pill pill-blue">2-3%</span></td>
+                        <td>97-98%</td>
+                        <td><span class="pill pill-blue">Низкая</span></td>
+                        <td>1v1, "монетка". Минимальная комиссия, максимальный объём ставок. Привлекает хайроллеров</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Вагер-требования -->
+        <div class="callout callout-orange reveal" style="margin-top:2rem">
+            <h4>Вагер-требования: как удерживают деньги внутри</h4>
+            <p>Депозит $100 &rarr; нужно прокрутить $100+ в ставках прежде чем вывести. На практике юзер делает ставок на $300-500, прежде чем выведет остаток. Каждый "прокрут" &mdash; это ещё раз house edge. Аналогия: положил $100 в автомат, должен сыграть 3-5 раз прежде чем обналичить. Каждый раз казино забирает свой %.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== СЕКЦИЯ 2: МАРКЕТПЛЕЙСЫ ==================== -->
+<div class="slide" id="marketplace-revenue" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">02 &mdash; Модель дохода</div>
+        <h2 class="section-title reveal">Как зарабатывают маркетплейсы</h2>
+        <p class="section-desc reveal">Проще: комиссия с каждой сделки. Но размер комиссии и способ её скрыть &mdash; отличаются радикально.</p>
+
+        <div class="grid-2 reveal" style="margin-bottom:2rem">
+            <div class="glass-card metric-card">
+                <span class="icon">$</span>
+                <div class="value" style="font-size:1.4rem;background:var(--gradient2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">GMV</div>
+                <div class="label" style="margin-top:.75rem;line-height:1.6">Gross Merchandise Volume &mdash; общий объём сделок на платформе. Юзер купил скин за $100 &mdash; GMV +$100.</div>
+            </div>
+            <div class="glass-card metric-card">
+                <span class="icon">%</span>
+                <div class="value" style="font-size:1.4rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Take Rate</div>
+                <div class="label" style="margin-top:.75rem;line-height:1.6">Комиссия платформы с каждой сделки. Revenue = GMV &times; Take Rate. Чем ниже &mdash; тем конкурентнее.</div>
+            </div>
+        </div>
+
+        <!-- Таблица комиссий -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin:1rem 0 1.25rem">Комиссии по платформам</h3>
+        <div class="table-container reveal">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Платформа</th>
+                        <th>Take Rate</th>
+                        <th>Модель</th>
+                        <th>Комментарий</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Steam Marketplace</strong></td>
+                        <td><span class="pill pill-red">15%</span></td>
+                        <td>P2P</td>
+                        <td>5% Steam + 10% Valve как "разработчику CS2". Монополия, но дорого</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BUFF163</strong></td>
+                        <td><span class="pill pill-green">1.5-2.5%</span></td>
+                        <td>P2P</td>
+                        <td>Эталон дешевизны. Доминирует в Китае, растёт глобально. Самый ликвидный рынок</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSFloat</strong></td>
+                        <td><span class="pill pill-green">2-4.5%</span></td>
+                        <td>P2P</td>
+                        <td>Лидер западного P2P. Блог, SEO, прозрачность. Доп. скидки за объём</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DMarket</strong></td>
+                        <td><span class="pill pill-purple">5%</span></td>
+                        <td>P2P + API</td>
+                        <td>Украинский стартап с $65M+ инвестиций. API для разработчиков, мульти-игровой</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skinport</strong></td>
+                        <td><span class="pill pill-orange">6-8%</span></td>
+                        <td>P2P</td>
+                        <td>Немецкий, надёжный. Высокий trust, чуть дороже конкурентов</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CS.Money</strong></td>
+                        <td><span class="pill pill-orange">5-7%</span></td>
+                        <td>Бот-трейд</td>
+                        <td>Классический обменник через ботов. Комиссия скрыта в спреде цен</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tradeit.gg</strong></td>
+                        <td><span class="pill pill-red">2-15%</span></td>
+                        <td>Бот-трейд</td>
+                        <td>Огромный разброс. Дешёвые скины &mdash; 2%, дорогие &mdash; до 15%. Зависит от ликвидности</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SkinSwap</strong></td>
+                        <td><span class="pill pill-orange">~10%</span></td>
+                        <td>Бот-трейд</td>
+                        <td>+ Insta-Sell с маржой 38-45%. Рекламируют "0% комиссия" на продажу</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Insta-Sell разбор -->
+        <div class="glass-card reveal" style="margin-top:2rem">
+            <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem">Insta-Sell: скрытая маржа в "0% комиссии"</h3>
+            <div class="grid-2">
+                <div class="detail-card">
+                    <h4>Как это работает</h4>
+                    <ul>
+                        <li>Юзер хочет продать скин за "кэш"</li>
+                        <li>Платформа мгновенно выкупает за 55-62% рыночной цены</li>
+                        <li>Потом продаёт другому юзеру за 100%+ цены</li>
+                        <li>Маржа 38-45% &mdash; скрыта за "0% комиссия на продажу"</li>
+                        <li>Формально комиссии нет &mdash; но цена покупки сильно ниже рыночной</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h4>Аналогия из реального мира</h4>
+                    <ul>
+                        <li><strong>Ломбард:</strong> приносишь золотое кольцо за $1000, получаешь $600. Ломбард продаёт за $1000+</li>
+                        <li><strong>Trade-in телефона:</strong> сдаёшь iPhone за $400, магазин продаёт как "б/у" за $700</li>
+                        <li><strong>CarMax:</strong> выкупает машину за 70% рынка, продаёт за 100%+</li>
+                        <li>Клиент платит удобством и скоростью. Маржа &mdash; цена мгновенной ликвидности</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== СЕКЦИЯ 3: ОЦЕНКА ВЫРУЧКИ ==================== -->
+<div class="slide" id="estimates" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">03 &mdash; Оценка выручки</div>
+        <h2 class="section-title reveal">Сколько зарабатывают ключевые игроки</h2>
+        <p class="section-desc reveal">Оценки на основе трафика, публичных данных и отраслевых бенчмарков. 3-5% визитов &rarr; активные юзеры, каждый делает на $200-500/мес.</p>
+
+        <!-- Gambling -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem"><span class="pill pill-red">Gambling</span> Платформы</h3>
+
+        <div class="grid-3 reveal" style="margin-bottom:2.5rem">
+            <!-- CSGOEmpire -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">E</div>
+                    <div class="rev-info"><h3>CSGOEmpire</h3><div class="type-tag">Gambling &middot; #1 по трафику</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">3.6-6.6M</div><div class="rl">Визитов/мес</div></div>
+                        <div class="rev-metric"><div class="rv">5M+</div><div class="rl">Юзеров всего</div></div>
+                        <div class="rev-metric"><div class="rv">$80-150M</div><div class="rl">Handle/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">3-5%</div><div class="rl">Edge</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$36-84M</div><div class="tag">GGR/год (est.)</div></div>
+                    <div class="tag">$3-7M/мес</div>
+                </div>
+            </div>
+
+            <!-- Clash.gg -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">C</div>
+                    <div class="rev-info"><h3>Clash.gg</h3><div class="type-tag">Gambling &middot; Case Battles</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">3.7-5.6M</div><div class="rl">Визитов/мес</div></div>
+                        <div class="rev-metric"><div class="rv">$50-100M</div><div class="rl">Handle/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">$2-5M</div><div class="rl">GGR/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">5-8%</div><div class="rl">Edge (кейсы)</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$24-60M</div><div class="tag">GGR/год (est.)</div></div>
+                    <div class="tag">$2-5M/мес</div>
+                </div>
+            </div>
+
+            <!-- CSGORoll -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#10b981,#06b6d4)">R</div>
+                    <div class="rev-info"><h3>CSGORoll</h3><div class="type-tag">Gambling &middot; Мульти-игры</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">3-5M</div><div class="rl">Визитов/мес</div></div>
+                        <div class="rev-metric"><div class="rv">$40-80M</div><div class="rl">Handle/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">$1.5-4M</div><div class="rl">GGR/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">3-5%</div><div class="rl">Edge</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$18-48M</div><div class="tag">GGR/год (est.)</div></div>
+                    <div class="tag">$1.5-4M/мес</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketplace -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem"><span class="pill pill-green">Marketplace</span> Платформы</h3>
+
+        <div class="grid-2 reveal" style="margin-bottom:1.5rem">
+            <!-- BUFF163 -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#f59e0b,#ec4899)">B</div>
+                    <div class="rev-info"><h3>BUFF163</h3><div class="type-tag">P2P &middot; Доминант Китая</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">2.1M</div><div class="rl">Визитов/мес (инт.)</div></div>
+                        <div class="rev-metric"><div class="rv">4.2M</div><div class="rl">Листингов</div></div>
+                        <div class="rev-metric"><div class="rv">$200-500M</div><div class="rl">GMV/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">1.5-2.5%</div><div class="rl">Take Rate</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$36-150M</div><div class="tag">Выручка/год (est.)</div></div>
+                    <div class="tag">+ огромный CN рынок</div>
+                </div>
+            </div>
+
+            <!-- CSFloat -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">F</div>
+                    <div class="rev-info"><h3>CSFloat</h3><div class="type-tag">P2P &middot; Лидер Запада</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">8-11.7M</div><div class="rl">Визитов/мес</div></div>
+                        <div class="rev-metric"><div class="rv">1.9M</div><div class="rl">Листингов</div></div>
+                        <div class="rev-metric"><div class="rv">$30-80M</div><div class="rl">GMV/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">2-4.5%</div><div class="rl">Take Rate</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$10-43M</div><div class="tag">Выручка/год (est.)</div></div>
+                    <div class="tag">Сильный SEO</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2 reveal">
+            <!-- DMarket -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#06b6d4,#10b981)">D</div>
+                    <div class="rev-info"><h3>DMarket</h3><div class="type-tag">P2P + API &middot; Мульти-игровой</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">3-5M</div><div class="rl">Визитов/мес</div></div>
+                        <div class="rev-metric"><div class="rv">$20-50M</div><div class="rl">GMV/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">5%</div><div class="rl">Take Rate</div></div>
+                        <div class="rev-metric"><div class="rv">$16.8M</div><div class="rl">Growjo оценка/год</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$12-30M</div><div class="tag">Выручка/год (est.)</div></div>
+                    <div class="tag">$65M+ инвестиций</div>
+                </div>
+            </div>
+
+            <!-- Skinport -->
+            <div class="glass-card rev-card">
+                <div class="rev-header">
+                    <div class="rev-logo" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">S</div>
+                    <div class="rev-info"><h3>Skinport</h3><div class="type-tag">P2P &middot; Германия</div></div>
+                </div>
+                <div class="rev-body">
+                    <div class="rev-grid">
+                        <div class="rev-metric"><div class="rv">3-5M</div><div class="rl">Визитов/мес</div></div>
+                        <div class="rev-metric"><div class="rv">$15-40M</div><div class="rl">GMV/мес (est.)</div></div>
+                        <div class="rev-metric"><div class="rv">6-8%</div><div class="rl">Take Rate</div></div>
+                        <div class="rev-metric"><div class="rv">Высокий</div><div class="rl">Trust/надёжность</div></div>
+                    </div>
+                </div>
+                <div class="rev-highlight">
+                    <div><div class="big">$12-36M</div><div class="tag">Выручка/год (est.)</div></div>
+                    <div class="tag">Немецкая юрисдикция</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Логика оценки -->
+        <div class="callout callout-info reveal" style="margin-top:2rem">
+            <h4>Логика оценки</h4>
+            <p>3-5% от визитов &rarr; активные юзеры (депозит/покупка). Средний активный юзер делает ставок/сделок на $200-500/мес. Gambling: handle &times; edge = GGR. Marketplace: GMV &times; take rate = revenue. Цифры &mdash; экспертная оценка на основе SimilarWeb, публичных отчётов и отраслевых бенчмарков.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== СЕКЦИЯ 4: ТРАФИК ==================== -->
+<div class="slide" id="traffic" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">04 &mdash; Трафик</div>
+        <h2 class="section-title reveal">Откуда приходят пользователи</h2>
+        <p class="section-desc reveal">Общие паттерны индустрии и разбивка по конкретным платформам. Ключевое: gambling не может использовать Google Ads / Meta Ads &mdash; это меняет всё.</p>
+
+        <!-- Общие паттерны -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem">Общие паттерны по индустрии</h3>
+        <div class="glass-card reveal" style="margin-bottom:2.5rem">
+            <div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label">Прямой</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--gradient)">40-60%</div></div>
+                    <div class="bar-value" style="color:var(--accent2)">Бренд</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Поиск (SEO)</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:22%;background:linear-gradient(90deg,#3b82f6,#06b6d4)">15-25%</div></div>
+                    <div class="bar-value" style="color:var(--blue)">Органика</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Реферальный</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:17%;background:linear-gradient(90deg,#10b981,#34d399)">10-20%</div></div>
+                    <div class="bar-value" style="color:var(--green)">Affiliate</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Соцсети</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:8%;background:linear-gradient(90deg,#ec4899,#f59e0b)">5-10%</div></div>
+                    <div class="bar-value" style="color:var(--pink)">YT/Twitch</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Платная реклама</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:4%;background:linear-gradient(90deg,#ef4444,#f59e0b)">1-5%</div></div>
+                    <div class="bar-value" style="color:var(--red)">Ограничена</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- По платформам -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem">Разбивка по платформам</h3>
+
+        <div class="grid-2 reveal" style="margin-bottom:1.5rem">
+            <div class="glass-card traffic-card">
+                <h4>CSGOEmpire</h4>
+                <div class="traffic-row">
+                    <div class="ch-name">Прямой</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:55%;background:var(--gradient)"></div></div>
+                    <div class="ch-pct" style="color:var(--accent2)">55%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Поиск</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:20%;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
+                    <div class="ch-pct" style="color:var(--blue)">20%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Реферальный</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:15%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div>
+                    <div class="ch-pct" style="color:var(--green)">15%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Соцсети</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:7%;background:linear-gradient(90deg,#ec4899,#f59e0b)"></div></div>
+                    <div class="ch-pct" style="color:var(--pink)">7%</div>
+                </div>
+                <div style="margin-top:.75rem;font-size:.75rem;color:var(--text3)">Гео: РФ, Бразилия, Турция</div>
+            </div>
+
+            <div class="glass-card traffic-card">
+                <h4>CSFloat</h4>
+                <div class="traffic-row">
+                    <div class="ch-name">Прямой</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:45%;background:var(--gradient)"></div></div>
+                    <div class="ch-pct" style="color:var(--accent2)">45%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Поиск</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:30%;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
+                    <div class="ch-pct" style="color:var(--blue)">30%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Реферальный</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:15%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div>
+                    <div class="ch-pct" style="color:var(--green)">15%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Соцсети</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:8%;background:linear-gradient(90deg,#ec4899,#f59e0b)"></div></div>
+                    <div class="ch-pct" style="color:var(--pink)">8%</div>
+                </div>
+                <div style="margin-top:.75rem;font-size:.75rem;color:var(--text3)">Гео: США 20%, Германия 8%. Сильный SEO/блог</div>
+            </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-bottom:2rem">
+            <div class="glass-card traffic-card">
+                <h4>Clash.gg</h4>
+                <div class="traffic-row">
+                    <div class="ch-name">Прямой</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:50%;background:var(--gradient)"></div></div>
+                    <div class="ch-pct" style="color:var(--accent2)">50%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Поиск</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:15%;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
+                    <div class="ch-pct" style="color:var(--blue)">15%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Реферальный</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:25%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div>
+                    <div class="ch-pct" style="color:var(--green)">25%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Соцсети</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:8%;background:linear-gradient(90deg,#ec4899,#f59e0b)"></div></div>
+                    <div class="ch-pct" style="color:var(--pink)">8%</div>
+                </div>
+                <div style="margin-top:.75rem;font-size:.75rem;color:var(--text3)">Гео: Бразилия, РФ. Инфлюенсеры &mdash; основной драйвер</div>
+            </div>
+
+            <div class="glass-card traffic-card">
+                <h4>BUFF163</h4>
+                <div class="traffic-row">
+                    <div class="ch-name">Прямой</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:90%;background:var(--gradient)"></div></div>
+                    <div class="ch-pct" style="color:var(--accent2)">90%+</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Поиск</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:5%;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
+                    <div class="ch-pct" style="color:var(--blue)">~5%</div>
+                </div>
+                <div class="traffic-row">
+                    <div class="ch-name">Другое</div>
+                    <div class="ch-bar"><div class="ch-fill" style="width:5%;background:linear-gradient(90deg,#6b6490,#9d97c0)"></div></div>
+                    <div class="ch-pct" style="color:var(--text3)">~5%</div>
+                </div>
+                <div style="margin-top:.75rem;font-size:.75rem;color:var(--text3)">Китай. Доминирующий бренд, закладки. SEO не нужен</div>
+            </div>
+        </div>
+
+        <!-- Каналы привлечения -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem">Каналы привлечения: что работает</h3>
+        <div class="grid-3 reveal">
+            <div class="detail-card">
+                <h4>YouTube / Twitch</h4>
+                <ul>
+                    <li>$500-5,000 за интеграцию</li>
+                    <li>ROI 3-10x при правильном выборе</li>
+                    <li>Стримеры открывают кейсы в прямом эфире</li>
+                    <li>Промокод = трекинг конверсий</li>
+                    <li>Gambling-спонсорство CS-турниров запрещено с дек. 2025</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4>Промокод-сайты и Affiliate</h4>
+                <ul>
+                    <li>cs-config, csgamer, similar агрегаторы</li>
+                    <li>Affiliate 0.5-5% от депозитов реферала</li>
+                    <li>Пожизненные выплаты (SkinSwap: 1%)</li>
+                    <li>Огромная сеть &mdash; тысячи сайтов</li>
+                    <li>Низкая цена привлечения, высокий LTV</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4>Telegram / Discord</h4>
+                <ul>
+                    <li>Telegram &mdash; основной канал для СНГ</li>
+                    <li>Discord &mdash; основной для Запада</li>
+                    <li>Сообщества, розыгрыши, дропы</li>
+                    <li>Прямой контакт с аудиторией</li>
+                    <li>Бесплатный органический рост</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4>SEO</h4>
+                <ul>
+                    <li>"best cs2 trading site"</li>
+                    <li>"cs2 skin gambling"</li>
+                    <li>"cheapest cs2 skins"</li>
+                    <li>CSFloat &mdash; эталон: блог, гайды, инструменты</li>
+                    <li>Долгосрочный канал, стабильный поток</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4>Google Ads</h4>
+                <ul>
+                    <li>Gambling: ЗАПРЕЩЕНО (Google политика)</li>
+                    <li>Маркетплейсы: можно, но дорого</li>
+                    <li>Meta Ads: тоже ограничен для gambling</li>
+                    <li>Результат: органика и инфлюенсеры &mdash; основа</li>
+                    <li>Маркетплейсы имеют преимущество в платных каналах</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <h4>Прямой трафик</h4>
+                <ul>
+                    <li>40-60% у всех крупных игроков</li>
+                    <li>Бренд, закладки, запомнили URL</li>
+                    <li>Показатель зрелости и лояльности</li>
+                    <li>BUFF163: 90%+ &mdash; абсолютная доминация в Китае</li>
+                    <li>Сложно перехватить устоявшийся прямой трафик</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== СЕКЦИЯ 5: VALVE ==================== -->
+<div class="slide" id="valve" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">05 &mdash; Платформенный риск</div>
+        <h2 class="section-title reveal">Valve как "хозяин" экосистемы</h2>
+        <p class="section-desc reveal">Все сторонние сервисы зависят от Valve. Это как строить бизнес на API Apple &mdash; в любой момент могут изменить правила.</p>
+
+        <!-- Аналогия -->
+        <div class="glass-card reveal" style="margin-bottom:2.5rem">
+            <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem">Аналогия: Valve = Apple App Store для скинов</h3>
+            <div class="grid-3">
+                <div class="detail-card">
+                    <h4>Что контролирует Valve</h4>
+                    <ul>
+                        <li>Steam Marketplace &mdash; 15% комиссия</li>
+                        <li>Steam API &mdash; все сайты зависят от него</li>
+                        <li>Trade-офферы &mdash; единственный легальный способ передачи скинов</li>
+                        <li>Цены &mdash; Steam определяет "рыночную" цену</li>
+                        <li>Боты &mdash; может забанить любой аккаунт</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h4>Рычаги давления</h4>
+                    <ul>
+                        <li>Забанить ботов сайта (мгновенная смерть)</li>
+                        <li>Ограничить Steam API</li>
+                        <li>Увеличить trade hold (было 7 дней, стало 8)</li>
+                        <li>Изменить правила маркетплейса</li>
+                        <li>Юридические письма (C&D)</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h4>Зачем терпит</h4>
+                    <ul>
+                        <li>Сторонние сайты увеличивают ценность скинов</li>
+                        <li>Больше торгов = больше покупок кейсов</li>
+                        <li>$1.15B дохода от кейсов в 2024</li>
+                        <li>Баланс: давить, но не убивать экосистему</li>
+                        <li>Постепенное ужесточение &mdash; не резкое</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <h3 class="reveal" style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem">Хронология действий Valve</h3>
+        <div class="glass-card reveal">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="year">2016</div>
+                    <div class="event">Valve рассылает C&D письма gambling-сайтам. Несколько крупных (CSGOLotto, CSGODiamonds) закрываются. Первый серьёзный удар по индустрии.</div>
+                </div>
+                <div class="timeline-item danger">
+                    <div class="year">2018</div>
+                    <div class="event"><strong>7-day trade hold.</strong> Все скины после покупки/обмена заморожены на 7 дней. Убило мгновенный трейдинг. Многие сайты закрылись или адаптировались. Ключевое событие для индустрии.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2023</div>
+                    <div class="event">Ужесточение API-лимитов. Борьба с ботами. Часть мелких трейд-сайтов теряет доступ. Крупные адаптируются.</div>
+                </div>
+                <div class="timeline-item danger">
+                    <div class="year">2025 (март)</div>
+                    <div class="event"><strong>Trade Protection &mdash; 8 дней hold.</strong> +1 день к предыдущему. Valve показывает: ужесточение продолжается. Мелочь, но тренд ясен.</div>
+                </div>
+                <div class="timeline-item danger">
+                    <div class="year">2025 (декабрь)</div>
+                    <div class="event"><strong>Запрет gambling-спонсорства на CS-турнирах.</strong> Valve официально запрещает gambling-сайтам спонсировать турниры. Огромный канал привлечения закрыт. Clash.gg, CSGORoll и другие теряют ключевой маркетинговый инструмент.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Выводы -->
+        <div class="callout callout-warn reveal" style="margin-top:2rem">
+            <h4>Что это значит для нового проекта</h4>
+            <p>Любой бизнес на скинах CS2 &mdash; это бизнес на чужой платформе. Valve может в любой момент изменить правила. Нужна стратегия диверсификации: мульти-игровая поддержка, собственные активы, минимальная зависимость от одного API. Gambling-проекты несут максимальный риск &mdash; Valve последовательно давит именно на них.</p>
+        </div>
+
+        <div class="callout callout-info reveal" style="margin-top:1rem">
+            <h4>Но есть и защита</h4>
+            <p>Маркетплейсы менее уязвимы &mdash; они не нарушают ToS напрямую. P2P торговля скинами &mdash; это легитимная активность. Valve заинтересован в ликвидности рынка (это увеличивает продажи кейсов). Гибридная модель marketplace + upgrade с прозрачной механикой &mdash; наименее рискованный вариант.</p>
+        </div>
+    </div>
+</div>
+
+<footer><p>UPG_GG Research &middot; Доходы и трафик &middot; Апрель 2026</p></footer>
+
+<script>
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+// Nav scroll effect
+const navbar = document.getElementById('navbar');
+// Reveal on scroll
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Scroll events
+window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progressBar.style.width = pct + '%';
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+
+    // Active section
+    const sections = document.querySelectorAll('.slide[id]');
+    const links = document.querySelectorAll('nav .nav-links a[href^="#"]');
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    links.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+});
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const group = btn.closest('.tabs').dataset.group;
+        document.querySelectorAll(`.tabs[data-group="${group}"] .tab-btn`).forEach(b => b.classList.remove('active'));
+        document.querySelectorAll(`.tab-panel[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('mobileNav').classList.remove('open');
+        document.getElementById('menuToggle').classList.remove('open');
+        document.body.style.overflow = '';
+    });
+});
+
+// Mobile menu toggle
+document.getElementById('menuToggle').addEventListener('click', () => {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('menuToggle');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+});
+
+// Animate bars on scroll
+const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.bar-fill, .ch-fill').forEach(bar => {
+                const w = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => { bar.style.width = w; }, 100);
+            });
+        }
+    });
+}, { threshold: 0.2 });
+document.querySelectorAll('.bar-chart, .traffic-card').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>
