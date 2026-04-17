@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPG_GG — GTM-стратегия и риски</title>
+    <title>UPG_GG — GTM-стратегия и анализ рисков</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -22,137 +22,143 @@
         body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
 
         /* === NAV === */
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s}
-        nav.scrolled{background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s;background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
         nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-        nav .logo{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);transition:color .3s;text-decoration:none}
+        nav .logo{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);text-shadow:0 0 30px rgba(139,92,246,.2)}
         nav .logo span{color:var(--accent2)}
-        nav .nav-links{display:flex;gap:.25rem}
-        nav .nav-links a{color:var(--text3);text-decoration:none;font-size:.75rem;font-weight:500;padding:.45rem .75rem;border-radius:8px;transition:all .25s;letter-spacing:.02em}
+        nav .logo a{color:inherit;text-decoration:none}
+        nav .nav-links{display:flex;gap:.25rem;flex-wrap:wrap}
+        nav .nav-links a{color:var(--text3);text-decoration:none;font-size:.72rem;font-weight:500;padding:.4rem .65rem;border-radius:8px;transition:all .25s;letter-spacing:.02em}
         nav .nav-links a:hover{color:var(--text2)}
-        nav .nav-links a.active{color:#fff;background:rgba(139,92,246,.15);backdrop-filter:blur(10px);border:1px solid rgba(139,92,246,.2)}
+        nav .nav-links a.active{color:#fff;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.2)}
         .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gradient);z-index:1001;transition:width .15s;box-shadow:0 0 20px rgba(139,92,246,.5)}
-        nav .logo{text-shadow:0 0 30px rgba(139,92,246,.2)}
 
         /* === SECTIONS === */
-        .slide{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem;position:relative;overflow:hidden}
+        .slide{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden}
         .slide-content{max-width:1100px;width:100%;position:relative;z-index:2}
 
         /* === HERO === */
-        .hero{text-align:center;padding-top:0}
+        .hero{text-align:center;align-items:center;padding-top:0}
         .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border:1px solid rgba(139,92,246,.3);border-radius:100px;font-size:.8rem;color:var(--accent2);margin-bottom:2.5rem;background:rgba(139,92,246,.08);backdrop-filter:blur(10px)}
         .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite;box-shadow:0 0 12px var(--green)}
-        @keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 12px var(--green)}50%{opacity:.4;box-shadow:0 0 4px var(--green)}}
-        .hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-.04em}
+        @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+        .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-.04em}
         .hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .hero .subtitle{font-size:1.25rem;color:var(--text2);max-width:600px;margin:0 auto 3.5rem;font-weight:300;line-height:1.6}
-        .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+        .hero .subtitle{font-size:1.15rem;color:var(--text2);max-width:650px;margin:0 auto 3rem;font-weight:300;line-height:1.6}
+        .hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
         .hero-stat{text-align:center}
-        .hero-stat .value{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:brightness(1.2)}
-        .hero-stat .label{font-size:.72rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
-        .hero-glow{position:absolute;width:1000px;height:1000px;background:radial-gradient(circle,rgba(139,92,246,.12) 0%,rgba(236,72,153,.06) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
+        .hero-stat .value{font-size:2rem;font-weight:800;letter-spacing:-.02em;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-stat .label{font-size:.7rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+        .hero-glow{position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(139,92,246,.1) 0%,rgba(236,72,153,.05) 40%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 6s ease-in-out infinite}
         @keyframes glow-pulse{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
 
         /* === SECTION HEADERS === */
         .section-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;text-shadow:0 0 30px rgba(139,92,246,.4)}
         .section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);max-width:120px;opacity:.5}
-        .section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
-        .section-desc{font-size:1.05rem;color:var(--text2);max-width:580px;margin-bottom:3rem;font-weight:300;line-height:1.7}
+        .section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.03em}
+        .section-desc{font-size:1rem;color:var(--text2);max-width:580px;margin-bottom:3rem;font-weight:300;line-height:1.7}
 
         /* === CARDS === */
         .glass-card{background:linear-gradient(160deg,rgba(139,92,246,.04),rgba(236,72,153,.02),var(--glass));border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(8px);transition:all .35s ease}
-        .glass-card:hover{border-color:rgba(139,92,246,.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(139,92,246,.08),0 0 0 1px rgba(139,92,246,.1)}
+        .glass-card:hover{border-color:rgba(139,92,246,.25);transform:translateY(-3px);box-shadow:0 20px 60px rgba(139,92,246,.08)}
 
         /* === GRID === */
         .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
         .grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
 
-        /* === DETAIL BLOCKS === */
-        .detail-card{background:linear-gradient(170deg,var(--surface2),rgba(139,92,246,.03));border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:border-color .3s}
-        .detail-card:hover{border-color:rgba(139,92,246,.2)}
-        .detail-card h4{font-size:.9rem;font-weight:600;margin-bottom:1rem;color:var(--accent2);display:flex;align-items:center;gap:.5rem}
-        .detail-card ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-        .detail-card li{font-size:.85rem;color:var(--text2);padding-left:1.25rem;position:relative;line-height:1.65}
-        .detail-card li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7;box-shadow:0 0 8px rgba(139,92,246,.3)}
-
         /* === TABLE === */
         .table-container{border-radius:20px;border:1px solid var(--border);overflow:hidden;background:var(--surface)}
-        table{width:100%;border-collapse:collapse;font-size:.85rem}
+        .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+        table{width:100%;border-collapse:collapse;font-size:.83rem}
         thead{background:var(--surface2)}
-        th{padding:1rem 1.25rem;text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);border-bottom:1px solid var(--border)}
-        td{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);vertical-align:top}
+        th{padding:.9rem 1.1rem;text-align:left;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);border-bottom:1px solid var(--border);white-space:nowrap}
+        td{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);vertical-align:top}
         tr:last-child td{border-bottom:none}
-        tr{transition:background .2s}
         tr:hover td{background:rgba(139,92,246,.04)}
-        .pill{display:inline-block;padding:.15rem .55rem;border-radius:6px;font-size:.72rem;font-weight:600;letter-spacing:.01em}
+        .pill{display:inline-block;padding:.15rem .55rem;border-radius:6px;font-size:.7rem;font-weight:600;letter-spacing:.01em}
         .pill-purple{background:rgba(139,92,246,.15);color:var(--accent2);border:1px solid rgba(139,92,246,.2)}
         .pill-green{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.2)}
         .pill-red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.2)}
         .pill-orange{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
         .pill-blue{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+        .pill-cyan{background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid rgba(6,182,212,.2)}
 
-        /* === INSIGHTS === */
-        .insight-card{padding:2.25rem;position:relative;overflow:hidden}
-        .insight-card .num{font-size:4rem;font-weight:900;position:absolute;top:.75rem;right:1.25rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.2;line-height:1}
-        .insight-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem;position:relative}
-        .insight-card p{font-size:.85rem;color:var(--text2);line-height:1.7;position:relative}
+        /* === TABS === */
+        .tabs{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;gap:2px;flex-wrap:wrap;margin-bottom:2rem}
+        .tab-btn{padding:.5rem 1.1rem;border-radius:10px;border:none;background:none;color:var(--text3);font-size:.8rem;font-weight:500;cursor:pointer;transition:all .25s;font-family:inherit;white-space:nowrap}
+        .tab-btn:hover{color:var(--text2)}
+        .tab-btn.active{background:var(--gradient);color:white;box-shadow:0 4px 20px rgba(139,92,246,.4)}
+        .tab-panel{display:none;animation:fadeUp .4s ease}
+        .tab-panel.active{display:block}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+        /* === DETAIL BLOCKS === */
+        .detail-card{background:linear-gradient(170deg,var(--surface2),rgba(139,92,246,.03));border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:border-color .3s}
+        .detail-card:hover{border-color:rgba(139,92,246,.2)}
+        .detail-card h4{font-size:.88rem;font-weight:600;margin-bottom:1rem;color:var(--accent2);display:flex;align-items:center;gap:.5rem}
+        .detail-card ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+        .detail-card li{font-size:.83rem;color:var(--text2);padding-left:1.25rem;position:relative;line-height:1.65}
+        .detail-card li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7;box-shadow:0 0 8px rgba(139,92,246,.3)}
 
         /* === CALLOUTS === */
         .callout{border-radius:16px;padding:1.5rem 1.75rem;margin:1.25rem 0}
-        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);box-shadow:0 4px 20px rgba(239,68,68,.05)}
-        .callout-warn h4{color:var(--red);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
-        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);box-shadow:0 4px 20px rgba(16,185,129,.05)}
-        .callout-info h4{color:var(--green);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
-        .callout p{font-size:.85rem;color:var(--text2);line-height:1.7}
+        .callout-warn{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)}
+        .callout-warn h4{color:var(--red);font-size:.88rem;font-weight:600;margin-bottom:.4rem}
+        .callout-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18)}
+        .callout-info h4{color:var(--green);font-size:.88rem;font-weight:600;margin-bottom:.4rem}
+        .callout-blue{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.18)}
+        .callout-blue h4{color:var(--blue);font-size:.88rem;font-weight:600;margin-bottom:.4rem}
+        .callout p,.callout li{font-size:.83rem;color:var(--text2);line-height:1.7}
+        .callout ul{list-style:none;margin-top:.5rem}
+        .callout li{padding-left:1rem;position:relative;margin-bottom:.3rem}
+        .callout li::before{content:'';position:absolute;left:0;top:.55rem;width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.4}
 
-        /* === PHASE CARDS === */
-        .phase-card{padding:0;overflow:hidden}
-        .phase-header{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem}
-        .phase-num{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;flex-shrink:0}
-        .phase-info h3{font-size:1.15rem;font-weight:700}
-        .phase-info .meta{font-size:.78rem;color:var(--text3)}
-        .phase-body{padding:1.75rem 2rem}
-        .phase-body ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-        .phase-body li{font-size:.85rem;color:var(--text2);padding-left:1.25rem;position:relative;line-height:1.65}
-        .phase-body li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;opacity:.7;box-shadow:0 0 8px rgba(139,92,246,.3)}
+        /* === METRIC HIGHLIGHT === */
+        .metric-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+        .metric-box{flex:1;min-width:140px;text-align:center;padding:1.5rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+        .metric-box .val{font-size:1.6rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .metric-box .lbl{font-size:.7rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em}
 
-        /* === MATRIX CARD === */
-        .matrix-card{padding:0;overflow:hidden}
-        .matrix-header{padding:1.25rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
-        .matrix-header .flag{font-size:1.3rem}
-        .matrix-header h4{font-size:.95rem;font-weight:700;flex:1}
-        .matrix-body{padding:1.25rem 1.75rem}
-        .matrix-body p{font-size:.84rem;color:var(--text2);line-height:1.7}
-        .matrix-body .cost{font-size:.78rem;font-weight:600;margin-top:.5rem;color:var(--accent2)}
+        /* === CHANNEL CARD === */
+        .channel-card{padding:1.75rem}
+        .channel-card h4{font-size:.95rem;font-weight:700;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+        .channel-card .stats{display:flex;gap:1.5rem;margin-bottom:.75rem;flex-wrap:wrap}
+        .channel-card .stat{font-size:.75rem;color:var(--text3)}
+        .channel-card .stat strong{color:var(--text);font-weight:600}
+        .channel-card p{font-size:.83rem;color:var(--text2);line-height:1.6}
 
-        /* === BARRIER CARDS === */
-        .barrier-card{padding:2rem;position:relative;overflow:hidden}
-        .barrier-card .barrier-icon{font-size:2rem;margin-bottom:1rem;display:block}
-        .barrier-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem}
-        .barrier-card p{font-size:.84rem;color:var(--text2);line-height:1.7}
+        /* === INSIGHT === */
+        .insight-card{padding:2rem;position:relative;overflow:hidden}
+        .insight-card .num{font-size:3.5rem;font-weight:900;position:absolute;top:.5rem;right:1rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.15;line-height:1}
+        .insight-card h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .insight-card p{font-size:.83rem;color:var(--text2);line-height:1.7;position:relative}
 
-        /* === KPI CARDS === */
-        .kpi-group{margin-bottom:2rem}
-        .kpi-group-title{font-size:.85rem;font-weight:700;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.06em}
-        .kpi-item{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.85rem}
-        .kpi-item:last-child{border-bottom:none}
-        .kpi-item .kpi-name{color:var(--text2)}
-        .kpi-item .kpi-target{font-weight:600;color:var(--text)}
+        /* === KPI CARD === */
+        .kpi-card{padding:1.5rem;text-align:center}
+        .kpi-card .kpi-icon{font-size:1.8rem;margin-bottom:.75rem}
+        .kpi-card .kpi-name{font-size:.88rem;font-weight:700;margin-bottom:.25rem}
+        .kpi-card .kpi-target{font-size:1.3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+        .kpi-card .kpi-desc{font-size:.78rem;color:var(--text2);line-height:1.5}
 
-        /* === TIMELINE === */
-        .timeline-item{display:flex;gap:1.25rem;margin-bottom:1.25rem;align-items:flex-start}
-        .timeline-year{flex-shrink:0;font-size:.78rem;font-weight:700;color:var(--orange);min-width:50px;padding-top:.15rem}
-        .timeline-text{font-size:.85rem;color:var(--text2);line-height:1.65}
+        /* === BACK LINK === */
+        .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent2);text-decoration:none;font-size:.8rem;font-weight:500;padding:.4rem .8rem;border-radius:8px;border:1px solid rgba(139,92,246,.2);transition:all .25s}
+        .back-link:hover{background:rgba(139,92,246,.1)}
 
-        /* === SCROLL HINT === */
-        .scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--accent2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;animation:float 3s ease-in-out infinite;opacity:.6}
-        .scroll-hint .arrow{width:20px;height:20px;border-right:2px solid var(--accent2);border-bottom:2px solid var(--accent2);transform:rotate(45deg)}
-        @keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+        /* === MOBILE MENU === */
+        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
+        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
+        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+        .mobile-nav.open{display:flex}
+        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.75rem 2rem;border-radius:12px;transition:all .25s}
+        .mobile-nav a:hover,.mobile-nav a.active{color:var(--text);background:rgba(139,92,246,.1)}
+        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.open span:nth-child(2){opacity:0}
+        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
         /* === FOOTER === */
         footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;background:linear-gradient(0deg,rgba(139,92,246,.03),transparent)}
-        footer p{color:var(--text3);font-size:.78rem;letter-spacing:.02em}
+        footer p{color:var(--text3);font-size:.78rem}
 
         /* === ANIMATIONS === */
         .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
@@ -161,62 +167,41 @@
         .reveal-delay-2{transition-delay:.2s}
         .reveal-delay-3{transition-delay:.3s}
 
+        .scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--accent2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;animation:float 3s ease-in-out infinite;opacity:.6}
+        .scroll-hint .arrow{width:20px;height:20px;border-right:2px solid var(--accent2);border-bottom:2px solid var(--accent2);transform:rotate(45deg)}
+        @keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
         /* === SECTION GLOWS === */
         #gtm::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(6,182,212,.06),transparent 60%);top:10%;right:-10%;pointer-events:none}
-        #regulation::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(239,68,68,.05),transparent 60%);top:5%;left:-10%;pointer-events:none}
+        #regulatory::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(239,68,68,.06),transparent 60%);top:5%;left:-10%;pointer-events:none}
         #barriers::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.05),transparent 60%);top:5%;right:-10%;pointer-events:none}
-        #analogues::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,.05),transparent 60%);bottom:10%;left:-15%;pointer-events:none}
-        #kpi::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,.05),transparent 60%);top:10%;right:-10%;pointer-events:none}
-        #exit::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(236,72,153,.05),transparent 60%);bottom:10%;left:-15%;pointer-events:none}
+        #exit::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,.05),transparent 60%);bottom:10%;left:-10%;pointer-events:none}
+        #comparables::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.05),transparent 60%);top:10%;right:-10%;pointer-events:none}
 
-        /* === MOBILE MENU === */
-        .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem;z-index:1001}
-        .menu-toggle span{display:block;width:22px;height:2px;background:var(--text2);margin:5px 0;transition:all .3s;border-radius:2px}
-        .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,6,14,.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
-        .mobile-nav.open{display:flex}
-        .mobile-nav a{color:var(--text2);text-decoration:none;font-size:1.1rem;font-weight:500;padding:.75rem 2rem;border-radius:12px;transition:all .25s;text-align:center}
-        .mobile-nav a:hover,.mobile-nav a.active{color:var(--text);background:rgba(139,92,246,.1)}
-        .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-        .menu-toggle.open span:nth-child(2){opacity:0}
-        .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-
-        /* === RESPONSIVE === */
         @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:768px){
             .grid-2,.grid-3{grid-template-columns:1fr}
-            .grid-4{grid-template-columns:repeat(2,1fr)}
             nav .nav-links{display:none}
             .menu-toggle{display:block}
-            .slide{padding:3.5rem 1rem;min-height:auto}
+            .slide{padding:5rem 1rem 4rem;min-height:auto}
             .hero{min-height:100vh;padding:4rem 1.25rem}
-            .hero .subtitle{font-size:1rem}
-            .hero-stats{gap:1.25rem}
-            .hero-stat .value{font-size:1.6rem}
-            .section-title{font-size:1.75rem}
-            .section-desc{font-size:.92rem}
-            .glass-card{padding:1.5rem;border-radius:16px}
-            .table-container{border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+            .section-title{font-size:1.6rem}
+            .metric-row{gap:.75rem}
+            .metric-box{min-width:45%;padding:1.2rem .75rem}
+            .metric-box .val{font-size:1.3rem}
+            .tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
+            .tabs::-webkit-scrollbar{display:none}
+            .tab-btn{flex-shrink:0;font-size:.75rem}
+            .table-container{border-radius:14px}
             table{min-width:700px}
-            .detail-card{padding:1.25rem}
-            .detail-card h4{font-size:.85rem}
-            .detail-card li{font-size:.8rem}
-            .insight-card{padding:1.5rem}
-            .insight-card .num{font-size:3rem}
-            .insight-card h4{font-size:.9rem}
-            .insight-card p{font-size:.8rem}
-            .phase-header{flex-wrap:wrap;padding:1.25rem}
-            .phase-body{padding:1.25rem}
-            .callout{padding:1.25rem}
-            .hero-glow{width:500px;height:500px}
+            .glass-card{padding:1.5rem;border-radius:16px}
         }
         @media(max-width:480px){
-            .hero h1{font-size:2.2rem}
-            .hero-stats{gap:1rem}
-            .hero-stat .value{font-size:1.4rem}
-            .hero-stat .label{font-size:.65rem}
+            .hero h1{font-size:2rem}
+            .hero-stats{gap:.75rem}
+            .hero-stat .value{font-size:1.3rem}
+            .metric-box{min-width:100%}
             .grid-4{grid-template-columns:1fr}
-            .section-num{font-size:.6rem}
-            .slide{padding:3rem .85rem}
         }
     </style>
 </head>
@@ -224,519 +209,1340 @@
 
 <div class="progress-bar" id="progressBar"></div>
 
-<nav id="navbar">
+<nav>
     <div class="inner">
-        <a class="logo" href="index.html">UPG<span>_</span>GG</a>
+        <div class="logo"><a href="index.html">UPG<span>_</span>GG</a></div>
         <div class="nav-links">
-            <a href="index.html">Обзор ниши</a>
-            <a href="business.html">Бизнес</a>
-            <a href="revenue.html">Доходы</a>
-            <a href="gtm.html" class="active">GTM</a>
+            <a href="#gtm">GTM</a>
+            <a href="#channels">Каналы</a>
+            <a href="#regulatory">Регуляция</a>
+            <a href="#valve">Valve</a>
+            <a href="#barriers">Барьеры</a>
+            <a href="#exit">M&A</a>
+            <a href="#comparables">Аналоги</a>
+            <a href="#kpi">KPI</a>
         </div>
         <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
     </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-    <a href="index.html">Обзор ниши</a>
-    <a href="business.html">Бизнес</a>
-    <a href="revenue.html">Доходы</a>
-    <a href="gtm.html" class="active">GTM</a>
+    <a href="#gtm">GTM</a>
+    <a href="#channels">Каналы</a>
+    <a href="#regulatory">Регуляция</a>
+    <a href="#valve">Valve</a>
+    <a href="#barriers">Барьеры</a>
+    <a href="#exit">M&A</a>
+    <a href="#comparables">Аналоги</a>
+    <a href="#kpi">KPI</a>
 </div>
 
 <!-- ==================== HERO ==================== -->
 <div class="slide hero" id="hero">
     <div class="hero-glow"></div>
     <div class="slide-content">
-        <div class="hero-badge"><span class="dot"></span> GTM-стратегия &middot; Апрель 2026</div>
-        <h1>Go-To-Market<br><span class="gradient">& Риски</span></h1>
-        <p class="subtitle">Как выйти на рынок CS2-скинов, какие барьеры ждут и что отслеживать. Для тех, кто считает деньги до первого доллара.</p>
+        <a href="index.html" class="back-link">&larr; Основное исследование</a>
+        <div class="hero-badge" style="margin-top:1.5rem"><span class="dot"></span> GTM Strategy &middot; Апрель 2026</div>
+        <h1>Go-to-Market<br><span class="gradient">& Risk Analysis</span></h1>
+        <p class="subtitle">Стратегия выхода на рынок CS2 скинов. Каналы привлечения, регуляторные риски, барьеры входа, M&A и ключевые метрики. Для людей из IT-бизнеса.</p>
         <div class="hero-stats">
-            <div class="hero-stat"><div class="value">$30-80</div><div class="label">CAC (YouTube)</div></div>
-            <div class="hero-stat"><div class="value">$4,600</div><div class="label">Лицензия (заявка)</div></div>
-            <div class="hero-stat"><div class="value">3:1+</div><div class="label">Target LTV:CAC</div></div>
-            <div class="hero-stat"><div class="value">6-12 мес</div><div class="label">Breakeven</div></div>
+            <div class="hero-stat"><div class="value">$2-8</div><div class="label">CPA через инфлюенсеров</div></div>
+            <div class="hero-stat"><div class="value">5-15%</div><div class="label">Take rate ниши</div></div>
+            <div class="hero-stat"><div class="value">$50-150K</div><div class="label">MVP бюджет</div></div>
+            <div class="hero-stat"><div class="value">3-5x</div><div class="label">Revenue multiple</div></div>
+            <div class="hero-stat"><div class="value">12-18 мес</div><div class="label">До breakeven</div></div>
         </div>
     </div>
     <div class="scroll-hint">Скролл<div class="arrow"></div></div>
 </div>
 
-<!-- ==================== 01: GTM STRATEGY ==================== -->
-<div class="slide" id="gtm" style="align-items:flex-start;padding-top:8rem">
+<!-- ==================== GTM STRATEGY ==================== -->
+<div class="slide" id="gtm">
     <div class="slide-content">
-        <div class="section-num reveal">01 &mdash; Go-To-Market</div>
-        <h2 class="section-title reveal">Как набрать первых<br>юзеров</h2>
-        <p class="section-desc reveal">Три фазы роста. Каждая с конкретными каналами, бюджетами и ожидаемыми результатами. Всё основано на реальных кейсах CSGOEmpire, SkinSwap, Upgrader.</p>
+        <div class="section-num reveal">01 &mdash; GTM-стратегия</div>
+        <h2 class="section-title reveal">Как успешные платформы набирали первых юзеров</h2>
+        <p class="section-desc reveal">Разбор каналов привлечения, unit-экономики и playbook первых 10K пользователей.</p>
 
-        <!-- Phase 1 -->
-        <div class="glass-card phase-card reveal" style="margin-bottom:1.5rem">
-            <div class="phase-header">
-                <div class="phase-num" style="background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(139,92,246,.05));color:var(--accent2)">1</div>
-                <div class="phase-info"><h3>Запуск: 0 &rarr; 1,000 юзеров</h3><div class="meta">1-3 месяца &middot; Бюджет: $5-25K</div></div>
+        <div class="metric-row reveal">
+            <div class="metric-box"><div class="val">$2-5</div><div class="lbl">CPA через Telegram</div></div>
+            <div class="metric-box"><div class="val">$5-15</div><div class="lbl">CPA через YouTube</div></div>
+            <div class="metric-box"><div class="val">$0.30-0.80</div><div class="lbl">CPC контекст (EN)</div></div>
+            <div class="metric-box"><div class="val">$0.05-0.15</div><div class="lbl">CPC контекст (RU)</div></div>
+            <div class="metric-box"><div class="val">15-35%</div><div class="lbl">Конверсия Steam OAuth</div></div>
+        </div>
+
+        <div class="tabs" data-group="gtm">
+            <button class="tab-btn active" data-tab="gtm-phases">Фазы запуска</button>
+            <button class="tab-btn" data-tab="gtm-channels">Каналы и CPA</button>
+            <button class="tab-btn" data-tab="gtm-influencer">Инфлюенсеры</button>
+            <button class="tab-btn" data-tab="gtm-seo">SEO</button>
+        </div>
+
+        <!-- Фазы запуска -->
+        <div class="tab-panel active" id="gtm-phases" data-group="gtm">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--cyan)">Фаза 1: Pre-launch (0-3 мес)</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Closed beta через Telegram</h4>
+                        <ul>
+                            <li>Создать Telegram-канал + чат, набрать 500-2000 подписчиков через посевы в CS2-комьюнити</li>
+                            <li>Раздать бесплатные скины первым 100 юзерам (бюджет ~$500-1000)</li>
+                            <li>Собрать feedback, итерировать продукт</li>
+                            <li>Запустить реферальную систему: +$1 баланс за каждого приглашённого</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Посевы в тематических чатах</h4>
+                        <ul>
+                            <li>50-100 Telegram-чатов по CS2 (торговля, гэмблинг, новости)</li>
+                            <li>Reddit: r/GlobalOffensiveTrade, r/csgomarketforum (200K+ подписчиков)</li>
+                            <li>Steam Community группы</li>
+                            <li>Бюджет на посевы: $1000-3000/мес</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--green)">Фаза 2: Growth (3-9 мес)</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Инфлюенсер-маркетинг</h4>
+                        <ul>
+                            <li>YouTube: 10-20 интеграций с каналами 50K-500K подписчиков</li>
+                            <li>Twitch: спонсорство стримеров CS2 ($500-5000/стрим)</li>
+                            <li>Формат: "открываю кейсы / апгрейжу скины на [платформа]"</li>
+                            <li>ROI: 3-8x при правильном подборе блогеров</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Партнёрская программа</h4>
+                        <ul>
+                            <li>1-5% от оборота рефералов пожизненно</li>
+                            <li>Привлекает микро-инфлюенсеров (1K-50K)</li>
+                            <li>SkinSwap: партнёрка приносит ~30% трафика</li>
+                            <li>CSGOEmpire: до 40% выручки через аффилиатов</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="phase-body">
-                <ul>
-                    <li style="color:var(--text)"><strong>Инфлюенсеры:</strong> 3-5 YouTube/Twitch блогеров с промокодами. Стоимость интеграции: $500-5,000 за видео</li>
-                    <li><strong>ROI инфлюенсеров:</strong> 3-10x. Один блогер с 100K подписчиков дает 500-2,000 регистраций</li>
-                    <li><strong>Telegram/Discord:</strong> канал с розыгрышами скинов. Бесплатный, но требует контент 2-3 раза в день</li>
-                    <li><strong>Промокоды:</strong> +3-10% к первому депозиту. Себестоимость ~$1-5 на юзера, но конверсия x2</li>
-                    <li><strong>Раздачи:</strong> бесплатный кейс / скин за регистрацию. SkinSwap так набрал первые 10K</li>
-                </ul>
+            <div class="grid-2 reveal" style="margin-top:1.5rem">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--orange)">Фаза 3: Scale (9-18 мес)</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Платный трафик</h4>
+                        <ul>
+                            <li>Google Ads: "CS2 skin upgrade", "продать скины CS2" &mdash; $0.30-0.80 CPC (EN), $0.05-0.15 (RU)</li>
+                            <li>VK Ads (СНГ): $0.02-0.08 CPC, конверсия 3-8%</li>
+                            <li>Ограничение: Google/Meta банят gambling-рекламу &mdash; маскировать под "trade" или "marketplace"</li>
+                            <li>Программатик: через Propeller Ads, TrafficStars &mdash; $0.01-0.03 CPM</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>SEO + контент</h4>
+                        <ul>
+                            <li>Блог: "лучшие ножи CS2 до $100", "гайд по торговле скинами"</li>
+                            <li>50+ статей за 6 месяцев &mdash; 20-50K органики/мес</li>
+                            <li>YouTube SEO: обзоры скинов, торговые гайды</li>
+                            <li>Конверсия из органики: 2-5% в регистрацию</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--pink)">Фаза 4: Moat (18+ мес)</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Сетевые эффекты</h4>
+                        <ul>
+                            <li>Больше юзеров = больше скинов в обороте = лучше цены</li>
+                            <li>Глубина маркета &mdash; главный moat маркетплейса</li>
+                            <li>Турниры/ивенты с призовым фондом = медийное покрытие</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Мульти-игровой маркет</h4>
+                        <ul>
+                            <li>Rust, Dota 2, TF2 &mdash; расширение TAM в 2-3x</li>
+                            <li>Кросс-продажи между играми</li>
+                            <li>Каждая новая игра = новый канал привлечения</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Phase 2 -->
-        <div class="glass-card phase-card reveal" style="margin-bottom:1.5rem">
-            <div class="phase-header">
-                <div class="phase-num" style="background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(6,182,212,.05));color:var(--cyan)">2</div>
-                <div class="phase-info"><h3>Рост: 1K &rarr; 50K юзеров</h3><div class="meta">3-12 месяцев &middot; Бюджет: $25-150K</div></div>
-            </div>
-            <div class="phase-body">
-                <ul>
-                    <li style="color:var(--text)"><strong>Масштабирование инфлюенсеров:</strong> 10-20 блогеров, микро (10-50K) + средние (50-300K)</li>
-                    <li><strong>SEO:</strong> блог с контентом типа "лучшие сайты для обмена скинов", "как заработать на скинах CS2". Отдача через 3-6 месяцев, но самый дешевый канал долгосрочно</li>
-                    <li><strong>Affiliate-программа:</strong> 0.5-5% от депозитов рефералов. Upgrader дает 0.5%, SkinSwap 1% пожизненно</li>
-                    <li><strong>Розыгрыши:</strong> скины $50-500 для виральности. SkinSwap проводит 1-4 одновременно, ~$250/неделя</li>
-                    <li><strong>Telegram (СНГ) / Discord (Запад):</strong> разные каналы для разных рынков. СНГ дешевле в 3-5x</li>
-                </ul>
+        <!-- Каналы и CPA -->
+        <div class="tab-panel" id="gtm-channels" data-group="gtm">
+            <div class="table-container reveal">
+                <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Канал</th>
+                            <th>CPA (рег.)</th>
+                            <th>CPA (депозит)</th>
+                            <th>Конверсия</th>
+                            <th>Масштаб</th>
+                            <th>Риск бана</th>
+                            <th>Гео</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Telegram посевы</strong></td>
+                            <td>$0.50-2</td>
+                            <td>$3-8</td>
+                            <td>8-15%</td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>СНГ, Турция</td>
+                        </tr>
+                        <tr>
+                            <td><strong>YouTube интеграции</strong></td>
+                            <td>$3-8</td>
+                            <td>$8-25</td>
+                            <td>2-6%</td>
+                            <td><span class="pill pill-green">Высокий</span></td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Глобально</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Twitch спонсорство</strong></td>
+                            <td>$5-15</td>
+                            <td>$15-40</td>
+                            <td>1-4%</td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td>EN, DE, BR</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Google Ads</strong></td>
+                            <td>$1-5</td>
+                            <td>$5-20</td>
+                            <td>3-8%</td>
+                            <td><span class="pill pill-green">Высокий</span></td>
+                            <td><span class="pill pill-red">Высокий</span></td>
+                            <td>Глобально</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VK Ads</strong></td>
+                            <td>$0.20-1</td>
+                            <td>$2-5</td>
+                            <td>5-12%</td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td>СНГ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reddit (органика)</strong></td>
+                            <td>$0</td>
+                            <td>$0</td>
+                            <td>1-3%</td>
+                            <td><span class="pill pill-red">Низкий</span></td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td>EN</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Партнёрская программа</strong></td>
+                            <td>$1-3</td>
+                            <td>$3-10</td>
+                            <td>5-15%</td>
+                            <td><span class="pill pill-green">Высокий</span></td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Глобально</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SEO/контент</strong></td>
+                            <td>$0.10-0.50*</td>
+                            <td>$0.50-2*</td>
+                            <td>2-5%</td>
+                            <td><span class="pill pill-green">Высокий</span></td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Глобально</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discord комьюнити</strong></td>
+                            <td>$0</td>
+                            <td>$0</td>
+                            <td>10-25%</td>
+                            <td><span class="pill pill-red">Низкий</span></td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>EN, DE</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Программатик</strong></td>
+                            <td>$0.50-3</td>
+                            <td>$5-15</td>
+                            <td>0.5-2%</td>
+                            <td><span class="pill pill-green">Высокий</span></td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Глобально</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div style="padding:.75rem 1.25rem;font-size:.72rem;color:var(--text3)">* Amortized cost &mdash; CPA с учётом затрат на создание контента, распределённых на 12 месяцев</div>
             </div>
         </div>
 
-        <!-- Phase 3 -->
-        <div class="glass-card phase-card reveal" style="margin-bottom:2.5rem">
-            <div class="phase-header">
-                <div class="phase-num" style="background:linear-gradient(135deg,rgba(16,185,129,.2),rgba(16,185,129,.05));color:var(--green)">3</div>
-                <div class="phase-info"><h3>Масштаб: 50K+ юзеров</h3><div class="meta">12+ месяцев &middot; Маркетинг из выручки</div></div>
-            </div>
-            <div class="phase-body">
-                <ul>
-                    <li style="color:var(--text)"><strong>Бренд и репутация:</strong> Trustpilot 4.0+, отзывы, кейсы. SkinSwap активно работает с Trustpilot (3.8/5, 1,751 отзыв)</li>
-                    <li><strong>SEO как основной канал:</strong> 40-60% трафика у зрелых платформ приходит из поиска</li>
-                    <li><strong>Органический рост:</strong> сарафанное радио. Каждый довольный юзер приводит 0.5-2 новых</li>
-                    <li><strong>Ивенты и лидерборды:</strong> Upgrader запустил league.upgrader.pro с призами. Удержание и виральность</li>
-                    <li><strong>Партнерства:</strong> интеграции с другими платформами, API для ботов, виджеты</li>
-                </ul>
+        <!-- Инфлюенсеры -->
+        <div class="tab-panel" id="gtm-influencer" data-group="gtm">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Unit-экономика инфлюенсер-маркетинга</h4>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Тир</th><th>Подписчики</th><th>Цена интеграции</th><th>Просмотры</th><th>Рег.</th><th>Деп.</th><th>CPA (деп.)</th><th>ROI</th></tr></thead>
+                            <tbody>
+                                <tr><td>Нано</td><td>1K-10K</td><td>$50-200</td><td>500-3K</td><td>15-50</td><td>5-15</td><td>$5-15</td><td>2-5x</td></tr>
+                                <tr><td>Микро</td><td>10K-50K</td><td>$200-1000</td><td>3K-15K</td><td>50-200</td><td>15-60</td><td>$8-20</td><td>3-8x</td></tr>
+                                <tr><td>Мидл</td><td>50K-500K</td><td>$1K-5K</td><td>15K-100K</td><td>200-1500</td><td>60-400</td><td>$10-25</td><td>2-6x</td></tr>
+                                <tr><td>Макро</td><td>500K-2M</td><td>$5K-25K</td><td>100K-500K</td><td>1K-5K</td><td>300-1500</td><td>$15-35</td><td>1-4x</td></tr>
+                                <tr><td>Мега</td><td>2M+</td><td>$25K-100K</td><td>500K-3M</td><td>5K-30K</td><td>1K-8K</td><td>$15-40</td><td>1-3x</td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Лучшие практики</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Формат контента с максимальным ROI</h4>
+                        <ul>
+                            <li><strong>"От $10 до $1000 challenge"</strong> &mdash; формат апгрейда с нарастающей ставкой. Средний ROI 5-8x</li>
+                            <li><strong>Обзор + промокод</strong> &mdash; стандарт ниши. ROI 2-4x, но стабильно</li>
+                            <li><strong>Стрим с розыгрышем</strong> &mdash; вовлечение аудитории, CPA ниже на 30-50%</li>
+                            <li><strong>Сравнение сайтов</strong> &mdash; "честный обзор", высокое доверие</li>
+                        </ul>
+                    </div>
+                    <div class="callout callout-info">
+                        <h4>Ключевой инсайт</h4>
+                        <p>Микро-инфлюенсеры (10K-50K) дают лучший ROI в нише. Их аудитория более лояльна, конверсия в 2-3x выше чем у мега-блогеров. CSGOEmpire тратит ~$2M/мес на инфлюенсеров, но 60% бюджета идёт на микро и мидл тиры.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- CAC Table -->
-        <h3 class="reveal" style="font-size:1.15rem;font-weight:700;margin-bottom:1.5rem">Стоимость привлечения по каналам</h3>
+        <!-- SEO -->
+        <div class="tab-panel" id="gtm-seo" data-group="gtm">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">SEO конкурентный анализ</h4>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Ключевик</th><th>Объём/мес</th><th>CPC</th><th>Сложность</th><th>ТОП-3</th></tr></thead>
+                            <tbody>
+                                <tr><td>cs2 skin trading</td><td>18K</td><td>$0.45</td><td><span class="pill pill-red">Высокая</span></td><td>SkinSwap, CS.Money, DMarket</td></tr>
+                                <tr><td>cs2 upgrade</td><td>8K</td><td>$0.35</td><td><span class="pill pill-orange">Средняя</span></td><td>Upgrader, CSGORoll, Gamdom</td></tr>
+                                <tr><td>продать скины CS2</td><td>12K</td><td>$0.08</td><td><span class="pill pill-orange">Средняя</span></td><td>CS.Money, DMarket, LisSkins</td></tr>
+                                <tr><td>cs2 skins buy</td><td>22K</td><td>$0.55</td><td><span class="pill pill-red">Высокая</span></td><td>Steam, CS.Money, BitSkins</td></tr>
+                                <tr><td>best cs2 gambling sites</td><td>35K</td><td>$0.80</td><td><span class="pill pill-red">Высокая</span></td><td>Аффилиатные сайты</td></tr>
+                                <tr><td>cs2 skin upgrade site</td><td>5K</td><td>$0.25</td><td><span class="pill pill-green">Низкая</span></td><td>Upgrader, CSGORoll</td></tr>
+                                <tr><td>обмен скинов КС2</td><td>9K</td><td>$0.06</td><td><span class="pill pill-green">Низкая</span></td><td>CS.Money, SkinSwap</td></tr>
+                                <tr><td>cs2 case opening</td><td>40K</td><td>$0.60</td><td><span class="pill pill-red">Высокая</span></td><td>CSGORoll, Farmskins, Key-Drop</td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">SEO стратегия для новичка</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Long-tail стратегия (месяцы 1-6)</h4>
+                        <ul>
+                            <li><strong>Целевые запросы:</strong> "лучшие ножи CS2 до 5000 рублей", "самые выгодные скины для торговли 2026"</li>
+                            <li><strong>Объём:</strong> 50-100 статей, 1500-3000 слов каждая</li>
+                            <li><strong>Ожидание:</strong> 10-30K визитов/мес через 4-6 месяцев</li>
+                            <li><strong>Бюджет:</strong> $2000-5000/мес (копирайтеры + редактор)</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Конкурентные запросы (месяцы 6-18)</h4>
+                        <ul>
+                            <li>Линкбилдинг: гостевые посты на gaming-медиа ($100-500/ссылка)</li>
+                            <li>DR сайтов конкурентов: CS.Money 72, DMarket 65, BitSkins 58</li>
+                            <li>Новому сайту нужно 6-12 мес чтобы добраться до DR 30+</li>
+                            <li>Параллельно: YouTube SEO (менее конкурентно, быстрее результат)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SOCIAL CHANNELS ==================== -->
+<div class="slide" id="channels">
+    <div class="slide-content">
+        <div class="section-num reveal">02 &mdash; Социальные каналы</div>
+        <h2 class="section-title reveal">Telegram vs Discord vs Twitter по гео</h2>
+        <p class="section-desc reveal">Каждый рынок имеет свою платформу-лидер. Неправильный выбор = слив бюджета.</p>
+
+        <div class="grid-3 reveal">
+            <div class="glass-card channel-card">
+                <h4 style="color:var(--cyan)">Telegram</h4>
+                <div class="stats">
+                    <div class="stat">Гео: <strong>СНГ, Турция, Иран, ЮВА</strong></div>
+                    <div class="stat">DAU: <strong>900M+</strong></div>
+                </div>
+                <p>Основной канал для СНГ-аудитории. 80%+ CS2-гэмблинг сайтов для СНГ работают через Telegram. Каналы + чаты + боты. Средняя стоимость поста в CS2-канале 10K подписчиков: $30-100. Автоматизация через Telegram Bot API. Лучший канал для ретеншена в СНГ.</p>
+                <div class="callout callout-info" style="margin-top:1rem">
+                    <h4>Почему Telegram #1 для СНГ</h4>
+                    <p>Upgrader.pro: 95%+ коммуникации через Telegram. Нет Discord. Нет Twitter. Почему? Аудитория 14-25 лет в СНГ живёт в Telegram. Discord воспринимается как "для зарубежных". VK &mdash; дополнительный, не основной.</p>
+                </div>
+            </div>
+            <div class="glass-card channel-card">
+                <h4 style="color:var(--blue)">Discord</h4>
+                <div class="stats">
+                    <div class="stat">Гео: <strong>NA, EU, LATAM</strong></div>
+                    <div class="stat">DAU: <strong>200M+</strong></div>
+                </div>
+                <p>Стандарт для англоязычных gaming-комьюнити. SkinSwap, CSGORoll, Gamdom &mdash; все имеют Discord 10K-100K+ участников. Серверы с верификацией, розыгрышами, тикетами поддержки. Средний Discord CS2 gambling: 15-50K участников. Бот-интеграции для проверки баланса, трейдов.</p>
+                <div class="callout callout-blue" style="margin-top:1rem">
+                    <h4>Discord как support-канал</h4>
+                    <p>70% тикетов поддержки в англоязычных skin-платформах идут через Discord, не через email. Экономия на support: $3-5K/мес vs Intercom/Zendesk.</p>
+                </div>
+            </div>
+            <div class="glass-card channel-card">
+                <h4 style="color:var(--text)">X (Twitter)</h4>
+                <div class="stats">
+                    <div class="stat">Гео: <strong>NA, EU (EN)</strong></div>
+                    <div class="stat">MAU: <strong>600M+</strong></div>
+                </div>
+                <p>PR и новостной канал. Не для привлечения, а для доверия и SEO. Крипто-аудитория пересекается с skin trading (30-40% юзеров skin-платформ владеют криптой). Giveaway через Twitter &mdash; дешёвый охват: $0.01-0.05 за подписчика. Репосты от инфлюенсеров. Важен для англоязычного рынка.</p>
+                <div class="callout callout-warn" style="margin-top:1rem">
+                    <h4>Twitter для СНГ &mdash; не работает</h4>
+                    <p>Менее 5% CS2-аудитории в СНГ использует Twitter для gaming-контента. Не тратить бюджет на Twitter для RU-сегмента.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container reveal" style="margin-top:2rem">
+            <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr><th>Гео</th><th>Основной канал</th><th>Второй канал</th><th>Не работает</th><th>Язык контента</th><th>Бюджет/мес</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Россия</strong></td><td>Telegram</td><td>VK</td><td>Discord, Twitter</td><td>Русский</td><td>$1-3K</td></tr>
+                    <tr><td><strong>Украина</strong></td><td>Telegram</td><td>Discord</td><td>VK</td><td>Русский/Украинский</td><td>$500-1.5K</td></tr>
+                    <tr><td><strong>Казахстан</strong></td><td>Telegram</td><td>Instagram</td><td>Discord</td><td>Русский</td><td>$300-800</td></tr>
+                    <tr><td><strong>Турция</strong></td><td>Discord</td><td>Telegram</td><td>VK</td><td>Турецкий</td><td>$500-2K</td></tr>
+                    <tr><td><strong>Германия</strong></td><td>Discord</td><td>Twitter</td><td>Telegram</td><td>Английский/Немецкий</td><td>$1-3K</td></tr>
+                    <tr><td><strong>США</strong></td><td>Discord</td><td>Twitter</td><td>Telegram</td><td>Английский</td><td>$2-5K</td></tr>
+                    <tr><td><strong>Бразилия</strong></td><td>Discord</td><td>Twitter</td><td>Telegram</td><td>Португальский</td><td>$500-1.5K</td></tr>
+                    <tr><td><strong>Польша</strong></td><td>Discord</td><td>Twitter</td><td>Telegram</td><td>Английский/Польский</td><td>$500-1.5K</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== REGULATORY ==================== -->
+<div class="slide" id="regulatory">
+    <div class="slide-content">
+        <div class="section-num reveal">03 &mdash; Регуляторная матрица</div>
+        <h2 class="section-title reveal">Юрисдикции: легально, серо, запрещено</h2>
+        <p class="section-desc reveal">Скин-гэмблинг находится в серой зоне большинства юрисдикций. Valve официально не считает скины валютой, но регуляторы всё чаще думают иначе.</p>
+
+        <div class="tabs" data-group="reg">
+            <button class="tab-btn active" data-tab="reg-matrix">Матрица по странам</button>
+            <button class="tab-btn" data-tab="reg-enforcement">Прецеденты</button>
+            <button class="tab-btn" data-tab="reg-upcoming">Ожидаемые законы</button>
+        </div>
+
+        <!-- Матрица по странам -->
+        <div class="tab-panel active" id="reg-matrix" data-group="reg">
+            <div class="table-container reveal">
+                <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Юрисдикция</th>
+                            <th>Скин-гэмблинг</th>
+                            <th>Маркетплейс/трейд</th>
+                            <th>Лицензия нужна?</th>
+                            <th>KYC</th>
+                            <th>Риск</th>
+                            <th>Комментарий</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Великобритания</strong></td>
+                            <td><span class="pill pill-red">Нелегально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (UKGC)</td>
+                            <td>Обязательно</td>
+                            <td><span class="pill pill-red">Критический</span></td>
+                            <td>UKGC активно преследует. Gambling Act 2005 распространён на виртуальные предметы с 2017</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Нидерланды</strong></td>
+                            <td><span class="pill pill-red">Нелегально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (KSA)</td>
+                            <td>Обязательно</td>
+                            <td><span class="pill pill-red">Критический</span></td>
+                            <td>KSA оштрафовала EA на &euro;10M за FIFA лутбоксы (2019). Прецедент для skin gambling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Бельгия</strong></td>
+                            <td><span class="pill pill-red">Нелегально</span></td>
+                            <td><span class="pill pill-orange">Серая зона</span></td>
+                            <td>Да</td>
+                            <td>Обязательно</td>
+                            <td><span class="pill pill-red">Критический</span></td>
+                            <td>Полный запрет лутбоксов с 2018. Скин-гэмблинг = уголовное преступление</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Германия</strong></td>
+                            <td><span class="pill pill-orange">Серая зона</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (GGL)</td>
+                            <td>Да, с порогом</td>
+                            <td><span class="pill pill-orange">Высокий</span></td>
+                            <td>GlStV 2021 регулирует онлайн-гэмблинг. Скины пока не определены как ставки, но тренд на ужесточение</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Австралия</strong></td>
+                            <td><span class="pill pill-red">Нелегально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (ACMA)</td>
+                            <td>Обязательно</td>
+                            <td><span class="pill pill-red">Критический</span></td>
+                            <td>Interactive Gambling Act. ACMA блокирует нелицензированные gambling-сайты. Valve получил иск в 2016</td>
+                        </tr>
+                        <tr>
+                            <td><strong>США (федеральный)</strong></td>
+                            <td><span class="pill pill-orange">Серая зона</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Зависит от штата</td>
+                            <td>По штатам</td>
+                            <td><span class="pill pill-orange">Высокий</span></td>
+                            <td>Нет федерального закона о skin gambling. Wire Act + UIGEA могут применяться. Штаты решают сами</td>
+                        </tr>
+                        <tr>
+                            <td><strong>США (Вашингтон)</strong></td>
+                            <td><span class="pill pill-red">Нелегально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да</td>
+                            <td>Да</td>
+                            <td><span class="pill pill-red">Критический</span></td>
+                            <td>Valve зарегистрирована здесь. Иск Valve 2016 за содействие skin gambling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Россия</strong></td>
+                            <td><span class="pill pill-orange">Серая зона</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Формально да</td>
+                            <td>Нет</td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td>ФЗ-244 запрещает азартные игры вне зон. Скины не определены как предмет ставки. РКН блокирует крупные gambling-сайты</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Кюрасао</strong></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да ($20-35K/год)</td>
+                            <td>Минимальный</td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Популярная юрисдикция для skin gambling. CSGORoll, Gamdom, CSGOEmpire &mdash; все здесь</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Кипр</strong></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (NBC)</td>
+                            <td>Базовый</td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Лицензия дешевле Мальты. Есть gambling-лицензии. Хороший вариант для СНГ-основателей</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Эстония</strong></td>
+                            <td><span class="pill pill-orange">Серая зона</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (EMTA)</td>
+                            <td>Да</td>
+                            <td><span class="pill pill-orange">Средний</span></td>
+                            <td>Upgrader.pro зарегистрирован здесь. e-Residency упрощает регистрацию. Gambling-лицензия: &euro;100K+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Мальта</strong></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да (MGA, &euro;25K+)</td>
+                            <td>Обязательно</td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Золотой стандарт gambling-лицензий. Дорого (&euro;25-50K + compliance), но максимальная легитимность</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Коморские о-ва</strong></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td><span class="pill pill-green">Легально</span></td>
+                            <td>Да ($5-15K)</td>
+                            <td>Минимальный</td>
+                            <td><span class="pill pill-green">Низкий</span></td>
+                            <td>Самая дешёвая лицензия. Низкая репутация. Используется мелкими сайтами</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Прецеденты -->
+        <div class="tab-panel" id="reg-enforcement" data-group="reg">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--red)">Крупные иски и штрафы</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Valve &mdash; class action (2016, США)</h4>
+                        <ul>
+                            <li>Иск в Вашингтоне за "содействие нелегальному skin gambling"</li>
+                            <li>Valve выслал C&D письма CSGO Lounge, CSGO Diamonds, OPSkins</li>
+                            <li>Результат: массовое закрытие skin gambling сайтов</li>
+                            <li>Valve ввёл ограничения Steam API для gambling</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>FTC vs CSGOLotto (2016, США)</h4>
+                        <ul>
+                            <li>TmarTn и ProSyndicate рекламировали свой gambling-сайт без раскрытия владения</li>
+                            <li>FTC вынесла предупреждение (не штраф)</li>
+                            <li>Прецедент: инфлюенсеры обязаны раскрывать аффилиацию</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>EA &mdash; Нидерланды (2019-2022)</h4>
+                        <ul>
+                            <li>KSA оштрафовала EA на &euro;10M за FIFA лутбоксы</li>
+                            <li>EA выиграла апелляцию в 2022 &mdash; суд решил что лутбоксы не gambling</li>
+                            <li>Но: дало импульс для EU-wide регулирования</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--orange)">Закрытия и баны</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>OPSkins (2018) &mdash; бан от Valve</h4>
+                        <ul>
+                            <li>Крупнейший skin-маркетплейс ($1.8B оборота)</li>
+                            <li>Valve заблокировал все бот-аккаунты OPSkins</li>
+                            <li>Причина: нарушение Steam Subscriber Agreement (SSA)</li>
+                            <li>Результат: OPSkins перешёл на WAX blockchain, потерял 90% аудитории</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>CSGO Lounge (2016) &mdash; C&D от Valve</h4>
+                        <ul>
+                            <li>Крупнейший match-betting сайт на скинах</li>
+                            <li>Valve отозвал API-доступ</li>
+                            <li>Сайт закрылся в течение месяца</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Множественные блокировки ботов (2023-2025)</h4>
+                        <ul>
+                            <li>Valve периодически банит волны бот-аккаунтов</li>
+                            <li>Средняя потеря: 10-30% бот-инфраструктуры за волну</li>
+                            <li>Восстановление: 2-4 недели (новые аккаунты + прокачка)</li>
+                            <li>Стоимость одной волны для крупного сайта: $10-50K</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ожидаемые законы -->
+        <div class="tab-panel" id="reg-upcoming" data-group="reg">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--orange)">EU: Закон о лутбоксах (2025-2027)</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Текущий статус</h4>
+                        <ul>
+                            <li>Европарламент принял резолюцию о регулировании лутбоксов (2023)</li>
+                            <li>Digital Services Act (DSA) может быть расширен на виртуальные предметы</li>
+                            <li>Срок принятия EU-wide закона: 2026-2027 (оценка)</li>
+                            <li>Влияние: обязательная маркировка шансов, возрастные ограничения, лимиты трат</li>
+                        </ul>
+                    </div>
+                    <div class="callout callout-warn">
+                        <h4>Риск для skin gambling</h4>
+                        <p>EU-закон может приравнять "upgrade" механику (шанс выиграть дорогой скин) к gambling. Это потребует полноценной gambling-лицензии для работы в EU. Сценарий: 30-40% трафика skin gambling сайтов &mdash; из EU.</p>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--blue)">США: штатные законы</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Активные законопроекты</h4>
+                        <ul>
+                            <li><strong>Калифорния AB-2286:</strong> регулирование виртуальных предметов с реальной стоимостью. Статус: на рассмотрении</li>
+                            <li><strong>Иллинойс HB-3359:</strong> запрет лутбоксов для несовершеннолетних</li>
+                            <li><strong>Миннесота SF-2821:</strong> обязательное раскрытие шансов в лутбоксах</li>
+                            <li><strong>Федеральный PACT Act:</strong> защита детей от хищнических механик. Пока не принят</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>Прогноз на 2026-2028</h4>
+                        <ul>
+                            <li>Вероятность федерального закона: 20-30%</li>
+                            <li>Вероятность штатных законов (CA, IL, MN): 50-70%</li>
+                            <li>Основной вектор: защита несовершеннолетних, не запрет gambling</li>
+                            <li>Маркетплейсы (trade/sell) затронуты меньше чем gambling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== VALVE ==================== -->
+<div class="slide" id="valve">
+    <div class="slide-content">
+        <div class="section-num reveal">04 &mdash; Valve как регулятор</div>
+        <h2 class="section-title reveal">Enforcement-история Valve</h2>
+        <p class="section-desc reveal">Valve &mdash; де-факто регулятор рынка. Один бан ботов может уничтожить бизнес за 24 часа. Это главный риск.</p>
+
+        <div class="metric-row reveal">
+            <div class="metric-box"><div class="val">7</div><div class="lbl">Крупных C&D за 10 лет</div></div>
+            <div class="metric-box"><div class="val">3-4/год</div><div class="lbl">Волны бан-ботов</div></div>
+            <div class="metric-box"><div class="val">$1.8B</div><div class="lbl">Оборот OPSkins до бана</div></div>
+            <div class="metric-box"><div class="val">7 дней</div><div class="lbl">Trade hold (защита)</div></div>
+        </div>
+
+        <div class="grid-2 reveal">
+            <div class="glass-card">
+                <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Хронология действий Valve</h4>
+                <div class="table-container">
+                    <div class="table-scroll">
+                    <table>
+                        <thead><tr><th>Год</th><th>Действие</th><th>Последствия</th></tr></thead>
+                        <tbody>
+                            <tr><td>2015</td><td>Введение 7-day trade hold</td><td>Убито 60% P2P-трейдинга</td></tr>
+                            <tr><td>2016</td><td>C&D письма gambling-сайтам</td><td>Закрыто 20+ крупных сайтов</td></tr>
+                            <tr><td>2018</td><td>Бан ботов OPSkins</td><td>Крупнейший маркетплейс уничтожен</td></tr>
+                            <tr><td>2019</td><td>Ограничение Steam API rate limits</td><td>Мелкие боты перестали работать</td></tr>
+                            <tr><td>2020</td><td>Бан ботов нескольких gambling-сайтов</td><td>Временные сбои, восстановление за 1-2 нед</td></tr>
+                            <tr><td>2023</td><td>Обновление SSA: запрет commercial use API</td><td>Юридическая база для будущих банов</td></tr>
+                            <tr><td>2024-2025</td><td>Периодические волны банов ботов</td><td>3-4 волны/год, каждая затрагивает 10-30% ботов</td></tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Стратегия защиты от Valve</h4>
+                <div class="detail-card" style="margin-bottom:1rem">
+                    <h4>Диверсификация ботов</h4>
+                    <ul>
+                        <li>Минимум 20-50 бот-аккаунтов, распределённых по разным IP</li>
+                        <li>Ротация ботов: каждый бот &mdash; не более 100 трейдов/день</li>
+                        <li>Резерв: 30% ботов в "холодном" режиме (не активны, готовы к замене)</li>
+                        <li>Разные паттерны поведения: время ответа, интервалы между трейдами</li>
+                    </ul>
+                </div>
+                <div class="detail-card" style="margin-bottom:1rem">
+                    <h4>Юридическая защита</h4>
+                    <ul>
+                        <li>Не позиционировать как "gambling" в публичных материалах</li>
+                        <li>"Upgrade" или "trade" &mdash; safer framing</li>
+                        <li>TOS: "виртуальные предметы не являются валютой"</li>
+                        <li>Не конфликтовать с Valve публично (урок OPSkins)</li>
+                    </ul>
+                </div>
+                <div class="callout callout-warn">
+                    <h4>Экзистенциальный риск</h4>
+                    <p>Valve может заблокировать ВСЕ бот-аккаунты платформы в любой момент без предупреждения. План B обязателен: альтернативная механика (P2P через расширение браузера), блокчейн-бридж, или мгновенный pivot на другую игру.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== BARRIERS ==================== -->
+<div class="slide" id="barriers">
+    <div class="slide-content">
+        <div class="section-num reveal">05 &mdash; Барьеры входа</div>
+        <h2 class="section-title reveal">Что нужно для запуска</h2>
+        <p class="section-desc reveal">Техническая инфраструктура, платёжные процессоры, бот-сеть, команда и минимальный бюджет.</p>
+
+        <div class="tabs" data-group="bar">
+            <button class="tab-btn active" data-tab="bar-tech">Инфраструктура</button>
+            <button class="tab-btn" data-tab="bar-payments">Платежи</button>
+            <button class="tab-btn" data-tab="bar-team">Команда и бюджет</button>
+        </div>
+
+        <!-- Инфраструктура -->
+        <div class="tab-panel active" id="bar-tech" data-group="bar">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Steam API и ограничения</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Ключевые лимиты</h4>
+                        <ul>
+                            <li><strong>Rate limit:</strong> 100K запросов/день на ключ (ISteamUser, ISteamEconomy)</li>
+                            <li><strong>Trade offers:</strong> 5 одновременных трейдов на аккаунт</li>
+                            <li><strong>Inventory fetch:</strong> ~200 запросов/5 мин на IP</li>
+                            <li><strong>Steam Guard:</strong> обязателен для трейдов (мобильный аутентификатор)</li>
+                            <li><strong>Trade hold:</strong> 7 дней без мобильного аутентификатора, 0-15 дней с ним</li>
+                            <li><strong>Escrow:</strong> трейд можно отменить в течение hold-периода</li>
+                        </ul>
+                    </div>
+                    <div class="callout callout-blue">
+                        <h4>Обход через Steam Guard эмуляцию</h4>
+                        <p>Библиотеки: SteamCommunity (Node.js), steam-totp, node-steam-user. Эмулируют мобильный аутентификатор программно. Используются ВСЕМИ крупными skin-платформами. Технически нарушает SSA Valve.</p>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Бот-инфраструктура</h4>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Компонент</th><th>Стоимость единицы</th><th>На старте (MVP)</th><th>На масштабе</th></tr></thead>
+                            <tbody>
+                                <tr><td>Steam-аккаунт (б/у, прокачанный)</td><td>$5-15</td><td>10-20 шт = $100-300</td><td>50-200 шт = $500-3000</td></tr>
+                                <tr><td>Телефонный номер (SMS-верификация)</td><td>$0.50-2</td><td>$10-40</td><td>$50-400</td></tr>
+                                <tr><td>Прокси (residential IP)</td><td>$5-15/мес за IP</td><td>$50-150/мес</td><td>$250-1500/мес</td></tr>
+                                <tr><td>VPS для ботов</td><td>$10-30/мес</td><td>1-2 VPS = $20-60/мес</td><td>5-20 VPS = $100-600/мес</td></tr>
+                                <tr><td>Инвентарь скинов (оборотный фонд)</td><td>&mdash;</td><td>$5K-20K</td><td>$50K-500K</td></tr>
+                                <tr><td><strong>Итого/мес (без инвентаря)</strong></td><td>&mdash;</td><td><strong>$200-550</strong></td><td><strong>$900-5500</strong></td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="callout callout-warn" style="margin-top:1rem">
+                        <h4>Главная статья расходов &mdash; инвентарь</h4>
+                        <p>Оборотный фонд скинов = основной капитал. Для маркетплейса нужно $5-20K на старте, для gambling &mdash; $2-10K (меньше, т.к. "проигранные" скины возвращаются в пул). При масштабировании растёт линейно с GMV.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Платежи -->
+        <div class="tab-panel" id="bar-payments" data-group="bar">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Платёжные процессоры</h4>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Процессор</th><th>Тип</th><th>Комиссия</th><th>Работает с gambling?</th><th>KYC</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Stripe</strong></td><td>Карты</td><td>2.9% + $0.30</td><td><span class="pill pill-red">Нет</span></td><td>Да</td></tr>
+                                <tr><td><strong>PayPal</strong></td><td>E-wallet</td><td>3.49% + $0.49</td><td><span class="pill pill-red">Нет</span></td><td>Да</td></tr>
+                                <tr><td><strong>NOWPayments</strong></td><td>Крипта</td><td>0.5-1%</td><td><span class="pill pill-green">Да</span></td><td>Минимальный</td></tr>
+                                <tr><td><strong>CoinPayments</strong></td><td>Крипта</td><td>0.5%</td><td><span class="pill pill-green">Да</span></td><td>Минимальный</td></tr>
+                                <tr><td><strong>G2A Pay</strong></td><td>Карты + alt</td><td>3-5%</td><td><span class="pill pill-orange">Выборочно</span></td><td>Да</td></tr>
+                                <tr><td><strong>Skinsback / SkinPay</strong></td><td>Скины как оплата</td><td>5-15%</td><td><span class="pill pill-green">Да</span></td><td>Нет</td></tr>
+                                <tr><td><strong>FreeKassa</strong></td><td>Мульти (СНГ)</td><td>3-7%</td><td><span class="pill pill-orange">Серая зона</span></td><td>Минимальный</td></tr>
+                                <tr><td><strong>Centrobill</strong></td><td>Карты (high-risk)</td><td>5-10%</td><td><span class="pill pill-green">Да</span></td><td>Да</td></tr>
+                                <tr><td><strong>Piastrix</strong></td><td>E-wallet (СНГ)</td><td>2-5%</td><td><span class="pill pill-orange">Серая зона</span></td><td>Минимальный</td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Стратегия платежей</h4>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Для маркетплейса (ниже риск)</h4>
+                        <ul>
+                            <li>Stripe/PayPal для карт &mdash; возможно если позиционироваться как "trade platform"</li>
+                            <li>Крипта через NOWPayments &mdash; без проблем</li>
+                            <li>Скины как депозит (через ботов) &mdash; основной метод</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card" style="margin-bottom:1rem">
+                        <h4>Для gambling (высокий риск)</h4>
+                        <ul>
+                            <li>Stripe/PayPal закроют аккаунт в течение 1-3 месяцев</li>
+                            <li>Крипта &mdash; основной метод пополнения</li>
+                            <li>High-risk процессоры: Centrobill, G2A Pay (комиссия 5-10%)</li>
+                            <li>Скины как валюта &mdash; лучший вариант (нет chargebacks)</li>
+                        </ul>
+                    </div>
+                    <div class="callout callout-info">
+                        <h4>Инсайт: скины = лучшая "валюта"</h4>
+                        <p>80%+ транзакций на Upgrader.pro &mdash; скинами, не деньгами. Это исключает chargebacks, снижает KYC-требования и упрощает правовой статус ("мы не принимаем деньги, мы обмениваем виртуальные предметы").</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Команда и бюджет -->
+        <div class="tab-panel" id="bar-team" data-group="bar">
+            <div class="grid-2 reveal">
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Минимальная команда MVP</h4>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Роль</th><th>Фуллтайм?</th><th>Зарплата/мес</th><th>Комментарий</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Fullstack-разработчик</strong></td><td>Да</td><td>$3-6K</td><td>Node.js + React/Next.js + Steam API</td></tr>
+                                <tr><td><strong>Backend/DevOps</strong></td><td>Да</td><td>$3-5K</td><td>Боты, инфраструктура, безопасность</td></tr>
+                                <tr><td><strong>Дизайнер (UI/UX)</strong></td><td>Part-time</td><td>$1-2K</td><td>Тёмная тема, gaming-стиль</td></tr>
+                                <tr><td><strong>Маркетолог</strong></td><td>Part-time</td><td>$1-2K</td><td>Telegram, инфлюенсеры, посевы</td></tr>
+                                <tr><td><strong>Support</strong></td><td>Part-time</td><td>$0.5-1K</td><td>Telegram-бот + чат, 12/7</td></tr>
+                                <tr><td><strong>Фаундер</strong></td><td>Да</td><td>&mdash;</td><td>Продукт, стратегия, финансы</td></tr>
+                                <tr><td colspan="2"><strong>Итого фонд оплаты</strong></td><td><strong>$8.5-16K/мес</strong></td><td>&mdash;</td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Бюджет запуска (12 мес)</h4>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Статья</th><th>Минимум</th><th>Комфорт</th></tr></thead>
+                            <tbody>
+                                <tr><td>Команда (12 мес)</td><td>$50K</td><td>$120K</td></tr>
+                                <tr><td>Инвентарь скинов</td><td>$5K</td><td>$30K</td></tr>
+                                <tr><td>Бот-инфраструктура (12 мес)</td><td>$3K</td><td>$15K</td></tr>
+                                <tr><td>Хостинг и SaaS (12 мес)</td><td>$2K</td><td>$8K</td></tr>
+                                <tr><td>Маркетинг (12 мес)</td><td>$10K</td><td>$50K</td></tr>
+                                <tr><td>Юрлицо + лицензия</td><td>$2K</td><td>$35K</td></tr>
+                                <tr><td>Дизайн и брендинг</td><td>$1K</td><td>$5K</td></tr>
+                                <tr><td>Непредвиденные (15%)</td><td>$11K</td><td>$39K</td></tr>
+                                <tr style="background:rgba(139,92,246,.08)"><td><strong>ИТОГО</strong></td><td><strong>$84K</strong></td><td><strong>$302K</strong></td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="callout callout-info" style="margin-top:1rem">
+                        <h4>Реалистичный MVP: $50-150K</h4>
+                        <p>С учётом того что фаундер кодит сам (экономия $50-70K) и стартует в СНГ (дешевле маркетинг и команда). Break-even при GMV $200-500K/мес и take rate 5-10%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EXIT / M&A ==================== -->
+<div class="slide" id="exit">
+    <div class="slide-content">
+        <div class="section-num reveal">06 &mdash; Exit и M&A</div>
+        <h2 class="section-title reveal">Кто покупает skin-платформы</h2>
+        <p class="section-desc reveal">Рынок M&A в нише существует, но непрозрачен. Большинство сделок &mdash; private, без публичных данных.</p>
+
+        <div class="metric-row reveal">
+            <div class="metric-box"><div class="val">3-5x</div><div class="lbl">Revenue multiple (маркетплейс)</div></div>
+            <div class="metric-box"><div class="val">2-3x</div><div class="lbl">Revenue multiple (gambling)</div></div>
+            <div class="metric-box"><div class="val">$5-50M</div><div class="lbl">Типичный размер сделки</div></div>
+            <div class="metric-box"><div class="val">12-24 мес</div><div class="lbl">Earn-out период</div></div>
+        </div>
+
+        <div class="grid-2 reveal">
+            <div class="glass-card">
+                <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Известные сделки</h4>
+                <div class="table-container">
+                    <div class="table-scroll">
+                    <table>
+                        <thead><tr><th>Компания</th><th>Год</th><th>Тип сделки</th><th>Оценка</th><th>Покупатель</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>BitSkins</strong></td><td>2022</td><td>Поглощение</td><td>~$10-20M (оценка)</td><td>Не раскрыт</td></tr>
+                            <tr><td><strong>CS.Money</strong></td><td>2023</td><td>Инвестиция</td><td>~$30-50M (оценка)</td><td>Стратегический инвестор</td></tr>
+                            <tr><td><strong>DMarket</strong></td><td>2021</td><td>Series A</td><td>$65M оценка</td><td>Almaz Capital, Benchmark</td></tr>
+                            <tr><td><strong>Waxpeer</strong></td><td>2022</td><td>Seed</td><td>~$5-10M (оценка)</td><td>Angel investors</td></tr>
+                            <tr><td><strong>Buff163</strong> (Китай)</td><td>2020</td><td>Инвестиция NetEase</td><td>$100M+ (оценка)</td><td>NetEase</td></tr>
+                            <tr><td><strong>OPSkins/WAX</strong></td><td>2017</td><td>Pivot в blockchain</td><td>~$50-100M GMV до бана</td><td>Self-funded</td></tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <h4 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Потенциальные покупатели</h4>
+                <div class="detail-card" style="margin-bottom:1rem">
+                    <h4>Стратегические</h4>
+                    <ul>
+                        <li><strong>Крупные gambling-холдинги:</strong> Flutter (FanDuel), DraftKings, Entain &mdash; ищут входы в esports gambling</li>
+                        <li><strong>Gaming-компании:</strong> Tencent, NetEase &mdash; уже в skin-рынке через Buff163</li>
+                        <li><strong>Крипто-платформы:</strong> WAX, Immutable X &mdash; интерес к gaming NFT/items</li>
+                        <li><strong>Конкуренты:</strong> горизонтальная консолидация (CS.Money купил несколько мелких сайтов)</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h4>Финансовые</h4>
+                    <ul>
+                        <li><strong>VC фонды:</strong> a16z (gaming practice), Makers Fund, Galaxy Interactive</li>
+                        <li><strong>PE фонды:</strong> для платформ с $5M+ ARR</li>
+                        <li><strong>Angel investors:</strong> skin-рынок привлекает gaming-предпринимателей</li>
+                    </ul>
+                </div>
+                <div class="callout callout-info" style="margin-top:1rem">
+                    <h4>Формула оценки</h4>
+                    <p><strong>Маркетплейс:</strong> 3-5x годовой выручки (net revenue) или 0.3-0.5x GMV. <strong>Gambling:</strong> 2-3x net revenue (дисконт за регуляторный риск). Ключевые драйверы: рост MAU, retention rate, unit economics, юрисдикция.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== COMPARABLES ==================== -->
+<div class="slide" id="comparables">
+    <div class="slide-content">
+        <div class="section-num reveal">07 &mdash; Аналогичные бизнес-модели</div>
+        <h2 class="section-title reveal">Уроки от StockX, GOAT, Poshmark и букмекеров</h2>
+        <p class="section-desc reveal">Skin-маркетплейсы &mdash; это ресейл-платформы для цифровых товаров. Вот что можно взять у физических аналогов.</p>
+
         <div class="table-container reveal">
+            <div class="table-scroll">
             <table>
                 <thead>
                     <tr>
-                        <th>Канал</th>
-                        <th>CAC</th>
-                        <th>Конверсия</th>
-                        <th>Масштабируемость</th>
-                        <th>Время до результата</th>
+                        <th>Платформа</th>
+                        <th>Ниша</th>
+                        <th>GMV</th>
+                        <th>Take rate</th>
+                        <th>Оценка</th>
+                        <th>Ключевой moat</th>
+                        <th>Урок для skin-платформы</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="font-weight:600">YouTube инфлюенсер</td>
-                        <td>$30-80</td>
-                        <td>2-5%</td>
-                        <td><span class="pill pill-orange">Средняя</span></td>
-                        <td>1-2 недели</td>
+                        <td><strong>StockX</strong></td>
+                        <td>Кроссовки, streetwear</td>
+                        <td>$3.8B (2022)</td>
+                        <td>9.5-14%</td>
+                        <td>$3.8B (2021)</td>
+                        <td>Аутентификация, bid/ask</td>
+                        <td>Bid/Ask модель ценообразования. Прозрачность цен &mdash; доверие</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">Telegram канал</td>
-                        <td>$5-20 <span style="font-size:.72rem;color:var(--text3)">(СНГ)</span></td>
-                        <td>3-8%</td>
-                        <td><span class="pill pill-green">Высокая</span></td>
-                        <td>1-4 недели</td>
+                        <td><strong>GOAT</strong></td>
+                        <td>Кроссовки, люкс</td>
+                        <td>$2B+ (2022)</td>
+                        <td>9-20%</td>
+                        <td>$3.7B (2021)</td>
+                        <td>Верификация, бренд</td>
+                        <td>Premium-позиционирование работает. "Безопасность" = премиум-цена</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">SEO</td>
-                        <td>$5-15</td>
-                        <td>1-3%</td>
-                        <td><span class="pill pill-green">Высокая</span></td>
-                        <td>3-6 месяцев</td>
+                        <td><strong>Poshmark</strong></td>
+                        <td>Fashion ресейл</td>
+                        <td>$1.8B (2022)</td>
+                        <td>20%</td>
+                        <td>$1.2B (IPO 2021)</td>
+                        <td>Социальная платформа</td>
+                        <td>Social commerce: лайки, подписки, "шкафы". Комьюнити = retention</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">Affiliate / промокоды</td>
-                        <td>$20-50</td>
-                        <td>5-10%</td>
-                        <td><span class="pill pill-green">Высокая</span></td>
-                        <td>2-4 недели</td>
+                        <td><strong>DraftKings</strong></td>
+                        <td>Sports betting</td>
+                        <td>N/A</td>
+                        <td>House edge 5-10%</td>
+                        <td>$15B (2024)</td>
+                        <td>Лицензии, бренд, данные</td>
+                        <td>Инвестиции в лицензии окупаются через доверие и легальный статус</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">Discord</td>
-                        <td>$10-30</td>
-                        <td>2-5%</td>
-                        <td><span class="pill pill-orange">Средняя</span></td>
-                        <td>2-4 недели</td>
+                        <td><strong>FanDuel</strong></td>
+                        <td>Sports betting</td>
+                        <td>$12B+ GGR</td>
+                        <td>House edge 5-8%</td>
+                        <td>$20B+ (Flutter)</td>
+                        <td>Первый в штатах, UX</td>
+                        <td>First-mover advantage в каждом новом рынке/юрисдикции критичен</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">Google Ads</td>
-                        <td>$15-40 <span style="font-size:.72rem;color:var(--text3)">(маркетплейс)</span></td>
-                        <td>1-3%</td>
-                        <td><span class="pill pill-red">Заблокировано для gambling</span></td>
-                        <td>1-2 недели</td>
+                        <td><strong>Whatnot</strong></td>
+                        <td>Live-аукционы (карточки, коллекционное)</td>
+                        <td>$2B+ (2023)</td>
+                        <td>8-12%</td>
+                        <td>$3.7B (2023)</td>
+                        <td>Live-формат, сообщество</td>
+                        <td>Live-стриминг + продажа = высокий engagement. Формат для skin-unboxing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BUFF163</strong></td>
+                        <td>CS2 скины (Китай)</td>
+                        <td>$2-3B (оценка)</td>
+                        <td>2.5%</td>
+                        <td>$500M+ (оценка)</td>
+                        <td>Монополия в Китае, ликвидность</td>
+                        <td>Низкий take rate + огромный объём. Защита через ликвидность</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div class="callout callout-info reveal" style="margin-top:1.5rem">
-            <h4>Ключевой инсайт</h4>
-            <p>Telegram (СНГ) &mdash; самый дешевый канал с CAC $5-20 и конверсией 3-8%. Для MVP с ограниченным бюджетом это оптимальный старт. SEO &mdash; лучший долгосрочный канал, но требует 3-6 месяцев на раскачку.</p>
-        </div>
-    </div>
-</div>
-
-<!-- ==================== 02: REGULATION ==================== -->
-<div class="slide" id="regulation" style="align-items:flex-start;padding-top:8rem">
-    <div class="slide-content">
-        <div class="section-num reveal">02 &mdash; Регуляторная матрица</div>
-        <h2 class="section-title reveal">Юрисдикции и<br>лицензии</h2>
-        <p class="section-desc reveal">Где gambling легален, где серая зона, и что реально происходит с enforcement. Это определяет структуру бизнеса.</p>
-
-        <!-- Legal jurisdictions -->
-        <h3 class="reveal" style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--green);display:flex;align-items:center;gap:.5rem">Где gambling легален</h3>
-        <div class="grid-3 reveal" style="margin-bottom:2.5rem">
-            <div class="glass-card matrix-card">
-                <div class="matrix-header">
-                    <div class="flag">&#127464;&#127484;</div>
-                    <h4>Кюрасао</h4>
-                    <span class="pill pill-green">Популярен</span>
-                </div>
-                <div class="matrix-body">
-                    <p>Новый закон LOK (2024). Самый популярный выбор для скин-гемблинга. CSGOEmpire, Gamdom и десятки других работают отсюда.</p>
-                    <div class="cost">Заявка: $4,600 &middot; Годовая: $47,450/год</div>
-                </div>
-            </div>
-            <div class="glass-card matrix-card">
-                <div class="matrix-header">
-                    <div class="flag">&#127474;&#127481;</div>
-                    <h4>Мальта (MGA)</h4>
-                    <span class="pill pill-purple">Престижная</span>
-                </div>
-                <div class="matrix-body">
-                    <p>Самая уважаемая лицензия в Европе. Требует серьезного капитала, аудитов, compliance-отдела. Открывает двери в ЕС.</p>
-                    <div class="cost">Капитал: $100K+ &middot; 5% GGR &middot; Итого: $600K+/год</div>
-                </div>
-            </div>
-            <div class="glass-card matrix-card">
-                <div class="matrix-header">
-                    <div class="flag">&#127472;&#127474;</div>
-                    <h4>Анжуан (Коморы)</h4>
-                    <span class="pill pill-orange">Бюджетный</span>
-                </div>
-                <div class="matrix-body">
-                    <p>Бюджетный вариант для стартапов. Минимум требований, быстрая выдача. Низкий престиж, но формальная легальность.</p>
-                    <div class="cost">$15-20K полностью</div>
-                </div>
-            </div>
-            <div class="glass-card matrix-card">
-                <div class="matrix-header">
-                    <div class="flag">&#127464;&#127486;</div>
-                    <h4>Кипр</h4>
-                    <span class="pill pill-blue">Офисы</span>
-                </div>
-                <div class="matrix-body">
-                    <p>Хорош для регистрации юрлица и офиса, но не для gambling-лицензий. Многие скин-компании держат тут операционный центр.</p>
-                    <div class="cost">Юрлицо: от $3-5K &middot; Лицензия: нет</div>
-                </div>
-            </div>
-            <div class="glass-card matrix-card">
-                <div class="matrix-header">
-                    <div class="flag">&#127468;&#127463;</div>
-                    <h4>UKGC</h4>
-                    <span class="pill pill-red">Строгий</span>
-                </div>
-                <div class="matrix-body">
-                    <p>Самый строгий регулятор. KYC обязателен, лимиты ставок, ответственная игра. Для стартапа &mdash; нереалистично на старте.</p>
-                    <div class="cost">$100K+ капитал &middot; Аудиты &middot; $200K+/год</div>
-                </div>
             </div>
         </div>
 
-        <!-- Illegal / grey zone -->
-        <h3 class="reveal" style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--red);display:flex;align-items:center;gap:.5rem">Где gambling нелегален / серая зона</h3>
-        <div class="grid-2 reveal" style="margin-bottom:2.5rem">
-            <div class="glass-card detail-card">
-                <h4>Запрет / жесткое регулирование</h4>
-                <ul>
-                    <li><strong>Бельгия, Нидерланды:</strong> лутбоксы за деньги НЕЛЕГАЛЬНЫ. Штрафы до &euro;800K</li>
-                    <li><strong>Австралия:</strong> полный запрет скин-гемблинга с 2018</li>
-                    <li><strong>ЕС:</strong> голосование за бан лутбоксов в комитете (32 &mdash; за, 5 &mdash; против). Директива в разработке</li>
-                </ul>
+        <div class="grid-3 reveal" style="margin-top:2rem">
+            <div class="glass-card insight-card">
+                <div class="num">1</div>
+                <h4>Аутентификация = доверие</h4>
+                <p>StockX и GOAT построили бизнес на $3.8B через "мы гарантируем подлинность". В скинах: Provably Fair + публичный аудит = тот же эффект. Доверие &mdash; главный дифференциатор для новичка.</p>
             </div>
-            <div class="glass-card detail-card">
-                <h4>Серая зона</h4>
-                <ul>
-                    <li><strong>США:</strong> нет федерального закона. Регулирование штат-за-штатом. Нью-Джерси, Невада &mdash; лицензии. Большинство &mdash; нет</li>
-                    <li><strong>СНГ:</strong> Россия &mdash; gambling запрещен онлайн, но enforcement слабый. Upgrader работает на РФ-рынок</li>
-                    <li><strong>Большинство стран:</strong> скины = виртуальные предметы, не деньги. Юридически неопределенно</li>
-                </ul>
+            <div class="glass-card insight-card">
+                <div class="num">2</div>
+                <h4>Социальный слой = retention</h4>
+                <p>Poshmark: 80% GMV от social features (лайки, подписки). В скинах: showcases, рейтинги трейдеров, "витрина инвентаря", лидерборды. Социальность удерживает даже без gambling.</p>
+            </div>
+            <div class="glass-card insight-card">
+                <div class="num">3</div>
+                <h4>Live-формат взрывает engagement</h4>
+                <p>Whatnot: $3.7B оценка за live-аукционы коллекционных карточек. В скинах: live-unboxing, live-upgrade стримы на платформе. Формат уже проверен на Twitch &mdash; осталось встроить в продукт.</p>
             </div>
         </div>
 
-        <!-- Enforcement -->
-        <h3 class="reveal" style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--orange);display:flex;align-items:center;gap:.5rem">Enforcement: реальные случаи</h3>
-        <div class="glass-card reveal" style="padding:2rem">
-            <div class="timeline-item">
-                <div class="timeline-year">2016</div>
-                <div class="timeline-text">Valve отправила C&D письма CSGOLounge, CSGODiamonds &mdash; немедленное закрытие. FTC расследование TmarTn и ProSyndicate за промо без раскрытия</div>
+        <div class="grid-2 reveal" style="margin-top:1.5rem">
+            <div class="callout callout-info">
+                <h4>Ключевая параллель: StockX для скинов</h4>
+                <p>StockX перевернул sneaker-ресейл через bid/ask модель (как фондовая биржа). Для скинов это означает: прозрачное ценообразование в реальном времени, графики цен, "портфолио" инвентаря, аналитика рынка. Это привлекает "трейдеров" (высокий LTV) вместо "игроков" (низкий LTV).</p>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2023</div>
-                <div class="timeline-text">Valve ужесточила API для gambling-сайтов. Ограничения на торговлю через ботов, новые rate-limits</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-text">Valve запретила gambling-спонсорство на CS2-турнирах. Убрала рекламу betting-сайтов из трансляций</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-text">Иск $5M+ против Valve за нелегальный gambling через лутбоксы (кейсы). Class-action в США</div>
-            </div>
-            <div class="timeline-item" style="margin-bottom:0">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-text">Twitch полностью забанил gambling-стримы. YouTube ужесточил политику. Каналы привлечения сужаются</div>
-            </div>
-        </div>
-
-        <div class="callout callout-warn reveal" style="margin-top:1.5rem">
-            <h4>Для стартап-инвестора</h4>
-            <p>Регуляторный ландшафт ужесточается. Кюрасао (LOK) &mdash; минимально жизнеспособный вариант для gambling. Маркетплейс-модель (как SkinSwap) безопаснее юридически, но маржинальность ниже. Гибрид &mdash; максимум денег при максимуме рисков.</p>
-        </div>
-    </div>
-</div>
-
-<!-- ==================== 03: BARRIERS ==================== -->
-<div class="slide" id="barriers" style="align-items:flex-start;padding-top:8rem">
-    <div class="slide-content">
-        <div class="section-num reveal">03 &mdash; Барьеры входа</div>
-        <h2 class="section-title reveal">Что стоит на пути</h2>
-        <p class="section-desc reveal">Каждый барьер &mdash; это и защита от конкурентов. Кто их преодолевает, получает moat. Кто нет &mdash; теряет деньги.</p>
-
-        <div class="grid-2">
-            <div class="glass-card barrier-card reveal">
-                <div class="barrier-icon">&#128270;</div>
-                <h4>Steam API доступ</h4>
-                <p>Бесплатно, но rate-limited. Каждый торговый бот требует уникальный телефон + Steam Guard (15-дневный cooldown). Нет официального API для gambling &mdash; все через неофициальные методы. Valve может заблокировать в любой момент.</p>
-            </div>
-            <div class="glass-card barrier-card reveal reveal-delay-1">
-                <div class="barrier-icon">&#128176;</div>
-                <h4>Инвентарь ботов</h4>
-                <p>$50-500K рабочего капитала замороженного в скинах. Это деньги, которые лежат мертвым грузом на ботах. Риск: бан аккаунта Valve = потеря всего инвентаря. CSFloat и DMarket держат $1M+ в инвентаре.</p>
-            </div>
-            <div class="glass-card barrier-card reveal">
-                <div class="barrier-icon">&#9203;</div>
-                <h4>7-Day Trade Hold</h4>
-                <p>Каждый трейд через Steam замораживается на 7 дней. Замедляет все операции, ухудшает UX. Юзеры ждут неделю, чтобы получить скин. Решения: p2p через ботов, instant-delivery через собственный инвентарь.</p>
-            </div>
-            <div class="glass-card barrier-card reveal reveal-delay-1">
-                <div class="barrier-icon">&#128274;</div>
-                <h4>Trade Protection (2025)</h4>
-                <p>Новое: отмена трейда в течение 8 дней. При отмене &mdash; бан на 30 дней на ВСЕ предметы. Это меняет экономику мошенничества, но добавляет friction для легитимных трейдов.</p>
-            </div>
-            <div class="glass-card barrier-card reveal">
-                <div class="barrier-icon">&#128179;</div>
-                <h4>Платежные процессоры</h4>
-                <p>Stripe и PayPal отказывают gambling-сайтам. Решение: крипто (USDT, BTC, LTC). SkinSwap принимает и крипту и фиат (через промежуточные процессоры). Для СНГ: СБП, карты через локальных провайдеров.</p>
-            </div>
-            <div class="glass-card barrier-card reveal reveal-delay-1">
-                <div class="barrier-icon">&#127942;</div>
-                <h4>Ликвидность (маркетплейс)</h4>
-                <p>Chicken-and-egg problem. Нужны и покупатели и продавцы одновременно. Без ликвидности &mdash; пустые полки. SkinSwap решает это Insta-Sell (сами покупают у юзеров) и рабочим капиталом. Дорого, но создает moat.</p>
+            <div class="callout callout-blue">
+                <h4>Анти-параллель: sports betting</h4>
+                <p>DraftKings потратил $1B+ на лицензии и маркетинг до прибыльности. Skin gambling работает наоборот: минимальные лицензии (Кюрасао $20K), органический рост через инфлюенсеров, прибыльность с первого месяца (house edge 5-15%). Но: нет юридической защиты при масштабировании.</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ==================== 04: ANALOGUES ==================== -->
-<div class="slide" id="analogues" style="align-items:flex-start;padding-top:8rem">
+<!-- ==================== KPI ==================== -->
+<div class="slide" id="kpi">
     <div class="slide-content">
-        <div class="section-num reveal">04 &mdash; Аналоги</div>
-        <h2 class="section-title reveal">Скин-платформы &ne;<br>уникальный бизнес</h2>
-        <p class="section-desc reveal">Каждый тип скин-платформы имеет прямой аналог в другой индустрии. Это помогает предсказать эволюцию и учиться на чужих ошибках.</p>
+        <div class="section-num reveal">08 &mdash; Ключевые метрики</div>
+        <h2 class="section-title reveal">KPI для новой skin-платформы</h2>
+        <p class="section-desc reveal">Что отслеживать с первого дня. Бенчмарки на основе данных конкурентов и аналогичных платформ.</p>
+
+        <div class="grid-4 reveal">
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#128200;</div>
+                <div class="kpi-name">GMV (месячный)</div>
+                <div class="kpi-target">$50K &rarr; $500K</div>
+                <div class="kpi-desc">Общий объём сделок. Месяц 3: $50K, Месяц 12: $500K. Рост 20-30%/мес в фазе growth.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#128176;</div>
+                <div class="kpi-name">Net Revenue</div>
+                <div class="kpi-target">5-15% от GMV</div>
+                <div class="kpi-desc">Take rate: маркетплейс 5-10%, gambling 8-15%. При GMV $500K = $25-75K/мес выручки.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#128101;</div>
+                <div class="kpi-name">DAU / MAU</div>
+                <div class="kpi-target">DAU/MAU > 25%</div>
+                <div class="kpi-desc">Месяц 3: 200-500 DAU, 2-5K MAU. Месяц 12: 2-5K DAU, 15-30K MAU. Ratio > 25% = здоровый engagement.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#9201;</div>
+                <div class="kpi-name">Time to First Trade</div>
+                <div class="kpi-target">&lt; 5 минут</div>
+                <div class="kpi-desc">От регистрации до первой сделки. Upgrader: ~2 мин. SkinSwap: ~5 мин. Чем короче &mdash; тем выше конверсия.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#128257;</div>
+                <div class="kpi-name">D1 / D7 / D30 Retention</div>
+                <div class="kpi-target">40% / 20% / 10%</div>
+                <div class="kpi-desc">Gambling: D1 50-60%, D30 15-25%. Маркетплейс: D1 30-40%, D30 8-15%. Gambling ретенция выше из-за дофамина.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#128178;</div>
+                <div class="kpi-name">ARPU (месячный)</div>
+                <div class="kpi-target">$5-25</div>
+                <div class="kpi-desc">Средний доход на юзера. Gambling: $15-30. Маркетплейс: $3-10. Топ-1% юзеров генерят 40-60% дохода.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#127919;</div>
+                <div class="kpi-name">LTV / CAC</div>
+                <div class="kpi-target">&gt; 3x</div>
+                <div class="kpi-desc">LTV юзера: $30-100 (gambling), $15-40 (маркетплейс). CAC: $3-15. Ratio > 3x = unit economics сходятся.</div>
+            </div>
+            <div class="glass-card kpi-card">
+                <div class="kpi-icon">&#11088;</div>
+                <div class="kpi-name">NPS / Trustpilot</div>
+                <div class="kpi-target">&gt; 3.5 / 5.0</div>
+                <div class="kpi-desc">SkinSwap: 3.8/5 (1751 отзыв). CS.Money: 4.1/5. Ниже 3.0 = красный флаг. Trustpilot &mdash; стандарт ниши для EN.</div>
+            </div>
+        </div>
+
+        <h3 class="reveal" style="font-size:1.2rem;font-weight:700;margin:3rem 0 1.5rem">Операционные метрики</h3>
 
         <div class="table-container reveal">
+            <div class="table-scroll">
             <table>
                 <thead>
                     <tr>
-                        <th>Скин-платформа</th>
-                        <th>Аналог</th>
-                        <th>Что общего</th>
-                        <th>Чему учиться</th>
+                        <th>Метрика</th>
+                        <th>Описание</th>
+                        <th>Целевое значение</th>
+                        <th>Красный флаг</th>
+                        <th>Как измерять</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="font-weight:600">CSFloat</td>
-                        <td><span class="pill pill-blue">StockX</span> (кроссовки)</td>
-                        <td>P2P маркетплейс, верификация, прозрачные цены</td>
-                        <td>Аутентификация, ценообразование, trust</td>
+                        <td><strong>Uptime ботов</strong></td>
+                        <td>% времени когда боты доступны для трейдов</td>
+                        <td>&gt; 99.5%</td>
+                        <td>&lt; 95%</td>
+                        <td>Мониторинг через Prometheus/Grafana</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">SkinSwap</td>
-                        <td><span class="pill pill-green">Poshmark</span> (одежда)</td>
-                        <td>Бот-трейд, instant sell</td>
-                        <td>Мгновенная ликвидность, удобство</td>
+                        <td><strong>Trade completion rate</strong></td>
+                        <td>% трейдов завершённых без ошибок</td>
+                        <td>&gt; 95%</td>
+                        <td>&lt; 85%</td>
+                        <td>Логи бот-транзакций / Steam API callbacks</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">CSGOEmpire</td>
-                        <td><span class="pill pill-orange">DraftKings</span> (ставки)</td>
-                        <td>Gambling с игровыми активами</td>
-                        <td>Регуляция, ответственная игра</td>
+                        <td><strong>Median trade time</strong></td>
+                        <td>Время от нажатия "Trade" до получения предмета</td>
+                        <td>&lt; 30 сек</td>
+                        <td>&gt; 2 мин</td>
+                        <td>Timestamp event tracking</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">BUFF163</td>
-                        <td><span class="pill pill-red">Alibaba/Taobao</span></td>
-                        <td>Доминант в Китае, P2P</td>
-                        <td>Масштаб, низкие комиссии</td>
+                        <td><strong>Support response time</strong></td>
+                        <td>Медианное время ответа поддержки</td>
+                        <td>&lt; 30 мин</td>
+                        <td>&gt; 4 часа</td>
+                        <td>Telegram bot / Intercom analytics</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:600">Upgrader</td>
-                        <td><span class="pill pill-purple">Lottery / scratch cards</span></td>
-                        <td>Простая механика, мгновенный результат</td>
-                        <td>Импульсная покупка, дофаминовый цикл</td>
+                        <td><strong>Chargeback rate</strong></td>
+                        <td>% платежей оспоренных пользователями</td>
+                        <td>&lt; 0.5%</td>
+                        <td>&gt; 1%</td>
+                        <td>Payment processor dashboard</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bot ban rate</strong></td>
+                        <td>% ботов забаненных Valve за период</td>
+                        <td>&lt; 5%/мес</td>
+                        <td>&gt; 20%/мес</td>
+                        <td>Внутренний мониторинг бот-сети</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inventory turnover</strong></td>
+                        <td>Сколько раз оборотный фонд "прокручивается" в месяц</td>
+                        <td>&gt; 4x</td>
+                        <td>&lt; 1x</td>
+                        <td>GMV / средняя стоимость инвентаря</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conversion funnel</strong></td>
+                        <td>Visit &rarr; Register &rarr; Deposit &rarr; Trade</td>
+                        <td>100% &rarr; 15% &rarr; 5% &rarr; 4%</td>
+                        <td>Reg &lt; 5%, Dep &lt; 1%</td>
+                        <td>Mixpanel / Amplitude / PostHog</td>
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
-        <div class="callout callout-info reveal" style="margin-top:1.5rem">
-            <h4>Паттерн</h4>
-            <p>Все эти рынки прошли через одни и те же фазы: дикий запад &rarr; регуляция &rarr; консолидация &rarr; 3-5 крупных игроков. Скин-рынок сейчас между первой и второй фазой. Окно входа сужается.</p>
+        <h3 class="reveal" style="font-size:1.2rem;font-weight:700;margin:3rem 0 1.5rem">North Star метрика по типу бизнеса</h3>
+
+        <div class="grid-2 reveal">
+            <div class="glass-card" style="border-color:rgba(6,182,212,.3)">
+                <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:1rem;color:var(--cyan)">Маркетплейс</h4>
+                <p style="font-size:2rem;font-weight:900;background:var(--gradient2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem">Еженедельный GMV</p>
+                <p style="font-size:.88rem;color:var(--text2);line-height:1.7">Для маркетплейса главное &mdash; ликвидность. Чем больше объём сделок, тем привлекательнее платформа для продавцов и покупателей. Рост GMV тянет за собой все остальные метрики. Целевой рост: 15-25% W/W в первые 6 месяцев.</p>
+            </div>
+            <div class="glass-card" style="border-color:rgba(239,68,68,.3)">
+                <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:1rem;color:var(--red)">Gambling</h4>
+                <p style="font-size:2rem;font-weight:900;background:var(--gradient3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem">Дневные депозиты</p>
+                <p style="font-size:.88rem;color:var(--text2);line-height:1.7">Для gambling-платформы главное &mdash; оборот. Каждый депозит проходит через house edge, генерируя выручку. D1 retention и повторные депозиты &mdash; производные. Целевой рост: 10-20% W/W.</p>
+            </div>
+        </div>
+
+        <div class="callout callout-info reveal" style="margin-top:2rem">
+            <h4>Dashboard с первого дня</h4>
+            <p>Инструменты: PostHog (бесплатно до 1M events/мес) + Grafana (инфраструктура) + Google Sheets (финмодель). Не тратить на Amplitude/Mixpanel до $10K MRR. Главное &mdash; отслеживать воронку: Visit &rarr; Register &rarr; First Trade &rarr; Deposit &rarr; Repeat Trade.</p>
         </div>
     </div>
 </div>
 
-<!-- ==================== 05: KPI ==================== -->
-<div class="slide" id="kpi" style="align-items:flex-start;padding-top:8rem">
+<!-- ==================== SUMMARY ==================== -->
+<div class="slide" id="summary" style="padding-bottom:4rem">
     <div class="slide-content">
-        <div class="section-num reveal">05 &mdash; KPI для нового проекта</div>
-        <h2 class="section-title reveal">Что отслеживать</h2>
-        <p class="section-desc reveal">Метрики, которые отличают растущий проект от умирающего. С конкретными таргетами.</p>
+        <div class="section-num reveal">09 &mdash; Резюме</div>
+        <h2 class="section-title reveal">Ключевые выводы для инвестора</h2>
+        <p class="section-desc reveal">Сжатое саммари для принятия решения go / no-go.</p>
 
-        <div class="grid-2">
-            <div class="glass-card reveal" style="padding:2rem">
-                <div class="kpi-group">
-                    <div class="kpi-group-title" style="color:var(--cyan)">Рост</div>
-                    <div class="kpi-item"><span class="kpi-name">DAU/MAU ratio</span><span class="kpi-target">&gt;20% = здоровый retention</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Регистрации/день</span><span class="kpi-target">50+ после запуска</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Visitor &rarr; Signup</span><span class="kpi-target">5-15%</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Signup &rarr; First deposit</span><span class="kpi-target">20-40%</span></div>
-                </div>
-                <div class="kpi-group">
-                    <div class="kpi-group-title" style="color:var(--green)">Монетизация</div>
-                    <div class="kpi-item"><span class="kpi-name">GMV (маркетплейс) / Handle (gambling)</span><span class="kpi-target">Рост MoM 15%+</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Take Rate / House Edge</span><span class="kpi-target">5-15% / 3-7%</span></div>
-                    <div class="kpi-item"><span class="kpi-name">ARPU (monthly)</span><span class="kpi-target">$20-80</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Revenue = GMV &times; Take Rate</span><span class="kpi-target">Трекать ежедневно</span></div>
-                </div>
+        <div class="grid-3 reveal">
+            <div class="glass-card insight-card">
+                <div class="num">1</div>
+                <h4 style="color:var(--green)">Рынок реален и растёт</h4>
+                <p>$4-6B TAM, 1.4M DAU CS2, 400M+ кейсов открыто. Рынок растёт 15-20% Y/Y. Не хайп &mdash; устоявшаяся экономика с 10+ летней историей.</p>
             </div>
-            <div class="glass-card reveal reveal-delay-1" style="padding:2rem">
-                <div class="kpi-group">
-                    <div class="kpi-group-title" style="color:var(--orange)">Удержание</div>
-                    <div class="kpi-item"><span class="kpi-name">D1 retention</span><span class="kpi-target">&gt;40%</span></div>
-                    <div class="kpi-item"><span class="kpi-name">D7 retention</span><span class="kpi-target">&gt;20%</span></div>
-                    <div class="kpi-item"><span class="kpi-name">D30 retention</span><span class="kpi-target">&gt;10%</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Churn rate (monthly)</span><span class="kpi-target">&lt;15%</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Повторные депозиты</span><span class="kpi-target">&gt;50% юзеров</span></div>
-                </div>
-                <div class="kpi-group">
-                    <div class="kpi-group-title" style="color:var(--pink)">Эффективность</div>
-                    <div class="kpi-item"><span class="kpi-name">CAC по каналам</span><span class="kpi-target">Разбивка выше</span></div>
-                    <div class="kpi-item"><span class="kpi-name">LTV:CAC ratio</span><span class="kpi-target">&gt;3:1</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Payback period</span><span class="kpi-target">&lt;3 месяцев</span></div>
-                </div>
+            <div class="glass-card insight-card">
+                <div class="num">2</div>
+                <h4 style="color:var(--orange)">Главный риск &mdash; Valve</h4>
+                <p>Не регуляторы, не конкуренты. Valve может заблокировать бот-аккаунты в любой момент. Это экзистенциальный риск, который невозможно полностью нивелировать. Plan B обязателен.</p>
+            </div>
+            <div class="glass-card insight-card">
+                <div class="num">3</div>
+                <h4 style="color:var(--cyan)">Unit economics работают</h4>
+                <p>CAC $3-15, LTV $30-100, LTV/CAC > 3x. Break-even при $200-500K GMV/мес. Достижимо за 9-15 месяцев при правильном исполнении.</p>
+            </div>
+            <div class="glass-card insight-card">
+                <div class="num">4</div>
+                <h4 style="color:var(--pink)">Маркетплейс безопаснее gambling</h4>
+                <p>Маркетплейс: ниже регуляторный риск, возможен Stripe/PayPal, higher multiple при M&A (3-5x vs 2-3x). Gambling: выше маржа, быстрее выход на прибыль, но выше все риски.</p>
+            </div>
+            <div class="glass-card insight-card">
+                <div class="num">5</div>
+                <h4 style="color:var(--accent2)">Минимальный вход &mdash; $50-150K</h4>
+                <p>С фаундером-разработчиком и фокусом на СНГ. Включая 12 мес runway, инвентарь, инфраструктуру и маркетинг. Без лицензии (Кюрасао опционально +$20-35K).</p>
+            </div>
+            <div class="glass-card insight-card">
+                <div class="num">6</div>
+                <h4 style="color:var(--blue)">Exit возможен через 2-3 года</h4>
+                <p>При $5M+ ARR возможен выход по 3-5x revenue ($15-25M). Покупатели: gambling-холдинги, gaming-компании, конкуренты. Рынок M&A существует, но непрозрачен.</p>
             </div>
         </div>
 
-        <div class="glass-card reveal" style="margin-top:1.5rem;padding:2rem">
-            <div class="kpi-group" style="margin-bottom:0">
-                <div class="kpi-group-title" style="color:var(--accent2)">Операционные</div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem 2rem">
-                    <div class="kpi-item"><span class="kpi-name">Время до первой сделки</span><span class="kpi-target">&lt;5 минут</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Среднее время вывода</span><span class="kpi-target">&lt;10 минут</span></div>
-                    <div class="kpi-item"><span class="kpi-name">NPS / Trustpilot</span><span class="kpi-target">&gt;4.0</span></div>
-                    <div class="kpi-item"><span class="kpi-name">Uptime</span><span class="kpi-target">99.9%+</span></div>
-                </div>
-            </div>
+        <div class="callout callout-warn reveal" style="margin-top:2rem">
+            <h4>Честная оценка для IT-предпринимателя</h4>
+            <p>Это не SaaS. Здесь нет recurring revenue в чистом виде, нет юридической определённости, и вся инфраструктура зависит от одной частной компании (Valve). С другой стороны: рынок на $4-6B с низкими барьерами входа, юнит-экономика сходится быстро, и конкуренция не непреодолима. Если готовы к регуляторной неопределённости и Valve-риску &mdash; это рабочий рынок для стартапа с $50-150K бюджетом.</p>
         </div>
     </div>
 </div>
 
-<!-- ==================== 06: EXIT ==================== -->
-<div class="slide" id="exit" style="align-items:flex-start;padding-top:8rem">
-    <div class="slide-content">
-        <div class="section-num reveal">06 &mdash; Exit-стратегия</div>
-        <h2 class="section-title reveal">Как выйти<br>из бизнеса</h2>
-        <p class="section-desc reveal">Три сценария: M&A, самоокупаемость, или IPO. Реальные числа и мультипликаторы.</p>
-
-        <div class="grid-3">
-            <div class="glass-card insight-card reveal">
-                <div class="num">01</div>
-                <h4>M&A в нише</h4>
-                <p>DMarket привлек $8.5M (Series A, 2018). Оценки: <strong>3-5x годовой revenue</strong> для маркетплейсов, <strong>5-8x</strong> для gambling. Нишевые платформы покупают за технологию + аудиторию.</p>
-            </div>
-            <div class="glass-card insight-card reveal reveal-delay-1">
-                <div class="num">02</div>
-                <h4>Потенциальные покупатели</h4>
-                <p>Крупные gambling-операторы (Flutter, DraftKings), игровые компании (эндемик-бренды), крипто-биржи (Coinbase, Binance расширяются в NFT/gaming).</p>
-            </div>
-            <div class="glass-card insight-card reveal reveal-delay-2">
-                <div class="num">03</div>
-                <h4>IPO</h4>
-                <p>Маловероятно из-за регуляторных рисков. Скин-gambling &mdash; серая зона, публичные рынки этого не любят. Возможно только после полной регуляции отрасли.</p>
-            </div>
-        </div>
-
-        <div class="glass-card reveal" style="margin-top:2rem;padding:2.5rem">
-            <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem">Модель самоокупаемости</h3>
-            <div class="grid-3" style="gap:2rem">
-                <div style="text-align:center">
-                    <div style="font-size:2rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$5M/мес</div>
-                    <div style="font-size:.78rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em">GMV</div>
-                </div>
-                <div style="text-align:center">
-                    <div style="font-size:2rem;font-weight:800;color:var(--green)">$250K/мес</div>
-                    <div style="font-size:.78rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em">Revenue (take rate 5%)</div>
-                </div>
-                <div style="text-align:center">
-                    <div style="font-size:2rem;font-weight:800;color:var(--cyan)">$50K/мес</div>
-                    <div style="font-size:.78rem;color:var(--text3);margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em">Расходы (команда + инфра)</div>
-                </div>
-            </div>
-            <div style="text-align:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
-                <div style="font-size:.85rem;color:var(--text2)">Net profit: <strong style="color:var(--green)">$200K/мес</strong> &middot; Breakeven: <strong style="color:var(--accent2)">6-12 месяцев</strong> при начальных инвестициях $500K-1M</div>
-            </div>
-        </div>
-
-        <div class="callout callout-warn reveal" style="margin-top:1.5rem">
-            <h4>Риск для инвестора</h4>
-            <p>Главный risk &mdash; Valve. Одно обновление (как Trade-Up с ножами в октябре 2025) может обнулить $3B рынка за 48 часов. Valve контролирует экосистему и не обязана предупреждать. Это single point of failure для всей индустрии.</p>
-        </div>
-    </div>
-</div>
-
-<footer><p>UPG_GG Research &middot; GTM-стратегия &middot; Апрель 2026</p></footer>
+<footer>
+    <p>UPG_GG GTM Strategy &middot; Апрель 2026 &middot; <a href="index.html" style="color:var(--accent2);text-decoration:none">Основное исследование &rarr;</a></p>
+</footer>
 
 <script>
-// Progress bar
 const progressBar = document.getElementById('progressBar');
-// Nav scroll effect
-const navbar = document.getElementById('navbar');
-// Reveal on scroll
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Scroll events
 window.addEventListener('scroll', () => {
     const h = document.documentElement;
     const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
     progressBar.style.width = pct + '%';
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
+
+    const sections = document.querySelectorAll('.slide[id]');
+    const links = document.querySelectorAll('nav .nav-links a');
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    links.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
 });
 
-// Smooth scroll for nav links
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const group = btn.closest('.tabs').dataset.group;
+        document.querySelectorAll(`.tabs[data-group="${group}"] .tab-btn`).forEach(b => b.classList.remove('active'));
+        document.querySelectorAll(`.tab-panel[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+});
+
 document.querySelectorAll('nav a[href^="#"], .mobile-nav a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
@@ -748,7 +1554,6 @@ document.querySelectorAll('nav a[href^="#"], .mobile-nav a[href^="#"]').forEach(
     });
 });
 
-// Mobile menu toggle
 document.getElementById('menuToggle').addEventListener('click', () => {
     const nav = document.getElementById('mobileNav');
     const btn = document.getElementById('menuToggle');
