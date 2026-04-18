@@ -1,6 +1,7 @@
 .DS_Store
 /screens/
 /screenshots/
+/playground/
 *.log
 .env
 # allow page-specific screenshots

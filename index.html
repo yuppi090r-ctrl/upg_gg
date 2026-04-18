@@ -209,6 +209,22 @@
         .menu-toggle.open span:nth-child(2){opacity:0}
         .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
+        /* === SITEMAP CARDS === */
+        .sitemap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem}
+        .site-card{display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));border:1px solid var(--border);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .3s,box-shadow .4s;position:relative}
+        .site-card:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.4);box-shadow:0 24px 48px -18px rgba(139,92,246,.35)}
+        .site-card-preview{aspect-ratio:16/10;background-size:cover;background-position:top center;background-color:var(--surface2);position:relative;overflow:hidden;background-image:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.05))}
+        .site-card-preview::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,6,14,.75));pointer-events:none}
+        .site-card-badge{position:absolute;top:.75rem;right:.75rem;padding:.3rem .7rem;background:rgba(7,6,14,.75);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:100px;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);z-index:2}
+        .site-card-badge.orange{color:var(--orange);border-color:rgba(245,158,11,.3)}
+        .site-card-badge.cyan{color:var(--cyan);border-color:rgba(6,182,212,.3)}
+        .site-card-body{padding:1.25rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+        .site-card-num{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);opacity:.85}
+        .site-card-body h3{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin:0;line-height:1.25}
+        .site-card-body p{font-size:.85rem;color:var(--text2);line-height:1.55;margin:0;flex:1}
+        .site-card-arrow{font-size:.78rem;font-weight:600;color:var(--accent2);margin-top:.8rem;letter-spacing:.01em;display:flex;align-items:center;gap:.4rem;transition:gap .25s}
+        .site-card:hover .site-card-arrow{gap:.7rem}
+
         /* === RESPONSIVE === */
         @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:768px){
@@ -249,6 +265,10 @@
             .q-card{padding:1.5rem}
             .callout{padding:1.25rem}
             .hero-glow{width:500px;height:500px}
+            .sitemap-grid{grid-template-columns:1fr;gap:1rem}
+            .site-card-body{padding:1rem 1.1rem 1.25rem}
+            .site-card-body h3{font-size:1.05rem}
+            .site-card-body p{font-size:.82rem}
         }
         @media(max-width:480px){
             .hero h1{font-size:2.2rem}
@@ -270,25 +290,27 @@
     <div class="inner">
         <a href="index.html" class="logo">UPG<span>_</span>GG</a>
         <div class="nav-links">
+            <a href="index.html" class="active">Обзор</a>
             <a href="business.html">Бизнес</a>
             <a href="revenue.html">Доходы</a>
             <a href="money.html">Воронка $</a>
             <a href="reality.html">Голос рынка</a>
+            <a href="gtm.html">GTM</a>
             <a href="upgrader-pro/index.html">Upgrader.pro</a>
             <a href="skin-club/index.html">Skin.Club</a>
-            <a href="gtm.html">GTM</a>
         </div>
         <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" style="color:var(--accent2);font-weight:600" class="active">Обзор ниши</a>
     <a href="business.html" style="color:var(--accent2);font-weight:600">Бизнес-аналитика</a>
     <a href="revenue.html" style="color:var(--accent2);font-weight:600">Доходы и трафик</a>
     <a href="money.html" style="color:var(--accent2);font-weight:600">Воронка заработка</a>
     <a href="reality.html" style="color:var(--accent2);font-weight:600">Голос рынка</a>
+    <a href="gtm.html" style="color:var(--accent2);font-weight:600">GTM и риски</a>
     <a href="upgrader-pro/index.html" style="color:var(--accent2);font-weight:600">Upgrader.pro разбор</a>
     <a href="skin-club/index.html" style="color:var(--accent2);font-weight:600">Skin.Club разбор</a>
-    <a href="gtm.html" style="color:var(--accent2);font-weight:600">GTM и риски</a>
 </div>
 
 <main id="content">
@@ -298,7 +320,7 @@
     <div class="hero-glow"></div>
     <div class="slide-content">
         <div class="hero-badge"><span class="dot"></span> Исследование &middot; Апрель 2026</div>
-        <h1>Ниша<br><span class="gradient">CS2 скинов</span></h1>
+        <h1>Ниша <br><span class="gradient">CS2 скинов</span></h1>
         <p class="subtitle">Полный анализ рынка на $4-6 млрд. Два референса, 20+ конкурентов, воронки, риски и возможности.</p>
         <div class="hero-stats">
             <div class="hero-stat"><div class="value">$4-6B</div><div class="label">Капитализация</div></div>
@@ -309,6 +331,85 @@
         </div>
     </div>
     <div class="scroll-hint">Скролл<div class="arrow"></div></div>
+</div>
+
+<!-- ==================== SITEMAP ==================== -->
+<div class="slide" id="sitemap" style="align-items:flex-start;padding-top:8rem">
+    <div class="slide-content">
+        <div class="section-num reveal">★ &mdash; Карта исследования</div>
+        <h2 class="section-title reveal">7 страниц. <span class="gradient">Полная база.</span></h2>
+        <p class="section-desc reveal">Каждая страница — отдельный слой анализа. Начни с любой, всё связано. Два последних блока — глубокие разборы конкретных платформ с верификацией цифр.</p>
+
+        <div class="sitemap-grid reveal">
+            <a class="site-card" href="business.html">
+                <div class="site-card-preview" style="background-image:url(previews/01_business.jpg),linear-gradient(135deg,rgba(139,92,246,.15),rgba(99,102,241,.08))"></div>
+                <div class="site-card-body">
+                    <div class="site-card-num">01 · Бизнес</div>
+                    <h3>Структура рынка</h3>
+                    <p>TAM/SAM/SOM, юнит-экономика и карта ниши на $4-6 млрд</p>
+                    <div class="site-card-arrow">Открыть <span>→</span></div>
+                </div>
+            </a>
+            <a class="site-card" href="revenue.html">
+                <div class="site-card-preview" style="background-image:url(previews/02_revenue.jpg),linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.08))"></div>
+                <div class="site-card-body">
+                    <div class="site-card-num">02 · Доходы</div>
+                    <h3>Трафик и выручка</h3>
+                    <p>Цифры топ-20 конкурентов: от 50K до 10M визитов в месяц</p>
+                    <div class="site-card-arrow">Открыть <span>→</span></div>
+                </div>
+            </a>
+            <a class="site-card" href="money.html">
+                <div class="site-card-preview" style="background-image:url(previews/03_money.jpg),linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.08))"></div>
+                <div class="site-card-body">
+                    <div class="site-card-num">03 · Воронка $</div>
+                    <h3>Как зарабатывают</h3>
+                    <p>10 этапов Upgrader + 8 этапов SkinSwap — где лежат деньги</p>
+                    <div class="site-card-arrow">Открыть <span>→</span></div>
+                </div>
+            </a>
+            <a class="site-card" href="reality.html">
+                <div class="site-card-preview" style="background-image:url(previews/04_reality.jpg),linear-gradient(135deg,rgba(236,72,153,.15),rgba(239,68,68,.08))"></div>
+                <div class="site-card-body">
+                    <div class="site-card-num">04 · Голос рынка</div>
+                    <h3>Реальные кейсы</h3>
+                    <p>Скам-истории, Valve-шоки и архетипы пользователей</p>
+                    <div class="site-card-arrow">Открыть <span>→</span></div>
+                </div>
+            </a>
+            <a class="site-card" href="gtm.html">
+                <div class="site-card-preview" style="background-image:url(previews/07_gtm.jpg),linear-gradient(135deg,rgba(99,102,241,.15),rgba(139,92,246,.08))"></div>
+                <div class="site-card-body">
+                    <div class="site-card-num">05 · GTM</div>
+                    <h3>Запуск и риски</h3>
+                    <p>Каналы, регуляторика, M&amp;A-ландшафт, окно возможностей</p>
+                    <div class="site-card-arrow">Открыть <span>→</span></div>
+                </div>
+            </a>
+            <a class="site-card" href="upgrader-pro/">
+                <div class="site-card-preview" style="background-image:url(previews/05_upgrader.jpg),linear-gradient(135deg,rgba(245,158,11,.2),rgba(239,68,68,.1))">
+                    <div class="site-card-badge orange">Deep dive</div>
+                </div>
+                <div class="site-card-body">
+                    <div class="site-card-num" style="color:var(--orange)">06 · Upgrader.pro</div>
+                    <h3>Полный парс платформы</h3>
+                    <p>Innospace LTD, трафик 1.2M/мес, RTP 55-75%, связь с RustMagic</p>
+                    <div class="site-card-arrow" style="color:var(--orange)">Открыть <span>→</span></div>
+                </div>
+            </a>
+            <a class="site-card" href="skin-club/">
+                <div class="site-card-preview" style="background-image:url(previews/06_skinclub.jpg),linear-gradient(135deg,rgba(6,182,212,.2),rgba(16,185,129,.1))">
+                    <div class="site-card-badge cyan">Deep dive</div>
+                </div>
+                <div class="site-card-body">
+                    <div class="site-card-num" style="color:var(--cyan)">07 · Skin.Club</div>
+                    <h3>Полный разбор кейс-сервиса</h3>
+                    <p>Moontain Ltd, 4.3M/мес, ACMA warning, 1712 отзывов, 10 скринов</p>
+                    <div class="site-card-arrow" style="color:var(--cyan)">Открыть <span>→</span></div>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 <!-- ==================== MARKET ==================== -->
