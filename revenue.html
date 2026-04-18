@@ -24,7 +24,8 @@
         body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
 
         /* === NAV === */
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s}
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:transform .35s cubic-bezier(.4,0,.2,1),background .4s,backdrop-filter .4s}
+        nav.nav-hidden{transform:translateY(-100%)}
         nav.scrolled{background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
         nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
         nav .logo{font-size:.88rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);transition:color .3s;text-shadow:0 0 30px rgba(139,92,246,.2);text-decoration:none}
@@ -1056,21 +1057,20 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // Scroll events
+let lastScrollY = 0;
 window.addEventListener('scroll', () => {
     const h = document.documentElement;
+    const y = window.scrollY;
     const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
     progressBar.style.width = pct + '%';
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-
-    // Active section
-    const sections = document.querySelectorAll('.slide[id]');
-    const links = document.querySelectorAll('nav .nav-links a[href^="#"]');
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
-    links.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-});
+    navbar.classList.toggle('scrolled', y > 60);
+    if (y > 240 && y > lastScrollY + 4) {
+        navbar.classList.add('nav-hidden');
+    } else if (y < lastScrollY - 4 || y < 120) {
+        navbar.classList.remove('nav-hidden');
+    }
+    lastScrollY = y;
+}, {passive:true});
 
 // Tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {

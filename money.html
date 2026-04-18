@@ -24,7 +24,8 @@
         body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent)}
 
         /* === NAV === */
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:all .4s;background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;transition:transform .35s cubic-bezier(.4,0,.2,1),background .4s,backdrop-filter .4s;background:rgba(5,5,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        nav.nav-hidden{transform:translateY(-100%)}
         nav .inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
         nav .logo{font-size:.88rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);text-shadow:0 0 30px rgba(139,92,246,.2)}
         nav .logo a{color:inherit;text-decoration:none}
@@ -1020,10 +1021,18 @@ const navbar = document.querySelector('nav');
 const menuToggle = document.getElementById('menuToggle');
 const mobileNav = document.getElementById('mobileNav');
 
+let lastScrollY = 0;
 window.addEventListener('scroll', () => {
-    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    const y = window.scrollY;
+    const scrollPercent = (y / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = scrollPercent + '%';
-});
+    if (y > 240 && y > lastScrollY + 4) {
+        navbar.classList.add('nav-hidden');
+    } else if (y < lastScrollY - 4 || y < 120) {
+        navbar.classList.remove('nav-hidden');
+    }
+    lastScrollY = y;
+}, {passive:true});
 
 // Reveal animations
 const observer = new IntersectionObserver((entries) => {
