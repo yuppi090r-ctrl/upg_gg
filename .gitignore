@@ -1,5 +1,8 @@
 .DS_Store
-screens/
-screenshots/
+/screens/
+/screenshots/
 *.log
 .env
+# allow page-specific screenshots
+!skin-club/screenshots/
+!upgrader-pro/screenshots/

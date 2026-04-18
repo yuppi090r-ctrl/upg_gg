@@ -224,6 +224,26 @@
         .back-link{display:inline-flex;align-items:center;gap:.4rem;color:#67e8f9;text-decoration:none;font-size:.8rem;font-weight:500;padding:.45rem .9rem;border-radius:8px;border:1px solid rgba(6,182,212,.2);transition:all .25s;margin-bottom:1.5rem}
         .back-link:hover{background:rgba(6,182,212,.1)}
 
+        /* === SCREENSHOTS GALLERY === */
+        .shots-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2rem}
+        .shot-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;position:relative}
+        .shot-card:hover{border-color:rgba(6,182,212,.3);transform:translateY(-4px);box-shadow:0 20px 60px rgba(6,182,212,.1)}
+        .shot-card a{display:block;text-decoration:none;color:inherit}
+        .shot-card .img-wrap{position:relative;overflow:hidden;background:var(--surface2);aspect-ratio:16/10}
+        .shot-card img{width:100%;height:100%;display:block;object-fit:cover;object-position:top;transition:transform .4s}
+        .shot-card:hover img{transform:scale(1.03)}
+        .shot-card.tall .img-wrap{aspect-ratio:9/16;max-height:560px}
+        .shot-card.tall img{object-position:center}
+        .shot-card .caption{padding:1rem 1.25rem}
+        .shot-card .caption .tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#67e8f9;margin-bottom:.3rem}
+        .shot-card .caption h5{font-size:.95rem;font-weight:700;margin-bottom:.25rem;color:var(--text)}
+        .shot-card .caption p{font-size:.8rem;color:var(--text3);line-height:1.5}
+        .shots-note{font-size:.78rem;color:var(--text3);text-align:center;margin-top:1.5rem;font-style:italic}
+        @media(max-width:768px){
+            .shots-grid{grid-template-columns:1fr}
+            .shot-card.tall .img-wrap{aspect-ratio:9/14;max-height:600px}
+        }
+
         @media(max-width:1024px){
             .stage{grid-template-columns:100px 1fr;gap:1rem;padding:1.4rem}
             .stage-num .n{font-size:2rem}
@@ -369,6 +389,120 @@
                 </ul>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- SCREENSHOTS GALLERY -->
+<div class="slide" id="screenshots">
+    <div class="slide-content">
+        <div class="section-num reveal">Интерфейс</div>
+        <h2 class="section-title reveal">Как это выглядит</h2>
+        <p class="section-desc reveal">Живые скрины платформы и источников верификации (18.04.2026). Сняты headless-браузером без входа в аккаунт &mdash; только публично доступные экраны.</p>
+
+        <div class="shots-grid reveal">
+            <div class="shot-card">
+                <a href="screenshots/01_hero_landing.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/01_hero_landing.jpg" alt="Skin.Club — главная страница" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">01 &middot; Главная</div>
+                        <h5>skin.club/en &mdash; Hero</h5>
+                        <p>Лента live drops, баннеры кейсов, CTA &laquo;Sign in through Steam&raquo;</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/02_cases_catalog.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/02_cases_catalog.jpg" alt="Каталог кейсов Skin.Club" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">02 &middot; Кейсы</div>
+                        <h5>Каталог</h5>
+                        <p>200+ кейсов в 20+ категориях, цены от $0.03 до $200+</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/03_case_battles.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/03_case_battles.jpg" alt="Case Battles" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">03 &middot; Battles</div>
+                        <h5>Case Battles &mdash; PvP</h5>
+                        <p>Лобби до 15 игроков, entry $0.50&ndash;$50+, 30M+ батлов сыграно</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/04_upgrader.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/04_upgrader.jpg" alt="Upgrader механика" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">04 &middot; Upgrader</div>
+                        <h5>Слайдер апгрейда</h5>
+                        <p>%-шанс 20&ndash;90%, множитель до x20. House edge до 25% &mdash; самая маржинальная механика</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/05_live_drops.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/05_live_drops.jpg" alt="Live drops лента" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">05 &middot; Social proof</div>
+                        <h5>Live drops лента</h5>
+                        <p>Чужие выигрыши $500&ndash;$2000 в реальном времени. По обвинению юзеров &mdash; часть фейковые балансы ботов</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/06_vitality_banner.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/06_vitality_banner.jpg" alt="Team Vitality партнёрство" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">06 &middot; Esports</div>
+                        <h5>Team Vitality</h5>
+                        <p>Активное партнёрство с CS2-командой (ZywOo). Deal оценивается $150&ndash;400K/год</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card tall">
+                <a href="screenshots/07_mobile_375.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/07_mobile_375.jpg" alt="Мобильная версия Skin.Club" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">07 &middot; Mobile</div>
+                        <h5>Мобильная версия 375px</h5>
+                        <p>iPhone SE viewport. UI адаптивный, те же кейсы и CTA что на десктопе</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/08_trustpilot_widget.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/08_trustpilot_widget.jpg" alt="Trustpilot Skin.Club" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">08 &middot; Отзывы</div>
+                        <h5>Trustpilot 3.5/5</h5>
+                        <p>1 712 отзывов, 28% one-star. Саппорт отвечает на 100% негатива</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/09_acma_warning.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/09_acma_warning.jpg" alt="ACMA formal warning Moontain Ltd" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">09 &middot; Регулятор</div>
+                        <h5>ACMA warning (17.07.2025)</h5>
+                        <p>Formal warning австралийского регулятора за нарушение Interactive Gambling Act 2001</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shot-card">
+                <a href="screenshots/10_moontain_registrar.jpg" target="_blank" rel="noopener">
+                    <div class="img-wrap"><img src="screenshots/10_moontain_registrar.jpg" alt="Cyprus Registry Moontain Limited" loading="lazy"></div>
+                    <div class="caption">
+                        <div class="tag">10 &middot; Юрлицо</div>
+                        <h5>Cyprus Registry &mdash; Moontain Ltd</h5>
+                        <p>HE 410299, зарег. 19/06/2020, Active. Директор Xanthos Ioannou (номинал)</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <p class="shots-note">Клик по любому скрину открывает полноразмерный JPG в новой вкладке.</p>
     </div>
 </div>
 
